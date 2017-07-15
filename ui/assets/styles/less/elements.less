@@ -1,0 +1,212 @@
+.col__lines {
+  display: none;
+}
+h1 {
+  font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: .85 !important;
+  letter-spacing: .02em;
+  margin: 0;
+}
+h2 {
+  font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  margin: 0;
+}
+h3 {
+  font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .05rem;
+  margin: 0;
+}
+h4 {
+  font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: .93rem;
+  font-style: normal;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: .067em;
+  margin: 0;
+  @media (min-width: 960px) {
+    font-size: 1.15rem;
+  }
+}
+h5 {
+  font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: .9rem;
+  line-height: 1.15;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .065em;
+  margin: 0;
+}
+p,
+blockquote {
+  font-family: "Share Tech",serif;
+  padding-bottom: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  max-width: 560px;
+}
+
+.f-s-body {
+  font-size: 1.125rem;
+}
+
+/*blockquote {
+  opacity: 0;
+  transition: .5s;
+}
+blockquote.is-in {
+  opacity: 1;
+}*/
+
+label {
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+button {
+  font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .05rem;
+  border: none;
+  outline: none;
+  transition: .3s;
+}
+button:hover {
+  color: black;
+  fill: black;
+  background: white;
+  opacity: 1;
+}
+input {
+  font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: .05rem;
+  border: none;
+  outline: none;
+}
+
+a { color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+}
+a:focus { outline: thin dotted; }
+a:hover, a:active { outline: 0;}
+
+::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+:-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+::-moz-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+:-moz-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+.font-headline {
+  font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body:after {
+  content: '';
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 1000;
+  transition: 1s;
+}
+
+.js-name-is {
+  transition: .5s;
+  opacity: 0;
+}
+.js-title {
+  transition: 1s;
+  transition-delay: .5s;
+  opacity: 0;
+}
+.js-name {
+  span {
+    opacity: 0;
+  }
+  span > span {
+    opacity: 0;
+    transform: translate3d(0,8px,0);
+  }
+}
+
+body.is-in {
+  &:after {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .js-name-is,
+  .js-title {
+    opacity: 1;
+  }
+  .js-name {
+    span {
+      opacity: 1;
+    }
+    span > span {
+      opacity: 1;
+      transition: 2s;
+      transform: none;
+    }
+    span > span:hover {
+      transform: scale(.9);
+      transition: 0.2s ease-out !important;
+      transition-delay: 0s !important;
+    }
+  }
+}
+.screen{
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: url(../../images/screen.png);
+  background-size: 160px 160px;
+  opacity: .4;
+  pointer-events: none;
+}
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+.mood {
+  line-height: 0;
+  -webkit-column-count: 3;
+  -webkit-column-gap: 0px;
+  -moz-column-count: 3;
+  -moz-column-gap: 0px;
+  column-count: 3;
+  column-gap: 0px;
+}
+
+.mood img {
+  width: 100%;
+}
