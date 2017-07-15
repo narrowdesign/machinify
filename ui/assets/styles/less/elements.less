@@ -120,17 +120,17 @@ a:hover, a:active { outline: 0;}
   font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-body:after {
-  content: '';
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  z-index: 1000;
-  transition: 1s;
-}
+// body:after {
+//   content: '';
+//   position: fixed;
+//   left: 0;
+//   top: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: black;
+//   z-index: 1000;
+//   transition: 1s;
+// }
 
 .js-name-is {
   transition: .5s;
@@ -213,10 +213,14 @@ canvas {
   .output {
     padding: 10px;
     position: relative;
-    width: 16.6667vw;
-    height: 16.6667vh;
+    width: 33.333vw;
+    height: 8.3333vh;
     margin: 0;
     font-size: .5rem;
+    @media (min-width: 800px) {
+      width: 16.6667vw;
+      height: 16.6667vh;
+    }
   }
 }
 
