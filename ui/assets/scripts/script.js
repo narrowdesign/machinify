@@ -327,7 +327,7 @@ $(function() {
   }
 
   function getData(i,el) {
-    $.get('../../../components/' + el.data('component') + '.html').done(function(data) {
+    $.get('../../components/' + el.data('component') + '.html').done(function(data) {
       if (el.data()) {
         data = data.replace('{{twitter}}',el.data('twitter'))
         data = data.replace('{{fb}}',el.data('fb'))
