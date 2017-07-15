@@ -449,7 +449,7 @@ canvas {
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
-  opacity: .2;
+  opacity: 1;
 }
 .outputs .output {
   padding: 10px;
