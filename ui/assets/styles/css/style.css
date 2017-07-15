@@ -426,8 +426,7 @@ body.is-in .js-name span > span:hover {
   position: fixed;
   top: 0;
   left: 0;
-  background: url(../../images/screen.png);
-  background-size: 160px 160px;
+  background-size: 16.6667vw 16.6667vh;
   opacity: .4;
   pointer-events: none;
 }
@@ -437,6 +436,28 @@ canvas {
   left: 0;
   background: transparent;
   pointer-events: none;
+}
+.outputs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  opacity: .2;
+}
+.outputs .output {
+  padding: 10px;
+  position: relative;
+  width: 16.6667vw;
+  height: 16.6667vh;
+  margin: 0;
+  font-size: .5rem;
 }
 @media (min-width: 800px) {
   .mood {
