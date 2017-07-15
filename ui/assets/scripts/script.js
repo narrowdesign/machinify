@@ -284,34 +284,9 @@ function runScript() {
       } else if (moved > 0 && BODY.hasClass('is-scrolling-up')) {
         BODY.removeClass('is-scrolling-up')
       }
-
-      if ($('.js-info').offset() && scrollTop > $('.js-info').offset().top) {
-        if (!$('.js-nav--fixed').hasClass('is-person')){
-          $('.js-nav--fixed').addClass('is-person');
-        }
-      } else if ($('.js-info').offset()) {
-        $('.js-nav--fixed').removeClass('is-person');
-      }
-
-      $('.js-video__bg-fill').css({
-        opacity: Math.max(0,1-scrollTop/_winH)
+      $('.header').css({
+        transform: 'translate3d(0,' + scrollTop/4 + 'px,0)'
       })
-
-      if (scrollTop > _winH) {
-        BODY.addClass('is-small-video');
-      } else {
-        BODY.removeClass('is-small-video');
-  /*      $('.js-video__cover').css({
-          transform: 'translate3d(0,' + scrollTop/3 + 'px,0)'
-        })*/
-        $('.js-bg--home').css({
-          transform: 'translate3d(0,' + scrollTop/2 + 'px,0)'
-        })
-        $('.js-video__wrapper').css({
-          transform: 'translate3d(0,' + -scrollTop/2 + 'px,0)',
-          transitionDuration: 0
-        })
-      }
 
       // // PHOTO STRIP (HELENA)
       // var strip = $('.js-photo-strip-images')

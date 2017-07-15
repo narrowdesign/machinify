@@ -416,7 +416,7 @@ body.is-in .js-name span > span {
   transform: none;
 }
 body.is-in .js-name span > span:hover {
-  transform: scale(0.9);
+  opacity: .5;
   transition: 0.2s ease-out !important;
   transition-delay: 0s !important;
 }
@@ -432,7 +432,7 @@ body.is-in .js-name span > span:hover {
   pointer-events: none;
 }
 canvas {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background: transparent;
@@ -462,6 +462,7 @@ canvas {
 }
 .mood img {
   width: 100%;
+  padding: 1px 1px 0 0;
 }
 .test {
   width: 100%;
