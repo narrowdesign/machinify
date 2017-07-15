@@ -1,6 +1,6 @@
 var _winW = window.innerWidth; // width of the window
 var _winH = window.innerHeight;
-var onLine, scrollX, scrollY, oldScrollX, oldScrollY, scrollXTotal, scrollYTotal, scrollXVelocity, scrollYVelocity, scrollXPercent, scrollYPercent, touchEnabled, touchMoveX, touchMoveY, touchMoveTotal, mouseX, mouseY, oldMouseX=0, oldMouseY=0, mouseXVelocity, mouseYVelocity, mouseXTotal=0, mouseYTotal=0, mouseXPercent, mouseYPercent, mouseXSpeed, mouseYSpeed, cookies, language, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, keyTotal=0, keyCache='', keyCurrent, mouseEnterTotal, mouseLeaveTotal, mouseDragTime, mouseUpEvents, mouseDownEvents, mouseDownTime, clicks, currentDate, startDate, currentTime, startTime, totalTime, activeTime, inactiveTime, plugins, device, OS, OSVersion, browser, browserVersion;
+var onLine, scrollX, scrollY, oldScrollX, oldScrollY, scrollXTotal, scrollYTotal, scrollXVelocity, scrollYVelocity, scrollXPercent, scrollYPercent, touchEnabled, touchMoveX, touchMoveY, touchMoveTotal, mouseX, mouseY, oldMouseX=0, oldMouseY=0, mouseXVelocity, mouseYVelocity, mouseXTotal=0, mouseYTotal=0, mouseXPercent, mouseYPercent, mouseXSpeed, mouseYSpeed, cookies, language, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, keyTotal=0, keyCache='', keyCurrent, mouseEnterTotal, mouseLeaveTotal, mouseDragTime, mouseUpEvents=0, mouseDownEvents=0, mouseDownTime, clicks=0, currentDate, startDate, currentTime, startTime, totalTime, activeTime, inactiveTime, plugins, device, OS, OSVersion, browser, browserVersion;
 
 var isTouchDevice;
 var mobileSafari;
@@ -62,6 +62,9 @@ function runScript() {
     WIN.on('mousemove',mousemoveHandler);
     WIN.on('keydown', keydownHandler);
     WIN.on('keyup', keyupHandler);
+    WIN.on('mousedown', function(){mouseDownEvents++});
+    WIN.on('mouseup', function(){mouseUpEvents++});
+    WIN.on('click', function(){clicks++});
 
   // FUNCTIONS
   ////////////
