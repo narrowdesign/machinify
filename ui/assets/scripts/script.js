@@ -284,15 +284,7 @@ function runScript() {
     });
 
     // ANIMATION STUFF
-    setTimeout(function(){
-      if (window.location.hash.indexOf('#playing') !== -1) {
-        setTimeout(function(){
-          BODY.addClass('is-in');
-        },600)
-      } else {
-        BODY.addClass('is-in');
-      }
-    },300)
+    BODY.addClass('is-in');
 
     setInview($('.js-watch-next'));
     /*setInview($('blockquote'));*/
