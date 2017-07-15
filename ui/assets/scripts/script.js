@@ -1,4 +1,44 @@
-var _winW = window.innerWidth; // width of the window
+
+$(function() {
+  var components = [];
+  var componentsData = [];
+  var componentsLoaded = 0;
+  if ($('.component').length > 0) {
+    for (var i=0; i < $('.component').length; i++) {
+      var el = $('.component').eq(i);
+      components[i] = el;
+      getData(i,el)
+    }
+  } else {
+    runScript()
+  }
+
+  function getData(i,el) {
+    $.get('/components/' + el.data('component') + '.html').done(function(data) {
+      if (el.data()) {
+        data = data.replace('{{twitter}}',el.data('twitter'))
+        data = data.replace('{{fb}}',el.data('fb'))
+        data = data.replace('{{bg}}',el.data('bg'))
+        data = data.replace('{{vidID}}',el.data('vidid'))
+        data = data.replace('{{person}}',el.data('person'))
+        data = data.replace('{{first-last}}',el.data('first-last'))
+        data = data.replace('{{twitter-user}}',el.data('twitter-user'))
+      }
+      componentsData[i] = data;
+      componentsLoaded++;
+      if (componentsLoaded === $('.component').length) {
+        populateComponents()
+      }
+    }).fail(function(error){'Tell @dannpetty he should’ve found a better dev.'});
+  }
+  function populateComponents() {
+    for (var i = components.length - 1; i >= 0; i--) {
+      components[i].replaceWith(componentsData[i]);
+    }
+    runScript()
+  }
+})
+;var _winW = window.innerWidth; // width of the window
 var _winH = window.innerHeight;
 
 var scrollTop = 0; // keeps track of scroll position
@@ -234,9 +274,9 @@ function runScript() {
       var oldScrollTop = scrollTop;
       scrollTop = WIN.scrollTop();
       var moved = scrollTop - oldScrollTop;
-      if (scrollTop > Math.max(50,NAME_TOP-100) && !BODY.hasClass('is-scrolled')) {
+      if (scrollTop > Math.max(50,NAME_TOP-250) && !BODY.hasClass('is-scrolled')) {
         BODY.addClass('is-scrolled')
-      } else if (scrollTop < Math.max(50,NAME_TOP-100) && BODY.hasClass('is-scrolled')) {
+      } else if (scrollTop < Math.max(50,NAME_TOP-250) && BODY.hasClass('is-scrolled')) {
         BODY.removeClass('is-scrolled')
       }
       if (scrollTop > 200 && (moved < -20 && !BODY.hasClass('is-scrolling-up') && scrollTop < DOC.height() - _winH - 40)) {
@@ -388,7 +428,7 @@ function runScript() {
     $('.js-name span').html(nameHTML);
     $('.js-name span > span').each(function(i){
       $(this).css({
-        '-webkit-transition-delay': Math.random()*2 + 's'
+        '-webkit-transition-delay': Math.random()*.3 + 's'
       });
     });
 
@@ -397,7 +437,7 @@ function runScript() {
     $('.js-next-name span').html(nextNameHTML);
     $('.js-next-name span > span').each(function(i){
       $(this).css({
-        '-webkit-transition-delay': Math.random()*2 + 's'
+        '-webkit-transition-delay': Math.random()*.3 + 's'
       });
     });
 
