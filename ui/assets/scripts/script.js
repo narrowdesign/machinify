@@ -1,6 +1,6 @@
 var _winW = window.innerWidth; // width of the window
 var _winH = window.innerHeight;
-var onLine, scrollX, scrollY, oldScrollX, oldScrollY, scrollXTotal, scrollYTotal, scrollXVelocity, scrollYVelocity, scrollXPercent, scrollYPercent, touchEnabled, touchMoveX, touchMoveY, touchMoveTotal, mouseX, mouseY, oldMouseX=0, oldMouseY=0, mouseXVelocity, mouseYVelocity, mouseXTotal=0, mouseYTotal=0, mouseXPercent, mouseYPercent, mouseXSpeed, mouseYSpeed, cookies, language, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, keyTotal=0, keyCache='', keyCurrent, mouseEnterTotal, mouseLeaveTotal, mouseDragTime, mouseUpEvents=0, mouseDownEvents=0, mouseDownTime, clicks=0, currentDate, startDate, currentTime, startTime, totalTime, activeTime, inactiveTime, plugins, device, OS, OSVersion, browser, browserVersion;
+var onLine, scrollX, scrollY, oldScrollX=0, oldScrollY=0, scrollXTotal=0, scrollYTotal=0, scrollXVelocity=0, scrollYVelocity=0, scrollXPercent, scrollYPercent, touchEnabled, touchMoveX, touchMoveY, touchMoveTotal, mouseX, mouseY, oldMouseX=0, oldMouseY=0, mouseXVelocity, mouseYVelocity, mouseXTotal=0, mouseYTotal=0, mouseXPercent, mouseYPercent, mouseXSpeed, mouseYSpeed, cookies, language, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, keyTotal=0, keyCache='', keyCurrent, mouseEnterTotal, mouseLeaveTotal, mouseDragTime, mouseUpEvents=0, mouseDownEvents=0, mouseDownTime, clicks=0, currentDate, startDate, currentTime, startTime, totalTime, activeTime, inactiveTime, plugins, device, OS, OSVersion, browser, browserVersion;
 
 var isTouchDevice;
 var mobileSafari;
@@ -169,7 +169,7 @@ function runScript() {
       scrollX = WIN.scrollLeft();
       scrollY = WIN.scrollTop();
       scrollXPercent = (scrollX/_winW).toFixed(3);;
-      scrollYPercent = (scrollY/BODY.innerHeight()).toFixed(3);;
+      scrollYPercent = (scrollY/BODY.innerHeight()).toFixed(3);
       if (oldScrollX) {
         scrollXVelocity = scrollX - oldScrollX;
       } else if (oldScrollX == scrollX) {
@@ -180,6 +180,8 @@ function runScript() {
       } else if (oldScrollY == scrollY) {
         scrollYVelocity = 0;
       }
+      scrollXTotal += Math.abs(scrollXVelocity);
+      scrollYTotal += Math.abs(scrollYVelocity);
       oldScrollX = scrollX;
       oldScrollY = scrollY;
       var moved = scrollY - oldScrollY;
