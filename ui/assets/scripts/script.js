@@ -72,13 +72,13 @@ function runScript() {
     WIN.on('click', function(){clicks++});
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation',function(e){
-        gyroscopeBeta = e.beta;
-        gyroscopeGamma = e.gamma;
+        gyroscopeBeta = (e.beta).toFixed(3);
+        gyroscopeGamma = (e.gamma).toFixed(3);
       })
     }else{
       window.addEventListener("devicemotion",function(e){
-        gyroscopeBeta = event.acceleration.x * 2;
-        gyroscopeGamma = event.acceleration.y * 2
+        gyroscopeBeta = (event.acceleration.x * 2).toFixed(3);
+        gyroscopeGamma = (event.acceleration.y * 2).toFixed(3);
       });
     }
 
