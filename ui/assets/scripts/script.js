@@ -57,8 +57,15 @@ function runScript() {
     WIN.on('mousemove',mousemoveHandler);
     WIN.on('keydown', keydownHandler);
     WIN.on('keyup', keyupHandler);
-    WIN.on('mousedown', function(){mouseDownEvents++});
-    WIN.on('mouseup', function(){mouseUpEvents++});
+    WIN.on('mousedown', function(){
+      $('.output-mouseDownEvents .output-bar').css({width:'100%'});
+      $('.output-clicks .output-bar').css({width:'100%'});
+      mouseDownEvents++
+    });
+    WIN.on('mouseup', function(){
+      $('.output-mouseDownEvents .output-bar').css({width:'0'});
+      $('.output-clicks .output-bar').css({width:'0'});
+      mouseUpEvents++});
     WIN.on('touchstart', touchStartHandler);
     WIN.on('touchmove', touchMoveHandler);
     // WIN.on('touchend', touchEndHandler);
@@ -114,13 +121,13 @@ function runScript() {
       startDate = new Date();
       startTime = startDate.toTimeString();
 
-      $('.output-cookies').text(cookies);
-      $('.output-language').text(language);
-      $('.output-device').text(device);
-      $('.output-OS').text(OS);
-      $('.output-OSVersion').text(OSVersion);
-      $('.output-browser').text(browser);
-      $('.output-browserVersion').text(browserVersion);
+      $('.output-cookies .output-value').text(cookies);
+      $('.output-language .output-value').text(language);
+      $('.output-device .output-value').text(device);
+      $('.output-OS .output-value').text(OS);
+      $('.output-OSVersion .output-value').text(OSVersion);
+      $('.output-browser .output-value').text(browser);
+      $('.output-browserVersion .output-value').text(browserVersion);
 
       render()
     })()
@@ -130,47 +137,55 @@ function runScript() {
       currentTime = (new Date()).toTimeString()
       totalTime = currentDate-startDate + 'ms';
 
-      $('.output-mouseX').text(mouseX)
-      $('.output-mouseY').text(mouseY)
-      $('.output-mouseXPercent').text(mouseXPercent)
-      $('.output-mouseYPercent').text(mouseYPercent)
-      $('.output-scrollY').text(scrollY)
-      $('.output-scrollX').text(scrollX);
-      $('.output-scrollXTotal').text(scrollXTotal);
-      $('.output-scrollYTotal').text(scrollYTotal);
-      $('.output-scrollXVelocity').text(scrollXVelocity);
-      $('.output-scrollYVelocity').text(scrollYVelocity);
-      $('.output-scrollXPercent').text(scrollXPercent);
-      $('.output-scrollYPercent').text(scrollYPercent);
-      $('.output-touchEnabled').text(touchEnabled);
-      $('.output-touchX').text(touchX);
-      $('.output-touchY').text(touchY);
-      $('.output-touchMoveTotal').text(touchMoveTotal);
-      $('.output-mouseX').text(mouseX);
-      $('.output-mouseY').text(mouseY);
-      $('.output-mouseXVelocity').text(mouseXVelocity);
-      $('.output-mouseYVelocity').text(mouseYVelocity);
-      $('.output-mouseXTotal').text(mouseXTotal);
-      $('.output-mouseYTotal').text(mouseYTotal);
-      $('.output-mouseXVelocity').text(mouseXVelocity);
-      $('.output-mouseYVelocity').text(mouseYVelocity);
-      $('.output-keyTotal').text(keyTotal);
-      $('.output-keyCache').text(keyCache);
-      $('.output-keyCurrent').text(keyCurrent);
-      $('.output-mouseEnterTotal').text(mouseEnterTotal);
-      $('.output-mouseLeaveTotal').text(mouseLeaveTotal);
-      $('.output-mouseDragTime').text(mouseDragTime);
-      $('.output-mouseUpEvents').text(mouseUpEvents);
-      $('.output-mouseDownEvents').text(mouseDownEvents);
-      $('.output-mouseDownTime').text(mouseDownTime);
-      $('.output-clicks').text(clicks);
-      $('.output-startTime').text(startTime);
-      $('.output-currentDate').text(currentDate.toDateString());
-      $('.output-currentTime').text(currentTime);
-      $('.output-totalTime').text(totalTime);
-      $('.output-activeTime').text(activeTime);
-      $('.output-inactiveTime').text(inactiveTime);
-      $('.output-onLine').text(onLine)
+      $('.output-mouseX .output-value').text(mouseX)
+      $('.output-mouseX .output-bar').css({width: mouseXPercent * 100 + '%'})
+      $('.output-mouseY .output-value').text(mouseY)
+      $('.output-mouseY .output-bar').css({width: mouseYPercent * 100 + '%'})
+      $('.output-mouseXPercent .output-value').text(mouseXPercent)
+      $('.output-mouseXPercent .output-bar').css({width: mouseXPercent * 100 + '%'})
+      $('.output-mouseYPercent .output-value').text(mouseYPercent)
+      $('.output-mouseYPercent .output-bar').css({width: mouseYPercent * 100 + '%'})
+      $('.output-scrollY .output-value').text(scrollY)
+      $('.output-scrollY .output-bar').css({width: scrollYPercent * 100 + '%'})
+      $('.output-scrollX .output-value').text(scrollX);
+      $('.output-scrollX .output-bar').css({width: scrollXPercent * 100 + '%'})
+      $('.output-scrollXTotal .output-value').text(scrollXTotal);
+      $('.output-scrollYTotal .output-value').text(scrollYTotal);
+      $('.output-scrollXVelocity .output-value').text(scrollXVelocity);
+      $('.output-scrollYVelocity .output-value').text(scrollYVelocity);
+      $('.output-scrollYVelocity .output-bar').css({width: scrollYVelocity + '%'})
+      $('.output-scrollXPercent .output-value').text(scrollXPercent);
+      $('.output-scrollYPercent .output-value').text(scrollYPercent);
+      $('.output-scrollYPercent .output-bar').css({width: scrollYPercent * 100 + '%'})
+      $('.output-touchEnabled .output-value').text(touchEnabled);
+      $('.output-touchX .output-value').text(touchX);
+      $('.output-touchY .output-value').text(touchY);
+      $('.output-touchMoveTotal .output-value').text(touchMoveTotal);
+      $('.output-mouseX .output-value').text(mouseX);
+      $('.output-mouseY .output-value').text(mouseY);
+      $('.output-mouseXVelocity .output-value').text(mouseXVelocity);
+      $('.output-mouseXVelocity .output-bar').css({width: Math.abs(mouseXVelocity) + '%'})
+      $('.output-mouseYVelocity .output-value').text(mouseYVelocity);
+      $('.output-mouseYVelocity .output-bar').css({width: Math.abs(mouseYVelocity) + '%'})
+      $('.output-mouseXTotal .output-value').text(mouseXTotal);
+      $('.output-mouseYTotal .output-value').text(mouseYTotal);
+      $('.output-keyTotal .output-value').text(keyTotal);
+      $('.output-keyCache .output-value').text(keyCache);
+      $('.output-keyCurrent .output-value').text(keyCurrent);
+      $('.output-mouseEnterTotal .output-value').text(mouseEnterTotal);
+      $('.output-mouseLeaveTotal .output-value').text(mouseLeaveTotal);
+      $('.output-mouseDragTime .output-value').text(mouseDragTime);
+      $('.output-mouseUpEvents .output-value').text(mouseUpEvents);
+      $('.output-mouseDownEvents .output-value').text(mouseDownEvents);
+      $('.output-mouseDownTime .output-value').text(mouseDownTime);
+      $('.output-clicks .output-value').text(clicks);
+      $('.output-startTime .output-value').text(startTime);
+      $('.output-currentDate .output-value').text(currentDate.toDateString());
+      $('.output-currentTime .output-value').text(currentTime);
+      $('.output-totalTime .output-value').text(totalTime);
+      $('.output-activeTime .output-value').text(activeTime);
+      $('.output-inactiveTime .output-value').text(inactiveTime);
+      $('.output-onLine .output-value').text(onLine)
 
       requestAnimationFrame(render)
     }
@@ -235,9 +250,10 @@ function runScript() {
       keyCurrent = String.fromCharCode(e.which);
       keyCache = (keyCurrent + keyCache);
       keyCache = keyCache.substr(0,3)
+      $('.output-keyCurrent .output-bar').css({width:'100%'});
     }
     function keyupHandler(e) {
-
+      $('.output-keyCurrent .output-bar').css({width:'0'});
     }
 
     function mousemoveHandler(e) {
@@ -249,8 +265,8 @@ function runScript() {
       mouseYTotal += Math.abs(mouseYVelocity)
       oldMouseX = mouseX;
       oldMouseY = mouseY;
-      mouseXPercent = (e.pageX / _winW).toFixed(3);
-      mouseYPercent = (e.pageY / _winH).toFixed(3);
+      mouseXPercent = (mouseX / _winW).toFixed(3);
+      mouseYPercent = (mouseY / _winH).toFixed(3);
     }
 
 

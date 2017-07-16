@@ -236,7 +236,7 @@ nav {
   transform: translate3d(0, -67px, 0);
 }
 .is-scrolled .outputs {
-  opacity: .2;
+  opacity: .4;
 }
 @media (max-width: 960px) {
   .is-scrolled .js-nav--main {
@@ -257,7 +257,7 @@ nav {
 h1 {
   font-family: "Share Tech", -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
-  font-weight: 100;
+  font-weight: 500;
   line-height: .85 !important;
   letter-spacing: .02em;
   margin: 0;
@@ -442,6 +442,7 @@ canvas {
   align-content: flex-start;
   flex-wrap: wrap;
   opacity: 1;
+  transition: .3s;
 }
 .outputs .output {
   padding: 10px;
@@ -456,6 +457,15 @@ canvas {
     width: 16.6667vw;
     height: 16.6667vh;
   }
+}
+.outputs .output .output-bar {
+  position: relative;
+  height: 1px;
+  width: 0px;
+  border-top: 1px solid;
+  opacity: .3;
+  margin-top: 4px;
+  transition: .1s;
 }
 @media (min-width: 800px) {
   .mood {
