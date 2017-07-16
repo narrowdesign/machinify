@@ -1,6 +1,6 @@
 var _winW = window.innerWidth; // width of the window
 var _winH = window.innerHeight;
-var onLine, scrollX, scrollY, gyroscopeX, gyroscopeY, oldScrollX=0, oldScrollY=0, scrollXTotal=0, scrollYTotal=0, scrollXVelocity=0, scrollYVelocity=0, scrollXPercent, scrollYPercent, touchEnabled, oldTouchX, oldTouchY, touchX, touchY, touchMoveTotal=0, mouseX, mouseY, oldMouseX=0, oldMouseY=0, mouseXVelocity, mouseYVelocity, mouseXTotal=0, mouseYTotal=0, mouseXPercent, mouseYPercent, mouseXSpeed, mouseYSpeed, cookies, language, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, keyTotal=0, keyCache='', keyCurrent, mouseEnterTotal, mouseLeaveTotal, mouseDragTime, mouseUpEvents=0, mouseDownEvents=0, mouseDownTime, clicks=0, currentDate, startDate, currentTime, startTime, totalTime, activeTime, inactiveTime, plugins, device, OS, OSVersion, browser, browserVersion;
+var onLine, scrollX, scrollY, gyroscopeAlpha, gyroscopeBeta, oldScrollX=0, oldScrollY=0, scrollXTotal=0, scrollYTotal=0, scrollXVelocity=0, scrollYVelocity=0, scrollXPercent, scrollYPercent, touchEnabled, oldTouchX, oldTouchY, touchX, touchY, touchMoveTotal=0, mouseX, mouseY, oldMouseX=0, oldMouseY=0, mouseXVelocity, mouseYVelocity, mouseXTotal=0, mouseYTotal=0, mouseXPercent, mouseYPercent, mouseXSpeed, mouseYSpeed, cookies, language, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, keyTotal=0, keyCache='', keyCurrent, mouseEnterTotal, mouseLeaveTotal, mouseDragTime, mouseUpEvents=0, mouseDownEvents=0, mouseDownTime, clicks=0, currentDate, startDate, currentTime, startTime, totalTime, activeTime, inactiveTime, plugins, device, OS, OSVersion, browser, browserVersion;
 
 var isTouchDevice;
 var mobileSafari;
@@ -72,13 +72,15 @@ function runScript() {
     WIN.on('click', function(){clicks++});
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation',function(e){
-        gyroscopeX = e.beta;
-        gyroscopeY = e.gamma;
+        gyroscopeBeta = e.beta;
+        gyroscopeGamma = e.gamma;
+        gyroscopeAlpha = e.alpha;
       })
     }else{
       window.addEventListener("devicemotion",function(e){
-        gyroscopeX = event.acceleration.x * 2;
-        gyroscopeY = event.acceleration.y * 2
+        gyroscopeBeta = event.acceleration.x * 2;
+        gyroscopeGamma = event.acceleration.y * 2
+        gyroscopeAlpha = event.acceleration.z * 2
       });
     }
 
@@ -160,6 +162,8 @@ function runScript() {
       $('.output-touchEnabled .output-value').text(touchEnabled);
       $('.output-touchX .output-value').text(touchX);
       $('.output-touchY .output-value').text(touchY);
+      $('.output-gyroscopeGamma .output-value').text(gyroscopeGamma);
+      $('.output-gyroscopeBeta .output-value').text(gyroscopeBeta);
       $('.output-touchMoveTotal .output-value').text(touchMoveTotal);
       $('.output-mouseX .output-value').text(mouseX);
       $('.output-mouseY .output-value').text(mouseY);
@@ -242,7 +246,7 @@ function runScript() {
       oldTouchY = touchY;
     }
     function deviceMotionHandler(e) {
-        gyroscopeX = event.acceleration.x * 2
+        gyroscopeAlpha = event.acceleration.x * 2
     }
 
     function keydownHandler(e) {

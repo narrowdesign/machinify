@@ -235,9 +235,6 @@ nav {
 .is-scrolled .js-nav--main {
   transform: translate3d(0, -67px, 0);
 }
-.is-scrolled .outputs {
-  opacity: .4;
-}
 @media (max-width: 960px) {
   .is-scrolled .js-nav--main {
     transform: translate3d(0, 0, 0);
@@ -466,6 +463,9 @@ canvas {
   opacity: .3;
   margin-top: 4px;
   transition: .1s;
+}
+.is-scrolled .outputs {
+  opacity: .2;
 }
 @media (min-width: 800px) {
   .mood {
