@@ -69,13 +69,13 @@
     // lights.add( pointLight4 );
 
     lines_material = new THREE.LineBasicMaterial({
-      color: 0x666666,
+      color: 0x49E256,
       linewidth: .1,
       opacity: 0.2,
       transparent: true
     });
     lines_material2 = new THREE.LineBasicMaterial({
-      color: 0x666666,
+      color: 0x49E256,
       linewidth: .1,
       opacity: 0.2,
       transparent: true
@@ -236,21 +236,18 @@
 
   function animate() {
 
-    requestAnimationFrame( animate );
+    requestAnimationFrame( function(){
+      poly1.rotation.y = mouseX/180
+      poly1.rotation.x = mouseY/180
 
-    poly1.rotation.y += -.01
-    poly1.rotation.x += -.01
-    poly2.rotation.y += -.01
-    poly2.rotation.x += -.01
-    poly2.position.x = -15;
-    poly2.position.y = -5;
-    // camera.rotation.x += .01
+      poly2.rotation.y = mouseY/360
+      poly2.rotation.x = mouseX/360
+      // poly2.rotation.x += .01
 
-    // plane1.position.y += .02*(0-plane1.position.y)
-    // plane2.position.z += .02*(0-plane2.position.z)
-    // plane3.position.x += .02*(0-plane3.position.x)
-
-    render();
+      poly2.position.x = -15;
+      poly2.position.y = -5;
+      render();
+    } );
 
   }
 
@@ -258,9 +255,13 @@
     renderer.render( scene, camera );
   }
 
+  window.addEventListener("wheel", function (e) {
+      animate()
+  }, false);
 
   window.addEventListener("mousemove", function (e) {
       findxy('move', e)
+      animate()
   }, false);
   window.addEventListener("mousedown", function (e) {
     touched = true;
