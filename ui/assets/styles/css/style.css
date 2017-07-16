@@ -465,7 +465,7 @@ canvas {
   transition: .1s;
 }
 .is-scrolled .outputs {
-  opacity: .2;
+  opacity: .1;
 }
 @media (min-width: 800px) {
   .mood {
