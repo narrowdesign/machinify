@@ -112,7 +112,7 @@ function runScript() {
 
       OS = navigator.platform
       plugins = navigator.plugins.length;
-      cookies = navigator.cookiesEnables?"enabled":"disabled";
+      cookies = navigator.cookiesEnabled?"enabled":"disabled";
       language = navigator.language;
       device = navigator.platform
       OSVersion = navigator.platform
@@ -197,12 +197,12 @@ function runScript() {
       scrollXPercent = (scrollX/_winW).toFixed(3);;
       scrollYPercent = (scrollY/BODY.innerHeight()).toFixed(3);
       if (oldScrollX) {
-        scrollXVelocity = scrollX - oldScrollX;
+        scrollXVelocity = Math.abs(scrollX - oldScrollX);
       } else if (oldScrollX == scrollX) {
         scrollXVelocity = 0;
       }
       if (oldScrollY) {
-        scrollYVelocity = scrollY - oldScrollY;
+        scrollYVelocity = Math.abs(scrollY - oldScrollY);
       } else if (oldScrollY == scrollY) {
         scrollYVelocity = 0;
       }
