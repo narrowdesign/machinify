@@ -255,7 +255,7 @@ h1 {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 100;
-  line-height: .85 !important;
+  line-height: 1 !important;
   letter-spacing: .4rem;
   margin: 0;
 }
@@ -2017,6 +2017,10 @@ canvas {
   .ms-p-h-col05 {
     padding-left: 4.1666666vw;
     padding-right: 4.1666666vw;
+  }
+  .ms-p-h-col1 {
+    padding-left: 8.333vw;
+    padding-right: 8.333vw;
   }
   .ms-p-h-col2 {
     padding-left: 16.66666vw;
