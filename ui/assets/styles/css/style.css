@@ -204,11 +204,14 @@ nav {
   right: 0;
   height: 1px;
   margin-top: 3px;
-  background-color: #49E256;
+  background-color: #DE0B2C;
   transition: .3s;
   z-index: -1;
 }
 @media (min-width: 960px) {
+  .js-nav--main .menu-item:hover {
+    color: #DE0B2C;
+  }
   .js-nav--main .menu-item:hover:before {
     width: calc(1px + 100%);
   }
@@ -250,6 +253,9 @@ nav {
 }
 .col__lines {
   display: none;
+}
+body {
+  background-image: url(../../images/pattern.png);
 }
 h1 {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -7481,8 +7487,8 @@ canvas {
   color: rgba(94, 94, 94, 0.5);
 }
 .red {
-  color: #FC363B;
-  fill: #FC363B;
+  color: #DE0B2C;
+  fill: #DE0B2C;
 }
 .gold {
   color: #ac9356;
@@ -7491,6 +7497,12 @@ canvas {
 .gold-2 {
   color: #867a5b;
   fill: #867a5b;
+}
+.dark-blue {
+  color: #27071E;
+}
+.magenta {
+  color: #D81668;
 }
 .transparent {
   color: transparent;
@@ -7507,11 +7519,17 @@ canvas {
 .bg-light-green {
   background: #E7FBE2;
 }
+.bg-red {
+  background-color: #DE0B2C;
+}
 .bg-cash {
   background: #25cb50;
 }
 .bg-dark-cash {
   background-color: #228C3D;
+}
+.bg-dark-blue {
+  background-color: #27071E;
 }
 .bg-dark-gray {
   background: #121212;
@@ -7552,11 +7570,20 @@ canvas {
 .bg-orange {
   background-color: #FC673D;
 }
+.bg-blue {
+  background-color: #0D2BFF;
+}
+.bg-dark-red {
+  background-color: #830925;
+}
 .bg-trans {
   background-color: transparent;
 }
 .bg-magenta {
-  background-color: #ff3366;
+  background-color: #84134F;
+}
+.bg-dark-purple {
+  background-color: #301036;
 }
 .bg-twitter-blue {
   background-color: #00aced;

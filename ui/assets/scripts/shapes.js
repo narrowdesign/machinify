@@ -69,19 +69,19 @@
     // lights.add( pointLight4 );
 
     lines_material = new THREE.LineBasicMaterial({
-      color: 0xff00ff,
+      color: 0xCCCCCC,
       linewidth: .1,
       opacity: 0.2,
       transparent: true
     });
     lines_material2 = new THREE.LineBasicMaterial({
-      color: 0xff00ff,
+      color: 0xCCCCCC,
       linewidth: .1,
       opacity: 0.2,
       transparent: true
     });
     lines_material3 = new THREE.LineBasicMaterial({
-      color: 0xff00ff,
+      color: 0xCCCCCC,
       linewidth: .1,
       opacity: 0.2,
       transparent: true
