@@ -255,6 +255,16 @@ $(function() {
     $('.output-keyCurrent .output-bar').css({width:'100%'});
   }
   function keyupHandler(e) {
+    if (e.keyCode === 39) {
+      $('.bg-pattern').css({
+        backgroundImage: 'url("ui/assets/images/pattern2.png")'
+      })
+    }
+    if (e.keyCode === 37) {
+      $('.bg-pattern').css({
+        backgroundImage: 'url("ui/assets/images/pattern.png")'
+      })
+    }
     $('.output-keyCurrent .output-bar').css({width:'0'});
   }
 
