@@ -237,6 +237,7 @@ nav {
 }
 .is-scrolled .js-nav--main {
   transform: translate3d(0, -67px, 0);
+  background: #27071E;
 }
 @media (max-width: 960px) {
   .is-scrolled .js-nav--main {
