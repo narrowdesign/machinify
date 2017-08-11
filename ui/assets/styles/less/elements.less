@@ -277,3 +277,23 @@ canvas {
 .mood img {
   width: 100%;
 }
+
+
+.dial1 {
+  animation: spin 2s 1000;
+}
+.dial2 {
+  animation: spin 1s 1000;
+}
+.dial3 {
+  animation: spin 3s 1000;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
