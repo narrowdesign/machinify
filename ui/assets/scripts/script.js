@@ -259,11 +259,24 @@ $(function() {
       $('.bg-pattern').css({
         backgroundImage: 'url("ui/assets/images/pattern2.png")'
       })
+      // $('.magenta').css({
+      //   color: 'cyan'
+      // })
+      // $('.magenta').css({
+      //   color: 'cyan'
+      // })
     }
     if (e.keyCode === 37) {
       $('.bg-pattern').css({
         backgroundImage: 'url("ui/assets/images/pattern.png")'
       })
+      $('.magenta').css({
+        color: '#D81668'
+      })
+      $('.red').css({
+        color: '#DE0B2C'
+      })
+
     }
     $('.output-keyCurrent .output-bar').css({width:'0'});
   }
