@@ -211,9 +211,9 @@ $(function() {
     oldScrollX = scrollX;
     oldScrollY = scrollY;
     var moved = scrollY - oldScrollY;
-    if (scrollY > Math.max(50,NAME_TOP-250) && !BODY.hasClass('is-scrolled')) {
+    if (scrollY > 200 && !BODY.hasClass('is-scrolled')) {
       BODY.addClass('is-scrolled')
-    } else if (scrollY < Math.max(50,NAME_TOP-250) && BODY.hasClass('is-scrolled')) {
+    } else if (scrollY < 200 && BODY.hasClass('is-scrolled')) {
       BODY.removeClass('is-scrolled')
     }
     if (scrollY > 200 && (moved < -20 && !BODY.hasClass('is-scrolling-up') && scrollY < DOC.height() - _winH - 40)) {
