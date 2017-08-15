@@ -72,8 +72,8 @@ $(function() {
   WIN.on('click', function(){clicks++});
   if (window.DeviceOrientationEvent) {
     window.addEventListener('deviceorientation',function(e){
-      gyroscopeBeta = (e.beta).toFixed(3);
-      gyroscopeGamma = (e.gamma).toFixed(3);
+      // gyroscopeBeta = (e.beta).toFixed(3);
+      // gyroscopeGamma = (e.gamma).toFixed(3);
     })
   }else{
     window.addEventListener("devicemotion",function(e){
@@ -131,11 +131,17 @@ $(function() {
 
     render()
   })()
+  var counter = 0;
   function render() {
+    counter++;
     onLine = navigator.onLine?"online":"offline";
     currentDate = new Date();
     currentTime = (new Date()).toTimeString()
     totalTime = currentDate-startDate + 'ms';
+    // console.log(counter)
+    // $('.bg-pattern').css({
+    //   backgroundPosition: '0 -' + counter + 'px'
+    // })
 
     $('.output-mouseX .output-value').text(mouseX)
     $('.output-mouseX .output-bar').css({width: mouseXPercent * 100 + '%'})
@@ -259,24 +265,26 @@ $(function() {
       $('.bg-pattern').css({
         backgroundImage: 'url("ui/assets/images/pattern2.png")'
       })
-      // $('.magenta').css({
-      //   color: 'cyan'
-      // })
-      // $('.magenta').css({
-      //   color: 'cyan'
-      // })
+      $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-c j-c-center')
+
+      $('.js-point').attr('class', 'js-point pos-r d-f fx-c j-c-between m-b-5 ms-w-50p p-h-col05')
+
+      $('.js-quotes').removeClass('ms-d-f')
+      $('.js-quotes').addClass('p-b-3 t-a-c')
+      $('.js-quote').removeClass('ms-w-30p p-v-8')
+      $('.js-quote').addClass('ms-w-100p p-v-3 t-a-c')
     }
     if (e.keyCode === 37) {
       $('.bg-pattern').css({
         backgroundImage: 'url("ui/assets/images/pattern.png")'
       })
-      $('.magenta').css({
-        color: '#D81668'
-      })
-      $('.red').css({
-        color: '#DE0B2C'
-      })
+      $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-l j-c-between')
+      $('.js-point').attr('class', 'js-point pos-r d-f fx-c j-c-between m-b-5 ms-w-22p')
 
+      $('.js-quotes').addClass('ms-d-f')
+      $('.js-quotes').removeClass('p-b-3 t-a-c')
+      $('.js-quote').addClass('ms-w-30p p-v-8')
+      $('.js-quote').removeClass('ms-w-100p p-v-3 t-a-c')
     }
     $('.output-keyCurrent .output-bar').css({width:'0'});
   }
