@@ -4468,6 +4468,9 @@ canvas {
 .bg-s-cn {
   background-size: contain;
 }
+.bg-a-f {
+  background-attachment: fixed;
+}
 .bg-p-c {
   background-position: center;
 }
