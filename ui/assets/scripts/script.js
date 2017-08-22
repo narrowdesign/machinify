@@ -262,16 +262,23 @@ $(function() {
   }
   function keyupHandler(e) {
     if (e.keyCode === 39) {
-      $('.bg-dark-blue').css({
-        backgroundColor: '#060031'
+      $('.bg-pattern').css({
+        backgroundImage: 'url("ui/assets/images/pattern3.png")'
       })
+      $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-c j-c-center')
+      $('header h1').removeClass('bd-t')
+
+      $('.js-quotes').removeClass('ms-d-f')
+      $('.js-quotes').addClass('p-b-3 t-a-c')
+      $('.js-quote').removeClass('ms-w-30p p-v-8')
+      $('.js-quote').addClass('ms-w-100p p-v-3 t-a-c')
+    }
+    if (e.keyCode === 38) {
       $('.bg-pattern').css({
         backgroundImage: 'url("ui/assets/images/pattern2.png")'
       })
       $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-c j-c-center')
       $('header h1').removeClass('bd-t')
-
-      $('.js-point').attr('class', 'js-point pos-r d-f fx-c j-c-between m-b-5 ms-w-50p p-h-col05')
 
       $('.js-quotes').removeClass('ms-d-f')
       $('.js-quotes').addClass('p-b-3 t-a-c')
@@ -279,15 +286,11 @@ $(function() {
       $('.js-quote').addClass('ms-w-100p p-v-3 t-a-c')
     }
     if (e.keyCode === 37) {
-      $('.bg-dark-blue').css({
-        backgroundColor: '#27071E'
-      })
       $('.bg-pattern').css({
         backgroundImage: 'url("ui/assets/images/pattern.png")'
       })
       $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-l j-c-between')
       $('header h1').addClass('bd-t')
-      $('.js-point').attr('class', 'js-point pos-r d-f fx-c j-c-between m-b-5 ms-w-22p')
 
       $('.js-quotes').addClass('ms-d-f')
       $('.js-quotes').removeClass('p-b-3 t-a-c')
