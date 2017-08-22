@@ -7671,7 +7671,7 @@ button.bg-white-20:hover {
 }
 .bg-divider {
   background-image: url(../../images/dividerBg.png);
-  background-size: 500px;
+  background-size: 200px;
   background-repeat-y: no-repeat;
 }
 .bg-pattern-tri {
