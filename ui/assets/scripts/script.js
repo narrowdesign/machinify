@@ -263,7 +263,7 @@ $(function() {
   function keyupHandler(e) {
     if (e.keyCode === 39) {
       $('.bg-pattern').css({
-        backgroundImage: 'url("ui/assets/images/pattern3.png")'
+        // backgroundImage: 'url("ui/assets/images/pattern3.png")'
       })
       $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-c j-c-center')
       $('header h1').removeClass('bd-t')
@@ -275,7 +275,7 @@ $(function() {
     }
     if (e.keyCode === 38) {
       $('.bg-pattern').css({
-        backgroundImage: 'url("ui/assets/images/pattern2.png")'
+        // backgroundImage: 'url("ui/assets/images/pattern2.png")'
       })
       $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-c j-c-center')
       $('header h1').removeClass('bd-t')
@@ -287,7 +287,7 @@ $(function() {
     }
     if (e.keyCode === 37) {
       $('.bg-pattern').css({
-        backgroundImage: 'url("ui/assets/images/pattern.png")'
+        // backgroundImage: 'url("ui/assets/images/pattern.png")'
       })
       $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-l j-c-between')
       $('header h1').addClass('bd-t')
