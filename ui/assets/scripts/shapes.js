@@ -16,6 +16,7 @@
   var spiralOriginX = winW * axis
   var spiralOriginY = winW * axis * aspect
   var keydown;
+  var rotation = 0;
 
   sizeCanvas();
 
@@ -64,10 +65,12 @@
     count++;
     if (count % 2) {
       requestAnimationFrame(function(){
-        ctx.globalAlpha = .4;
+        ctx.globalAlpha = .6;
+        ctx.fillStyle = "rgba(6, 0, 49, .03)";
+        ctx.fillRect(0, 0, winW, winH);
         ctx.translate( spiralOriginX, spiralOriginY);
         ctx.rotate(.6)
-        ctx.translate( -spiralOriginX, -spiralOriginY);
+        ctx.translate( -spiralOriginX + count/5, -spiralOriginY + count/5);
         ctx.drawImage(spiralRed, 0,0,winW,winH);
       })
     }
