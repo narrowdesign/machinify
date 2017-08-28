@@ -66,7 +66,7 @@
     if (count % 2) {
       requestAnimationFrame(function(){
         ctx.globalAlpha = .6;
-        ctx.fillStyle = "rgba(6, 0, 49, .03)";
+        ctx.fillStyle = "rgba(6, 0, 49, .04)";
         ctx.fillRect(0, 0, winW, winH);
         ctx.translate( spiralOriginX, spiralOriginY);
         ctx.rotate(.6)

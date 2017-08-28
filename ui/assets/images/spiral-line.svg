@@ -3,9 +3,9 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="92.5326 1.4129 606.9348 606.9348" enable-background="new 92.5326 1.4129 606.9348 606.9348" xml:space="preserve">
 <path opacity="0.2" fill="none" stroke="#A83158" stroke-width="0.7654" stroke-miterlimit="10" enable-background="new    " d="
-	M92.8955,71.5202C595.3314,228.452,699.1046,538.2404,699.1046,538.2404"/>
+	M92.8955,71.5202C699.1046,0,699.1046,538.2404,699.1046,538.2404"/>
 <path opacity="0.2" fill="none" stroke="#A83158" stroke-width="0.7654" stroke-miterlimit="10" enable-background="new    " d="
-	M92.8955,538.2404c0,0,103.7731-309.7885,606.2091-466.7202"/>
+	M92.8955,538.2404c0,0-0.8955-536.4647,606.2091-466.7202"/>
 <path opacity="0.2" fill="none" stroke="#A83158" stroke-width="0.7654" stroke-miterlimit="10" enable-background="new    " d="
 	M699.1046,71.5202c0,0-103.7731,309.7884-606.2091,466.7202"/>
 <path opacity="0.2" fill="none" stroke="#A83158" stroke-width="0.7654" stroke-miterlimit="10" enable-background="new    " d="
@@ -13,9 +13,6 @@
 <path opacity="0.2" fill="none" stroke="#A83158" stroke-width="0.7654" stroke-miterlimit="10" enable-background="new    " d="
 	M629.3601,1.7758C472.4283,504.2117,162.6399,607.9849,162.6399,607.9849"/>
 <path opacity="0.2" fill="none" stroke="#A83158" stroke-width="0.7654" stroke-miterlimit="10" enable-background="new    " d="
-	M162.6399,1.7758c0,0,309.7884,103.7731,466.7202,606.2091"/>
-<path opacity="0.2" fill="none" stroke="#A83158" stroke-width="0.7654" stroke-miterlimit="10" enable-background="new    " d="
 	M629.3601,607.9849c0,0-309.7885-103.7731-466.7202-606.2091"/>
-<path opacity="0.2" fill="none" stroke="#A83158" stroke-width="0.7654" stroke-miterlimit="10" enable-background="new    " d="
-	M162.6399,607.9849C319.5717,105.5489,629.3601,1.7758,629.3601,1.7758"/>
+<line opacity="0.2" fill="none" stroke="#A83158" stroke-width="0.7654" stroke-miterlimit="10" enable-background="new    " x1="396" y1="433.6386" x2="396" y2="95.6068"/>
 </svg>

@@ -95,9 +95,11 @@
   animation: fadeout @time linear @delay forwards;
 }
 
-.fadein(@time,@delay:0s){
-  -webkit-animation: fadein @time ease-out @delay forwards;
-  animation: fadein @time ease-out @delay forwards;
+.fadein{
+  animation: fadein 1s ease-out forwards;
+}
+.risein{
+  animation: risein 1s ease-out forwards;
 }
 
 .clearAnimation{
@@ -328,6 +330,28 @@
   100% {
     .transform(perspective(300px) rotateY(0deg));
     transform-origin: 50% 50% 38px;
+  }
+}
+
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to   {
+    opacity: 1;
+  }
+}
+
+
+@keyframes risein {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to   {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
