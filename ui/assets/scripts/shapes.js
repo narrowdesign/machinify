@@ -25,7 +25,7 @@
   // }
   setInterval(function(){
     drawMbp()
-  },30)
+  },60)
   window.addEventListener('touchmove',drawMbp);
   window.addEventListener('keydown',function() {
     if (rotation > 90 || rotation < -1300)

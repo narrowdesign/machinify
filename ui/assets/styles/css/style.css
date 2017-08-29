@@ -505,6 +505,36 @@ canvas {
     transform: rotate(360deg);
   }
 }
+.graphic1-spiral1 {
+  transition: 3s ease-in-out;
+  transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  animation: spin-centered 2s linear 1000;
+}
+.graphic1-spiral1 path {
+  stroke-dashoffset: 80px;
+  stroke-dasharray: 80px;
+  transition: 3s ease-in-out;
+  transition-delay: 1s;
+}
+.graphic-line {
+  flex-basis: 4%;
+  margin: 5px;
+  border-top: 1px solid #D81668;
+  transition: .5s;
+}
+svg .dial-ring {
+  stroke-dashoffset: 80px;
+  stroke-dasharray: 80px;
+  transition: 3s;
+}
+svg:nth-of-type(2) .dial-ring {
+  transition: 2s;
+  transition-delay: .5s;
+}
+svg:nth-of-type(3) .dial-ring {
+  transition: 1.2s;
+  transition-delay: 1s;
+}
 .test {
   width: 100%;
 }
@@ -7437,6 +7467,14 @@ canvas {
   }
   to {
     opacity: 1;
+  }
+}
+@keyframes spin-centered {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(-360deg);
   }
 }
 .white {

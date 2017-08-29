@@ -139,7 +139,7 @@ $(function() {
     render()
   })()
   var counter = 0;
-  setInterval(render,30)
+  setInterval(render,30);
   function render() {
     counter++;
 
@@ -151,16 +151,16 @@ $(function() {
     //   backgroundPosition: '0 -' + counter + 'px'
     // })
 
-    $('.output-mouseX .output-value').text('mx' + mouseX)
+    $('.output-mouseX .output-value').text('mx ' + mouseX)
     $('.output-mouseX .output-bar-fill').css({width: mouseXPercent * 100 + '%'})
-    $('.output-mouseY .output-value').text('my' + mouseY)
+    $('.output-mouseY .output-value').text('my ' + mouseY)
     $('.output-mouseY .output-bar-fill').css({width: mouseYPercent * 100 + '%'})
-    $('.output-totalTime .output-value').text('cycles' + totalTime);
-    $('.output-totalTime .output-bar-fill').css({width: Math.min(_winW,totalTime/200) + 'px'});
-    $('.output-mouseXVelocity .output-value').text('mxv' + mouseXVelocity);
-    $('.output-mouseXVelocity .output-bar-fill').css({width: Math.abs(mouseXVelocity) + '%'})
-    $('.output-mouseYVelocity .output-value').text('myv' + mouseYVelocity);
-    $('.output-mouseYVelocity .output-bar-fill').css({width: Math.abs(mouseYVelocity) + '%'})
+    $('.output-totalTime .output-value').text('cycles ' + totalTime);
+    $('.output-totalTime .output-bar-fill').css({width: Math.min(100,totalTime/200) + '%'});
+    $('.output-mouseXVelocity .output-value').text('mxv ' + mouseXVelocity);
+    $('.output-mouseXVelocity .output-bar-fill').css({width: Math.min(100,Math.abs(mouseXVelocity)) + '%'})
+    $('.output-mouseYVelocity .output-value').text('myv ' + mouseYVelocity);
+    $('.output-mouseYVelocity .output-bar-fill').css({width: Math.min(100,Math.abs(mouseYVelocity)) + '%'})
 
     // $('.output-mouseXPercent .output-value').text(mouseXPercent)
     // $('.output-mouseXPercent .output-bar-fill').css({width: mouseXPercent * 100 + '%'})
@@ -273,7 +273,6 @@ $(function() {
         // backgroundImage: 'url("ui/assets/images/pattern3.png")'
       })
       $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-c j-c-center')
-      $('header h1').removeClass('bd-t')
 
       $('.js-quotes').removeClass('ms-d-f')
       $('.js-quotes').addClass('p-b-3 t-a-c')
@@ -285,7 +284,6 @@ $(function() {
         // backgroundImage: 'url("ui/assets/images/pattern2.png")'
       })
       $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-c j-c-center')
-      $('header h1').removeClass('bd-t')
 
       $('.js-quotes').removeClass('ms-d-f')
       $('.js-quotes').addClass('p-b-3 t-a-c')
@@ -297,7 +295,6 @@ $(function() {
         // backgroundImage: 'url("ui/assets/images/pattern.png")'
       })
       $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-l j-c-between')
-      $('header h1').addClass('bd-t')
 
       $('.js-quotes').addClass('ms-d-f')
       $('.js-quotes').removeClass('p-b-3 t-a-c')
@@ -353,7 +350,46 @@ $(function() {
   // ANIMATION STUFF
   BODY.addClass('is-in');
 
-  setInview($('.js-watch-next'));
+  (function cycleGraphics() {
+    setInterval(setDials,3000)
+    var dialOffset = 80;
+    setDials();
+    function setDials() {
+      if (dialOffset == 80) {
+        dialOffset = 0;
+        $('.graphic1-spiral1 path').css({
+          strokeDashoffset: 0,
+          strokeWidth: 4
+        })
+      } else {
+        dialOffset = 80;
+        $('.graphic1-spiral1 path').css({
+          strokeDashoffset: 80,
+          strokeWidth: 1
+        })
+      }
+      $('.dial-ring').css({
+        strokeDashoffset: dialOffset,
+      })
+    }
+    var graphiclines = false;
+    doLines()
+    setInterval(doLines,1000);
+    function doLines() {
+      for (var i=0;i<132;i++) {
+        if (!graphiclines) {
+          $('.graphic-lines').append('<div class="graphic-line"></div>');
+        }
+        $('.graphic-line').eq(i).css({
+          opacity: Math.random() - .2,
+          transform: 'scaleX(' + Math.random() * 6 + ')'
+        })
+      }
+      graphiclines = true;
+    }
+
+  })()
+  // setInview($('.js-watch-next'));
   /*setInview($('blockquote'));*/
 
   function setInview (el) {
