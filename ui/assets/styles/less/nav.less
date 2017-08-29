@@ -10,17 +10,16 @@ nav {
   width: 0;
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -5px;
   right: 0;
-  height: 1px;
-  margin-top: 3px;
-  background-color: #060031;
+  height: 2px;
+  background-color: #DE0B2C;
   transition: .3s;
-  z-index: -1;
+  z-index: 1;
 }
 @media (min-width: 960px) {
   .js-nav--main .menu-item:hover {
-    color:  #DE0B2C;
+    color:  #fff;
   }
   .js-nav--main .menu-item:hover:before {
     width: ~"calc(1px + 100%)";
@@ -46,7 +45,7 @@ nav {
 
 .is-scrolled .js-nav--main {
   transform: translate3d(0,-24px,0);
-  background: #060031;
+  background: linear-gradient(to right, #050035 0%,#340a3a 100%);
 }
 
 

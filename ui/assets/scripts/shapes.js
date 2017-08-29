@@ -25,7 +25,7 @@
   // }
   setInterval(function(){
     drawMbp()
-  },60)
+  },30)
   window.addEventListener('touchmove',drawMbp);
   window.addEventListener('keydown',function() {
     if (rotation > 90 || rotation < -1300)
@@ -66,7 +66,7 @@
     if (count % 2) {
       requestAnimationFrame(function(){
         ctx.globalAlpha = .6;
-        ctx.fillStyle = "rgba(6, 0, 49, .04)";
+        ctx.fillStyle = "rgba(6, 0, 49, .02)";
         ctx.fillRect(0, 0, winW, winH);
         ctx.translate( spiralOriginX, spiralOriginY);
         ctx.rotate(.6)
