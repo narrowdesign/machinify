@@ -7730,9 +7730,6 @@ button.bg-white-20:hover {
   background-size: 600px;
 }
 .bg-divider {
-  background-image: url(../../images/dividerBg.png);
-  background-size: 200px;
-  background-repeat-y: no-repeat;
   background-color: #EEEEF0;
 }
 .bg-pattern-tri {
