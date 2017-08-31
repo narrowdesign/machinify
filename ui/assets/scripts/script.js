@@ -205,7 +205,6 @@ $(function() {
     // requestAnimationFrame(render)
   }
   function scrollHandler(e) {
-    scrollX = WIN.scrollLeft();
     scrollY = WIN.scrollTop();
     // scrollXPercent = (scrollX/_winW).toFixed(3);;
     // scrollYPercent = (scrollY/BODY.innerHeight()).toFixed(3);
