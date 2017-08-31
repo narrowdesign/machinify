@@ -207,22 +207,22 @@ $(function() {
   function scrollHandler(e) {
     scrollX = WIN.scrollLeft();
     scrollY = WIN.scrollTop();
-    scrollXPercent = (scrollX/_winW).toFixed(3);;
-    scrollYPercent = (scrollY/BODY.innerHeight()).toFixed(3);
-    if (oldScrollX) {
-      scrollXVelocity = Math.abs(scrollX - oldScrollX);
-    } else if (oldScrollX == scrollX) {
-      scrollXVelocity = 0;
-    }
-    if (oldScrollY) {
-      scrollYVelocity = Math.abs(scrollY - oldScrollY);
-    } else if (oldScrollY == scrollY) {
-      scrollYVelocity = 0;
-    }
-    scrollXTotal += Math.abs(scrollXVelocity);
-    scrollYTotal += Math.abs(scrollYVelocity);
-    oldScrollX = scrollX;
-    oldScrollY = scrollY;
+    // scrollXPercent = (scrollX/_winW).toFixed(3);;
+    // scrollYPercent = (scrollY/BODY.innerHeight()).toFixed(3);
+    // if (oldScrollX) {
+    //   scrollXVelocity = Math.abs(scrollX - oldScrollX);
+    // } else if (oldScrollX == scrollX) {
+    //   scrollXVelocity = 0;
+    // }
+    // if (oldScrollY) {
+    //   scrollYVelocity = Math.abs(scrollY - oldScrollY);
+    // } else if (oldScrollY == scrollY) {
+    //   scrollYVelocity = 0;
+    // }
+    // scrollXTotal += Math.abs(scrollXVelocity);
+    // scrollYTotal += Math.abs(scrollYVelocity);
+    // oldScrollX = scrollX;
+    // oldScrollY = scrollY;
     var moved = scrollY - oldScrollY;
     if (scrollY > 200 && !BODY.hasClass('is-scrolled')) {
       BODY.addClass('is-scrolled')
