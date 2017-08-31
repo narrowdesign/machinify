@@ -375,7 +375,11 @@ $(function() {
     var graphiclines = false;
     doLines()
     setInterval(doLines,1000);
+    setInterval(hideLines,2000);
     function doLines() {
+      $('.graphic-lines').css({
+        opacity: 1
+      })
       for (var i=0;i<132;i++) {
         if (!graphiclines) {
           $('.graphic-lines').append('<div class="graphic-line"></div>');
@@ -386,6 +390,16 @@ $(function() {
         })
       }
       graphiclines = true;
+    }
+    function hideLines() {
+      $('.graphic-lines').css({
+        opacity: 0
+      })
+      setTimeout(function(){
+        $('.graphic-lines').css({
+          opacity: 1
+        })
+      },2000)
     }
 
   })()
