@@ -227,7 +227,7 @@ $(function() {
     if (scrollY > 200 && !BODY.hasClass('is-scrolled')) {
       BODY.addClass('is-scrolled')
     } else if (scrollY < 200 && BODY.hasClass('is-scrolled')) {
-      BODY.removeClass('is-scrolled')
+      BODY.removeClass('is-scrolled');
     }
     if (scrollY > 200 && (moved < -20 && !BODY.hasClass('is-scrolling-up') && scrollY < DOC.height() - _winH - 40)) {
       BODY.addClass('is-scrolling-up')

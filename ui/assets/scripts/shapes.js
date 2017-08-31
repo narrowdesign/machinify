@@ -1,3 +1,4 @@
+var paused = false;
 (function() {
   var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                               window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -17,6 +18,7 @@
   var spiralOriginY = winW * axis * aspect
   var keydown;
   var rotation = 0;
+  var pauseTimeout;
 
   sizeCanvas();
 
@@ -24,9 +26,18 @@
   //   drawMbp()
   // }
   setInterval(function(){
-    drawMbp()
-  },30)
+    if (!paused) {
+      drawMbp()
+    }
+  },60)
   window.addEventListener('touchmove',drawMbp);
+  window.addEventListener('scroll',function(){
+    paused = true;
+    clearTimeout(pauseTimeout)
+    pauseTimeout = setTimeout(function(){
+      paused = false;
+    },100)
+  })
   window.addEventListener('keydown',function() {
     if (rotation > 90 || rotation < -1300)
     keydown = true;
@@ -63,17 +74,15 @@
   var count = 0;
   function drawMbp() {
     count++;
-    if (count % 2) {
-      requestAnimationFrame(function(){
-        ctx.globalAlpha = .6;
-        ctx.fillStyle = "rgba(6, 0, 49, .02)";
-        ctx.fillRect(0, 0, winW, winH);
-        ctx.translate( spiralOriginX, spiralOriginY);
-        ctx.rotate(.6)
-        ctx.translate( -spiralOriginX + count/5, -spiralOriginY + count/5);
-        ctx.drawImage(spiralRed, 0,0,winW,winH);
-      })
-    }
+    requestAnimationFrame(function(){
+      ctx.globalAlpha = .6;
+      ctx.fillStyle = "rgba(6, 0, 49, .02)";
+      ctx.fillRect(0, 0, winW, winH);
+      ctx.translate( spiralOriginX, spiralOriginY);
+      ctx.rotate(.6)
+      ctx.translate( -spiralOriginX + count/5, -spiralOriginY + count/5);
+      ctx.drawImage(spiralRed, 0,0,winW,winH);
+    })
     // }
   }
 })();
