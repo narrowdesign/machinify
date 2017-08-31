@@ -195,12 +195,14 @@ nav {
 }
 .js-nav--main .menu-item {
   position: relative;
+  top: 5px;
+  padding: 10px;
 }
 .js-nav--main .menu-item:before {
   width: 0;
   content: '';
   position: absolute;
-  bottom: -5px;
+  bottom: 2px;
   right: 0;
   height: 2px;
   background-color: #DE0B2C;
@@ -2877,6 +2879,9 @@ svg:nth-of-type(3) .dial-ring {
 }
 .m-b-13 {
   margin-bottom: 13rem;
+}
+.m-l-a {
+  margin-left: auto;
 }
 .m-l-0 {
   margin-left: 0rem;
