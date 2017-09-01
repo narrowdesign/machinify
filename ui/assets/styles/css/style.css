@@ -232,7 +232,6 @@ nav {
 }
 @media (min-width: 960px) {
   .is-scrolled.is-scrolling-up .js-nav__wrapper {
-    height: 68px;
     transition: 0.1s ease-out;
   }
 }
@@ -248,7 +247,6 @@ nav {
     opacity: 1;
   }
   .is-scrolled .js-nav__wrapper {
-    height: 65px;
     transition: 0s ease-out;
     transition-delay: .3s;
   }
