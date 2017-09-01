@@ -522,7 +522,7 @@ canvas {
   transition: 1s;
 }
 .graphic-lines line {
-  transition: 0.5s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 svg .dial-ring {
   stroke-dashoffset: 80px;
@@ -1827,6 +1827,9 @@ svg:nth-of-type(3) .dial-ring {
 }
 .p-t-13 {
   padding-top: 13rem;
+}
+.p-t-43p {
+  padding-top: 43.6%;
 }
 .p-t-vid {
   padding-top: 56.25%;

@@ -350,6 +350,13 @@ $(function() {
   BODY.addClass('is-in');
 
   (function cycleGraphics() {
+
+    var linesStatus = new Array();
+    for (var i=0;i<$('.graphic-lines line').length;i++) {
+      linesStatus[i] = 'nope';
+    }
+
+    linesInterval = setInterval(doLines,20);
     setInterval(setDials,3000);
     var dialOffset = 80;
     setDials();
@@ -358,56 +365,61 @@ $(function() {
         dialOffset = 0;
         $('.graphic1-spiral1 path').css({
           strokeDashoffset: 0,
-          strokeWidth: 4
+          strokeWidth: 2
         })
+        setTimeout(function(){
+          linesInterval = setInterval(doLines,20);
+          for (var i=0;i<$('.graphic-lines line').length;i++) {
+            linesStatus[i] = 'nope';
+          }
+        },500)
       } else {
         dialOffset = 80;
         $('.graphic1-spiral1 path').css({
           strokeDashoffset: 80,
           strokeWidth: 1
         })
+        clearInterval(linesInterval)
       }
       $('.dial-ring').css({
         strokeDashoffset: dialOffset,
       })
-    }
-    var graphiclines = false;
-    doLines()
-    setInterval(doLines,300);
-    function doLines() {
-      $('.graphic-lines').css({
-        opacity: 1
+
+      $('.graphic-lines line').css({
+        transform: 'scaleX(1)',
+        opacity: '.8',
+        stroke: '#ccc'
       })
-      for (var i=0;i<$('.graphic-lines line').length;i++) {
-        var line = $('.graphic-lines line').eq(i);
-        var opacity = Math.random() - .2;
-        var scale = Math.random() * 6;
-        if (!line.hasClass('set')) {
+    }
+
+    function doLines() {
+      if (linesStatus.indexOf('nope') != '-1') {
+        for (var i=0;i<$('.graphic-lines line').length;i++) {
+          updateLine(i)
+        }
+      }
+    }
+    function updateLine(i) {
+      var line = $('.graphic-lines line').eq(i);
+      var opacity = Math.random() - .2;
+      var scale = Math.random() * 3;
+      if (linesStatus[i] != "done") {
+        if (opacity > .75 || scale > 5) {
+          linesStatus[i] = "done";
+          line.css({
+            transform: 'scaleX(6)',
+            transformOrigin: '50%',
+            opacity: 1,
+            stroke: '#CB375B'
+          });
+        } else {
           line.css({
             opacity: opacity,
             transform: 'scaleX(' + scale + ')',
             transformOrigin: '50%'
           })
-          if (opacity > .75 || scale > 5) {
-            line.addClass('set');
-            line.css({
-              transform: 'scaleX(6)',
-              opacity: 1
-            });
-          }
         }
       }
-      graphiclines = true;
-    }
-    function hideLines() {
-      $('.graphic-lines').css({
-        opacity: 0
-      })
-      setTimeout(function(){
-        $('.graphic-lines').css({
-          opacity: 1
-        })
-      },2000)
     }
 
   })()
