@@ -350,7 +350,7 @@ $(function() {
   BODY.addClass('is-in');
 
   (function cycleGraphics() {
-    setInterval(setDials,3000)
+    setInterval(setDials,3000);
     var dialOffset = 80;
     setDials();
     function setDials() {
@@ -373,20 +373,29 @@ $(function() {
     }
     var graphiclines = false;
     doLines()
-    setInterval(doLines,1000);
-    setInterval(hideLines,2000);
+    setInterval(doLines,300);
     function doLines() {
       $('.graphic-lines').css({
         opacity: 1
       })
-      for (var i=0;i<132;i++) {
-        if (!graphiclines) {
-          $('.graphic-lines').append('<div class="graphic-line"></div>');
+      for (var i=0;i<$('.graphic-lines line').length;i++) {
+        var line = $('.graphic-lines line').eq(i);
+        var opacity = Math.random() - .2;
+        var scale = Math.random() * 6;
+        if (!line.hasClass('set')) {
+          line.css({
+            opacity: opacity,
+            transform: 'scaleX(' + scale + ')',
+            transformOrigin: '50%'
+          })
+          if (opacity > .75 || scale > 5) {
+            line.addClass('set');
+            line.css({
+              transform: 'scaleX(6)',
+              opacity: 1
+            });
+          }
         }
-        $('.graphic-line').eq(i).css({
-          opacity: Math.random() - .2,
-          transform: 'scaleX(' + Math.random() * 6 + ')'
-        })
       }
       graphiclines = true;
     }
