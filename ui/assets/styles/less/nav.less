@@ -20,10 +20,12 @@ nav {
   z-index: 1;
 }
 @media (min-width: 960px) {
+  .js-nav--main .menu-item.active,
   .js-nav--main .menu-item:hover {
     color:  #fff;
   }
-  .js-nav--main .menu-item:hover:before {
+  .js-nav--main .menu-item:hover:before,
+  .js-nav--main .menu-item.active:before {
     width: ~"calc(1px + 100%)";
   }
 }
