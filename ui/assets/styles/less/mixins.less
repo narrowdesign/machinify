@@ -120,9 +120,9 @@
 }
 
 .blink {
-  -webkit-animation: blink 1s infinite;
-  -moz-animation: blink 1s infinite;
-  animation: blink 1s infinite;
+  -webkit-animation: blink 3s infinite;
+  -moz-animation: blink 3s infinite;
+  animation: blink 3s infinite;
 }
 
 .bounce {
@@ -357,30 +357,39 @@
 
 
 @-webkit-keyframes blink {
-  from {
+  0% {
     opacity: 0;
   }
-  to   {
+  50% {
     opacity: 1;
+  }
+  100%   {
+    opacity: 0;
   }
 }
 
 @-moz-keyframes blink {
-    from {
-      opacity: 0;
-    }
-    to   {
-      opacity: 1;
-    }
+    0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100%   {
+    opacity: 0;
+  }
 }
 
 @keyframes blink {
-    from {
-      opacity: 0;
-    }
-    to   {
-      opacity: 1;
-    }
+   0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100%   {
+    opacity: 0;
+  }
 }
 
 @keyframes spin-centered {
@@ -388,5 +397,15 @@
     transform: translate3d(-50%,-50%,0)  rotate(0deg);
   } 100% {
     transform: translate3d(-50%,-50%,0) rotate(-360deg);
+  }
+}
+
+@keyframes grow {
+  0% {
+    stroke-dashoffset: 80px;
+    stroke-dasharray: 80px;
+  } 100% {
+    stroke-dashoffset: 0px;
+    stroke-dasharray: 80px;
   }
 }

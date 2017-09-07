@@ -270,16 +270,20 @@ canvas {
   width: 100%;
 }
 
+.growth path {
 
-.dial1 {
-  animation: spin 2s 1000;
 }
-.dial2 {
-  animation: spin 1s 1000;
-}
-.dial3 {
-  animation: spin 3s 1000;
-}
+
+
+// .dial1 {
+//   animation: spin 2s 1000;
+// }
+// .dial2 {
+//   animation: spin 1s 1000;
+// }
+// .dial3 {
+//   animation: spin 3s 1000;
+// }
 
 @keyframes spin {
   0% {
@@ -325,6 +329,25 @@ svg {
     .dial-ring {
       transition: 1.2s;
       transition-delay: 1s;
+    }
+  }
+}
+
+.cloud {
+  g {
+    transform-origin: 50%;
+    animation: spin 5s linear 1000;
+    transform-origin: 50%;
+    background: white;
+    border: 2px solid;
+    &:nth-of-type(2) {
+      animation: spin 4s linear 1000;
+    }
+    &:nth-of-type(3) {
+      animation: spin 3s linear 1000;
+    }
+    &:nth-of-type(4) {
+      animation: spin 2s linear 1000;
     }
   }
 }

@@ -492,15 +492,6 @@ canvas {
 .mood img {
   width: 100%;
 }
-.dial1 {
-  animation: spin 2s 1000;
-}
-.dial2 {
-  animation: spin 1s 1000;
-}
-.dial3 {
-  animation: spin 3s 1000;
-}
 @keyframes spin {
   0% {
     transform: rotate(0);
@@ -538,6 +529,21 @@ svg:nth-of-type(2) .dial-ring {
 svg:nth-of-type(3) .dial-ring {
   transition: 1.2s;
   transition-delay: 1s;
+}
+.cloud g {
+  animation: spin 5s linear 1000;
+  transform-origin: 50%;
+  background: white;
+  border: 2px solid;
+}
+.cloud g:nth-of-type(2) {
+  animation: spin 4s linear 1000;
+}
+.cloud g:nth-of-type(3) {
+  animation: spin 3s linear 1000;
+}
+.cloud g:nth-of-type(4) {
+  animation: spin 2s linear 1000;
 }
 .test {
   width: 100%;
@@ -7057,9 +7063,9 @@ svg:nth-of-type(3) .dial-ring {
   animation: none;
 }
 .blink {
-  -webkit-animation: blink 1s infinite;
-  -moz-animation: blink 1s infinite;
-  animation: blink 1s infinite;
+  -webkit-animation: blink 3s infinite;
+  -moz-animation: blink 3s infinite;
+  animation: blink 3s infinite;
 }
 .bounce {
   -webkit-animation: bounce 1s infinite;
@@ -7456,27 +7462,36 @@ svg:nth-of-type(3) .dial-ring {
   }
 }
 @-webkit-keyframes blink {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  50% {
     opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 @-moz-keyframes blink {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  50% {
     opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 @keyframes blink {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  50% {
     opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 @keyframes spin-centered {
@@ -7485,6 +7500,16 @@ svg:nth-of-type(3) .dial-ring {
   }
   100% {
     transform: translate3d(-50%, -50%, 0) rotate(-360deg);
+  }
+}
+@keyframes grow {
+  0% {
+    stroke-dashoffset: 80px;
+    stroke-dasharray: 80px;
+  }
+  100% {
+    stroke-dashoffset: 0px;
+    stroke-dasharray: 80px;
   }
 }
 .white {
@@ -7728,6 +7753,13 @@ button.bg-white-20:hover {
 }
 .bg-dark-gradient {
   background: linear-gradient(to right, #050035 0%, #340a3a 100%);
+}
+.magenta-gradient {
+  color: #D81668;
+  background-image: -webkit-linear-gradient(0deg, #7FA4F7, #CE3E67);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 .bg-pattern {
   background-image: url(../../images/pattern.png);
