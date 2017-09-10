@@ -139,89 +139,30 @@ $(function() {
     render()
   })()
   var counter = 0;
-  setInterval(render,30);
+  setInterval(render,60);
   function render() {
     counter++;
+    if (scrollY < 600) {
+      currentDate = new Date();
+      currentTime = (new Date()).toTimeString()
+      totalTime = currentDate-startDate;
 
-    currentDate = new Date();
-    currentTime = (new Date()).toTimeString()
-    totalTime = currentDate-startDate;
-    // console.log(counter)
-    // $('.bg-pattern').css({
-    //   backgroundPosition: '0 -' + counter + 'px'
-    // })
+      $('.output-mouseX .output-value').text('mx ' + mouseX)
+      $('.output-mouseX .output-bar-fill').css({width: mouseXPercent * 100 + '%'})
+      $('.output-mouseY .output-value').text('my ' + mouseY)
+      $('.output-mouseY .output-bar-fill').css({width: mouseYPercent * 100 + '%'})
+      $('.output-totalTime .output-value').text('cycles ' + totalTime);
+      $('.output-totalTime .output-bar-fill').css({width: Math.min(100,totalTime/200) + '%'});
+      $('.output-mouseXVelocity .output-value').text('mxv ' + mouseXVelocity);
+      $('.output-mouseXVelocity .output-bar-fill').css({width: Math.min(100,Math.abs(mouseXVelocity)) + '%'})
+      $('.output-mouseYVelocity .output-value').text('myv ' + mouseYVelocity);
+      $('.output-mouseYVelocity .output-bar-fill').css({width: Math.min(100,Math.abs(mouseYVelocity)) + '%'})
 
-    $('.output-mouseX .output-value').text('mx ' + mouseX)
-    $('.output-mouseX .output-bar-fill').css({width: mouseXPercent * 100 + '%'})
-    $('.output-mouseY .output-value').text('my ' + mouseY)
-    $('.output-mouseY .output-bar-fill').css({width: mouseYPercent * 100 + '%'})
-    $('.output-totalTime .output-value').text('cycles ' + totalTime);
-    $('.output-totalTime .output-bar-fill').css({width: Math.min(100,totalTime/200) + '%'});
-    $('.output-mouseXVelocity .output-value').text('mxv ' + mouseXVelocity);
-    $('.output-mouseXVelocity .output-bar-fill').css({width: Math.min(100,Math.abs(mouseXVelocity)) + '%'})
-    $('.output-mouseYVelocity .output-value').text('myv ' + mouseYVelocity);
-    $('.output-mouseYVelocity .output-bar-fill').css({width: Math.min(100,Math.abs(mouseYVelocity)) + '%'})
-
-    // $('.output-mouseXPercent .output-value').text(mouseXPercent)
-    // $('.output-mouseXPercent .output-bar-fill').css({width: mouseXPercent * 100 + '%'})
-    // $('.output-mouseYPercent .output-value').text(mouseYPercent)
-    // $('.output-mouseYPercent .output-bar-fill').css({width: mouseYPercent * 100 + '%'})
-    // $('.output-scrollY .output-value').text(scrollY)
-    // $('.output-scrollY .output-bar-fill').css({width: scrollYPercent * 100 + '%'})
-    // $('.output-scrollX .output-value').text(scrollX);
-    // $('.output-scrollX .output-bar-fill').css({width: scrollXPercent * 100 + '%'})
-    // $('.output-scrollXTotal .output-value').text(scrollXTotal);
-    // $('.output-scrollYTotal .output-value').text(scrollYTotal);
-    // $('.output-scrollXVelocity .output-value').text(scrollXVelocity);
-    // $('.output-scrollYVelocity .output-value').text(scrollYVelocity);
-    // $('.output-scrollYVelocity .output-bar-fill').css({width: scrollYVelocity + '%'})
-    // $('.output-scrollXPercent .output-value').text(scrollXPercent);
-    // $('.output-scrollYPercent .output-value').text(scrollYPercent);
-    // $('.output-scrollYPercent .output-bar-fill').css({width: scrollYPercent * 100 + '%'})
-    // $('.output-touchEnabled .output-value').text(touchEnabled);
-    // $('.output-touchX .output-value').text(touchX);
-    // $('.output-touchY .output-value').text(touchY);
-    // $('.output-gyroscopeGamma .output-value').text(gyroscopeGamma);
-    // $('.output-gyroscopeBeta .output-value').text(gyroscopeBeta);
-    // $('.output-touchMoveTotal .output-value').text(touchMoveTotal);
-    // $('.output-mouseXTotal .output-value').text(mouseXTotal);
-    // $('.output-mouseYTotal .output-value').text(mouseYTotal);
-    // $('.output-keyTotal .output-value').text(keyTotal);
-    // $('.output-keyCache .output-value').text(keyCache);
-    // $('.output-keyCurrent .output-value').text(keyCurrent);
-    // $('.output-mouseEnterTotal .output-value').text(mouseEnterTotal);
-    // $('.output-mouseLeaveTotal .output-value').text(mouseLeaveTotal);
-    // $('.output-mouseDragTime .output-value').text(mouseDragTime);
-    // $('.output-mouseUpEvents .output-value').text(mouseUpEvents);
-    // $('.output-mouseDownEvents .output-value').text(mouseDownEvents);
-    // $('.output-mouseDownTime .output-value').text(mouseDownTime);
-    // $('.output-clicks .output-value').text(clicks);
-    // $('.output-startTime .output-value').text(startTime);
-    // $('.output-currentTime .output-value').text(currentTime);
-    // $('.output-activeTime .output-value').text(activeTime);
-    // $('.output-inactiveTime .output-value').text(inactiveTime);
-    // $('.output-onLine .output-value').text(onLine)
-
-    // requestAnimationFrame(render)
+    }
   }
   function scrollHandler(e) {
     scrollY = WIN.scrollTop();
-    // scrollXPercent = (scrollX/_winW).toFixed(3);;
-    // scrollYPercent = (scrollY/BODY.innerHeight()).toFixed(3);
-    // if (oldScrollX) {
-    //   scrollXVelocity = Math.abs(scrollX - oldScrollX);
-    // } else if (oldScrollX == scrollX) {
-    //   scrollXVelocity = 0;
-    // }
-    // if (oldScrollY) {
-    //   scrollYVelocity = Math.abs(scrollY - oldScrollY);
-    // } else if (oldScrollY == scrollY) {
-    //   scrollYVelocity = 0;
-    // }
-    // scrollXTotal += Math.abs(scrollXVelocity);
-    // scrollYTotal += Math.abs(scrollYVelocity);
-    // oldScrollX = scrollX;
-    // oldScrollY = scrollY;
+
     var moved = scrollY - oldScrollY;
     if (scrollY > 200 && !BODY.hasClass('is-scrolled')) {
       BODY.addClass('is-scrolled')
@@ -356,6 +297,31 @@ $(function() {
       linesStatus[i] = 'nope';
     }
 
+
+
+    for (var i=-1;i<$('.graphic4-lines line').length;i = i+9) {
+      lineJump(i)
+    }
+    function lineJump(num) {
+      $('.graphic4-lines line').eq(num).css({
+        transform: 'scaleY(' + (num*(Math.random() + 2)) + ')',
+        transitionDelay: num/40 + 's',
+        transformOrigin: '0 120%',
+        stroke: '#CB375B'
+      }).addClass('is-on')
+    }
+    setInterval(function(){
+      $('.graphic4-lines line').css({
+        transform: 'scaleY(1)',
+        transitionDelay: '0s',
+      }).removeClass('is-on')
+      setTimeout(function(){
+        for (var i=-1;i<$('.graphic4-lines line').length;i = i+9) {
+          lineJump(i)
+        }
+      },300)
+    },6000)
+
     linesInterval = setInterval(doLines,20);
     setInterval(setDials,3000);
     var dialOffset = 80;
@@ -407,7 +373,7 @@ $(function() {
         if (opacity > .75 || scale > 5) {
           linesStatus[i] = "done";
           line.css({
-            transform: 'scaleX(6)',
+            transform: 'scaleX(30)',
             transformOrigin: '50%',
             opacity: 1,
             stroke: '#CB375B'
@@ -443,5 +409,25 @@ $(function() {
       }
     },300)
   }
-
+  var growthGroup = $('.growth g').length;
+  $('.growth path').each(function(i){
+    $('.growth path').eq(i).css({
+      transitionDelay: Math.random() + 's'
+    })
+  })
+  setInterval(function(){
+    var group = $('.growth g').eq(growthGroup);
+    var offset = 0;
+    if (Math.random() > .8) {
+      offset = '-120px'
+    }
+    var pathNum = Math.floor(Math.random() * $('path',group).length);
+    $('path',group).css({
+      strokeDashoffset: offset,
+    })
+    growthGroup--;
+    if (growthGroup <= 0) {
+      growthGroup = $('.growth g').length
+    }
+  },100)
 })

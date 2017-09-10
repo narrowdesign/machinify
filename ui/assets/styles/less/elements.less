@@ -333,6 +333,89 @@ svg {
   }
 }
 
+.growth path {
+  stroke-dashoffset: 120px;
+  stroke-dasharray: 120px;
+  transition: 5s;
+}
+
+.graphic4-spiral {
+  animation: spin 2.5s ease-in-out infinite;
+}
+
+.graphic4-lines line {
+  transition: .3s ease-out;
+}
+
+.dial-ring-4 {
+  stroke-dashoffset: 80px;
+  stroke-dasharray: 80px;
+  animation: fill 5s ease-in-out infinite;
+}
+
+@keyframes fill {
+  0% {
+    stroke-dashoffset: 80px;
+  }
+  50% {
+    stroke-dashoffset: 0px;
+  }
+  100% {
+    stroke-dashoffset: -80px;
+  }
+}
+.graphic3-slider {
+
+}
+.graphic3-spiral {
+  animation: spin-loop 5s ease-in-out infinite;
+  path {
+    animation: shift-color 5s ease-in-out infinite;
+  }
+}
+@keyframes shift-color {
+  0% {
+    stroke: rgba(206,61,100,1);
+    fill: transparent;
+  }
+  50% {
+    stroke: rgba(4,0,58,1);
+    fill: rgba(206,61,100,.6);
+  }
+  100% {
+    stroke: rgba(206,61,100,1);
+    fill: transparent;
+  }
+}
+@keyframes spin-loop {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+.slider {
+  animation: slide 5s ease-in-out infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-450%);
+  }
+  50% {
+    transform: translateX(450%);
+  }
+  100% {
+    transform: translateX(-450%);
+  }
+}
+
 .cloud {
   g {
     transform-origin: 50%;

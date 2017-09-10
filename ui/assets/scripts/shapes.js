@@ -19,6 +19,7 @@ var paused = false;
   var keydown;
   var rotation = 0;
   var pauseTimeout;
+  var scrollTop = 0;
 
   sizeCanvas();
 
@@ -33,10 +34,14 @@ var paused = false;
   window.addEventListener('touchmove',drawMbp);
   window.addEventListener('scroll',function(){
     paused = true;
-    clearTimeout(pauseTimeout)
-    pauseTimeout = setTimeout(function(){
-      paused = false;
-    },100)
+    if (scrollY > 700) {
+
+    } else {
+      clearTimeout(pauseTimeout)
+      pauseTimeout = setTimeout(function(){
+        paused = false;
+      },100)
+    }
   })
   window.addEventListener('keydown',function() {
     if (rotation > 90 || rotation < -1300)
@@ -72,11 +77,18 @@ var paused = false;
   var spiralRed = new Image;
   spiralRed.src = 'ui/assets/images/spiral-line.svg';
   var count = 0;
+  var src = 0;
+  var spirals = new Array('ui/assets/images/spiral-line.svg','ui/assets/images/spiral-line-purple.svg')
+  // every 10 seconds clear it dramatically
   function drawMbp() {
     count++;
+    if (count%100 == 0) {
+      src = Number(!src)
+      spiralRed.src = spirals[src];
+    }
     requestAnimationFrame(function(){
       ctx.globalAlpha = .6;
-      ctx.fillStyle = "rgba(6, 0, 49, .02)";
+      ctx.fillStyle = "rgba(6, 0, 49, .025)";
       ctx.fillRect(0, 0, winW, winH);
       ctx.translate( spiralOriginX, spiralOriginY);
       ctx.rotate(.6)

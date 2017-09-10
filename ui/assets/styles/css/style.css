@@ -530,6 +530,78 @@ svg:nth-of-type(3) .dial-ring {
   transition: 1.2s;
   transition-delay: 1s;
 }
+.growth path {
+  stroke-dashoffset: 120px;
+  stroke-dasharray: 120px;
+  transition: 5s;
+}
+.graphic4-spiral {
+  animation: spin 2.5s ease-in-out infinite;
+}
+.graphic4-lines line {
+  transition: 0.3s ease-out;
+}
+.dial-ring-4 {
+  stroke-dashoffset: 80px;
+  stroke-dasharray: 80px;
+  animation: fill 5s ease-in-out infinite;
+}
+@keyframes fill {
+  0% {
+    stroke-dashoffset: 80px;
+  }
+  50% {
+    stroke-dashoffset: 0px;
+  }
+  100% {
+    stroke-dashoffset: -80px;
+  }
+}
+.graphic3-spiral {
+  animation: spin-loop 5s ease-in-out infinite;
+}
+.graphic3-spiral path {
+  animation: shift-color 5s ease-in-out infinite;
+}
+@keyframes shift-color {
+  0% {
+    stroke: #ce3d64;
+    fill: transparent;
+  }
+  50% {
+    stroke: #04003a;
+    fill: rgba(206, 61, 100, 0.6);
+  }
+  100% {
+    stroke: #ce3d64;
+    fill: transparent;
+  }
+}
+@keyframes spin-loop {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.slider {
+  animation: slide 5s ease-in-out infinite;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(-450%);
+  }
+  50% {
+    transform: translateX(450%);
+  }
+  100% {
+    transform: translateX(-450%);
+  }
+}
 .cloud g {
   animation: spin 5s linear 1000;
   transform-origin: 50%;
@@ -1836,8 +1908,8 @@ svg:nth-of-type(3) .dial-ring {
 .p-t-13 {
   padding-top: 13rem;
 }
-.p-t-43p {
-  padding-top: 43.6%;
+.p-t-50p {
+  padding-top: 50%;
 }
 .p-t-vid {
   padding-top: 56.25%;
@@ -4786,6 +4858,9 @@ svg:nth-of-type(3) .dial-ring {
   }
   .ms-fx-b-33p {
     flex-basis: 33.33333%;
+  }
+  .ms-fx-b-46p {
+    flex-basis: 46%;
   }
   .ms-fx-b-49p {
     flex-basis: 49%;
@@ -7757,6 +7832,13 @@ button.bg-white-20:hover {
 .magenta-gradient {
   color: #D81668;
   background-image: -webkit-linear-gradient(0deg, #7FA4F7, #CE3E67);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.bluewhite-gradient {
+  color: #fff;
+  background-image: -webkit-linear-gradient(0deg, #DF4C8A, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
