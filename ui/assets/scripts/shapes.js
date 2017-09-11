@@ -79,16 +79,32 @@ var paused = false;
   var count = 0;
   var src = 0;
   var spirals = new Array('ui/assets/images/spiral-line.svg','ui/assets/images/spiral-line-purple.svg')
+  var gradient = ctx.createLinearGradient(0, 0, winW, winH);
+  gradient.addColorStop(0, 'rgba(4, 0, 58, .025)');
+  gradient.addColorStop(1, 'rgba(46, 6, 62, .025)');
+
+  var gradient2 = ctx.createLinearGradient(0, 0, winW, winH);
+  gradient2.addColorStop(0, 'rgba(4, 0, 58, .25)');
+  gradient2.addColorStop(1, 'rgba(46, 6, 62, .25)');
+  var fillStyle = gradient;
+  var clearingCount = 0;
   // every 10 seconds clear it dramatically
   function drawMbp() {
     count++;
+    clearingCount++;
     if (count%100 == 0) {
       src = Number(!src)
       spiralRed.src = spirals[src];
     }
+    if (clearingCount > 150 && clearingCount < 170) {
+      fillStyle = gradient2;
+    } else if (clearingCount > 170) {
+      fillStyle = gradient;
+      clearingCount = 0;
+    }
     requestAnimationFrame(function(){
       ctx.globalAlpha = .6;
-      ctx.fillStyle = "rgba(6, 0, 49, .025)";
+      ctx.fillStyle = fillStyle
       ctx.fillRect(0, 0, winW, winH);
       ctx.translate( spiralOriginX, spiralOriginY);
       ctx.rotate(.6)
