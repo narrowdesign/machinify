@@ -376,7 +376,7 @@ svg {
 @keyframes shift-color {
   0% {
     stroke: rgba(206,61,100,1);
-    fill: transparent;
+    fill: rgba(206,61,100,.1);
   }
   50% {
     stroke: rgba(4,0,58,1);
@@ -384,7 +384,7 @@ svg {
   }
   100% {
     stroke: rgba(206,61,100,1);
-    fill: transparent;
+    fill: rgba(206,61,100,.1);
   }
 }
 @keyframes spin-loop {
@@ -406,31 +406,52 @@ svg {
 
 @keyframes slide {
   0% {
-    transform: translateX(-450%);
+    transform: translateX(-250%);
   }
   50% {
-    transform: translateX(450%);
+    transform: translateX(250%);
   }
   100% {
-    transform: translateX(-450%);
+    transform: translateX(-250%);
   }
 }
 
 .cloud {
   g {
     transform-origin: 50%;
-    animation: spin 5s linear 1000;
+    animation: spin 5s linear infinite;
     transform-origin: 50%;
     background: white;
     border: 2px solid;
     &:nth-of-type(2) {
-      animation: spin 4s linear 1000;
+      animation: spin 4s linear infinite;
     }
     &:nth-of-type(3) {
-      animation: spin 3s linear 1000;
+      animation: spin 3s linear infinite;
     }
     &:nth-of-type(4) {
-      animation: spin 2s linear 1000;
+      animation: spin 2s linear infinite;
     }
   }
+}
+
+.control-line {
+  stroke-dashoffset: 1500px;
+  stroke-dasharray: 1500px;
+  transition: 2.5s ease-in-out;
+}
+
+.deploy g {
+  position: absolute;
+  transform-origin: 50% 50%;
+  &:nth-of-type(2) {
+    animation: spin 5s linear infinite;
+    path {
+      stroke-width: 8px;
+    }
+  }
+}
+
+.deploy-line {
+
 }

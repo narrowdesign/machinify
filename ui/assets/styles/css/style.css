@@ -566,7 +566,7 @@ svg:nth-of-type(3) .dial-ring {
 @keyframes shift-color {
   0% {
     stroke: #ce3d64;
-    fill: transparent;
+    fill: rgba(206, 61, 100, 0.1);
   }
   50% {
     stroke: #04003a;
@@ -574,7 +574,7 @@ svg:nth-of-type(3) .dial-ring {
   }
   100% {
     stroke: #ce3d64;
-    fill: transparent;
+    fill: rgba(206, 61, 100, 0.1);
   }
 }
 @keyframes spin-loop {
@@ -593,29 +593,44 @@ svg:nth-of-type(3) .dial-ring {
 }
 @keyframes slide {
   0% {
-    transform: translateX(-450%);
+    transform: translateX(-250%);
   }
   50% {
-    transform: translateX(450%);
+    transform: translateX(250%);
   }
   100% {
-    transform: translateX(-450%);
+    transform: translateX(-250%);
   }
 }
 .cloud g {
-  animation: spin 5s linear 1000;
+  animation: spin 5s linear infinite;
   transform-origin: 50%;
   background: white;
   border: 2px solid;
 }
 .cloud g:nth-of-type(2) {
-  animation: spin 4s linear 1000;
+  animation: spin 4s linear infinite;
 }
 .cloud g:nth-of-type(3) {
-  animation: spin 3s linear 1000;
+  animation: spin 3s linear infinite;
 }
 .cloud g:nth-of-type(4) {
-  animation: spin 2s linear 1000;
+  animation: spin 2s linear infinite;
+}
+.control-line {
+  stroke-dashoffset: 1500px;
+  stroke-dasharray: 1500px;
+  transition: 2.5s ease-in-out;
+}
+.deploy g {
+  position: absolute;
+  transform-origin: 50% 50%;
+}
+.deploy g:nth-of-type(2) {
+  animation: spin 5s linear infinite;
+}
+.deploy g:nth-of-type(2) path {
+  stroke-width: 8px;
 }
 .test {
   width: 100%;

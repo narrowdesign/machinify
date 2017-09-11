@@ -85,6 +85,7 @@ $(function() {
   // FUNCTIONS
   ////////////
   (function init() {
+    scrollHandler();
 
     if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) {
         browser = 'Opera';
@@ -297,7 +298,26 @@ $(function() {
       linesStatus[i] = 'nope';
     }
 
-
+    var dashedControls = false;
+    dashControlLines();
+    setInterval(function(){
+      dashControlLines()
+    },3000)
+    function dashControlLines() {
+      dashedControls = !dashedControls;
+      for (var i=0;i<$('.control-line').length;i++) {
+        dashControlLine(i)
+      }
+    }
+    function dashControlLine(num) {
+      var dashOffset = 0;
+      if (dashedControls) {
+        dashOffset = '1500px'
+      }
+      $('.control-line').css({
+        strokeDashoffset: dashOffset,
+      })
+    }
 
     for (var i=-1;i<$('.graphic4-lines line').length;i = i+9) {
       lineJump(i)
