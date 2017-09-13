@@ -193,9 +193,12 @@ nav {
   transition: 0.3s ease-out;
   transform: translate3d(0, 0, 0);
 }
+.menu a {
+  padding: 10px;
+}
 .js-nav--main .menu-item {
   position: relative;
-  padding: 10px;
+  padding: 0 0 10px 0;
 }
 .js-nav--main .menu-item:before {
   width: 0;
