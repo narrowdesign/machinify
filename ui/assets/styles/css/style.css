@@ -193,12 +193,9 @@ nav {
   transition: 0.3s ease-out;
   transform: translate3d(0, 0, 0);
 }
-.menu a {
-  padding: 10px;
-}
 .js-nav--main .menu-item {
   position: relative;
-  padding: 0 0 10px 0;
+  padding: 10px 0 10px 0;
 }
 .js-nav--main .menu-item:before {
   width: 0;
@@ -507,8 +504,8 @@ canvas {
   animation: spin-centered 2s linear 1000;
 }
 .graphic1-spiral1 path {
-  stroke-dashoffset: 80px;
-  stroke-dasharray: 80px;
+  stroke-dashoffset: 260px;
+  stroke-dasharray: 260px;
   transition: 3s ease-in-out;
   transition-delay: 1s;
 }
@@ -562,7 +559,7 @@ svg:nth-of-type(3) .dial-ring {
   animation: spin-loop 5s ease-in-out infinite;
 }
 .graphic3-spiral path {
-  animation: shift-color 5s ease-in-out infinite;
+  /*animation: shift-color 5s ease-in-out infinite;*/
 }
 @keyframes shift-color {
   0% {
@@ -2620,6 +2617,18 @@ svg:nth-of-type(3) .dial-ring {
   .ls-p-h-13vw {
     padding-left: 13vw;
     padding-right: 13vw;
+  }
+  .ls-p-h-col05 {
+    padding-left: 4.1666666vw;
+    padding-right: 4.1666666vw;
+  }
+  .ls-p-h-col1 {
+    padding-left: 8.333vw;
+    padding-right: 8.333vw;
+  }
+  .ls-p-h-col2 {
+    padding-left: 16.66666vw;
+    padding-right: 16.66666vw;
   }
   .ls-p-v-0 {
     padding-top: 0rem;

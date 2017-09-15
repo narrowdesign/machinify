@@ -344,10 +344,10 @@ $(function() {
 
     linesInterval = setInterval(doLines,20);
     setInterval(setDials,3000);
-    var dialOffset = 80;
+    var dialOffset = 260;
     setDials();
     function setDials() {
-      if (dialOffset == 80) {
+      if (dialOffset == 260) {
         dialOffset = 0;
         $('.graphic1-spiral1 path').css({
           strokeDashoffset: 0,
@@ -360,9 +360,9 @@ $(function() {
           }
         },500)
       } else {
-        dialOffset = 80;
+        dialOffset = 260;
         $('.graphic1-spiral1 path').css({
-          strokeDashoffset: 80,
+          strokeDashoffset: 260,
           strokeWidth: 1
         })
         clearInterval(linesInterval)
