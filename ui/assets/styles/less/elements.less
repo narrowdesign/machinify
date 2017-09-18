@@ -10,7 +10,7 @@ h1 {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 200;
-  font-size: 64px;
+  font-size: ~'calc(2.1rem + (3.5 - 2.1) * (100vw - 20rem) / (105 - 20))';
   line-height: 1 !important;
   margin: 0 0 20px;
 }
@@ -300,16 +300,22 @@ canvas {
   transform: translate3d(-50%,-50%,0) rotate(0deg);
   animation: spin-centered 2s linear 1000;
   path {
-    stroke-dashoffset: 260px;
-    stroke-dasharray: 260px;
-    transition: 3s ease-in-out;
-    transition-delay: 1s;
+    stroke-dashoffset: -200px;
+    stroke-dasharray: 200px;
+    transition: 1.4s all ease-in-out 1.1s;
+  }
+  circle {
+    transform-origin: 50% 50%;
+    transform: scale(.03);
+    stroke-width: 8px;
+    transition: 1.4s all ease-in-out 1.1s;
   }
 }
 .graphic-lines {
   transition: 1s;
   line {
-    transition: .2s ease-in-out;
+    transition: .3s ease-in-out;
+    opacity: .5;
   }
 }
 
@@ -334,13 +340,13 @@ svg {
 }
 
 .growth path {
-  stroke-dashoffset: 120px;
-  stroke-dasharray: 120px;
-  transition: 5s;
+  stroke-dashoffset: -390px;
+  stroke-dasharray: 390px;
+  transition: 4s stroke-dashoffset, 1s stroke;
 }
 
 .graphic4-spiral {
-  animation: spin 2.5s ease-in-out infinite;
+  animation: spin 4s ease-in-out infinite;
 }
 
 .graphic4-lines line {
@@ -368,10 +374,13 @@ svg {
 
 }
 .graphic3-spiral {
-  animation: spin-loop 5s ease-in-out infinite;
-  path {
-    /*animation: shift-color 5s ease-in-out infinite;*/
-  }
+  animation: spin-loop 2s linear infinite;
+}
+.bounce1 {
+  animation: bounce1 5s ease-in-out infinite;
+}
+.bounce2 {
+  animation: bounce2 5s ease-in-out infinite;
 }
 @keyframes shift-color {
   0% {
@@ -387,18 +396,48 @@ svg {
     fill: rgba(206,61,100,.1);
   }
 }
+@keyframes bounce1 {
+  0% {
+    transform: translate3d(49%,0,0) scaleX(-1);
+  }
+  50% {
+    transform: translate3d(0,0,0) scaleX(-1);
+  }
+  100% {
+    transform: translate3d(49%,0,0) scaleX(-1);
+  }
+}
+@keyframes bounce2 {
+  0% {
+    transform: translate3d(-49%,0,0);
+  }
+  50% {
+    transform: translate3d(0,0,0);
+  }
+  100% {
+    transform: translate3d(-49%,0,0);
+  }
+}
 @keyframes spin-loop {
   0% {
     transform: rotate(0);
   }
-  50% {
-    transform: rotate(360deg);
-  }
   100% {
-    transform: rotate(0deg);
+    transform: rotate(360deg);
   }
 }
 
+@keyframes spin-loop3 {
+  0% {
+    transform: rotate(0) translate3d(-58%,50%,0) scale(.8);
+  }
+  50% {
+    transform: rotate(180deg) translate3d(0,0,0) scale(1.5);
+  }
+  100% {
+    transform: rotate(360deg) translate3d(-58%,50%,0) scale(.8);
+  }
+}
 
 .slider {
   animation: slide 5s ease-in-out infinite;
@@ -432,8 +471,25 @@ svg {
     &:nth-of-type(4) {
       animation: spin 2s linear infinite;
     }
+    path {
+      animation: pulse-line 4s ease-in-out infinite;
+    }
+  }
+  circle {
+    animation: pulse-line 4s ease-in-out infinite;
   }
 }
+
+@keyframes pulse-line {
+  0% {
+    stroke: #CA3353;
+  } 50% {
+    stroke: #9DB2ED;
+  } 100% {
+    stroke: #CA3353;
+  }
+}
+
 
 .control-line {
   stroke-dashoffset: 1500px;
@@ -444,14 +500,53 @@ svg {
 .deploy g {
   position: absolute;
   transform-origin: 50% 50%;
+  path {
+    stroke-width: 1.1;
+  }
   &:nth-of-type(2) {
-    animation: spin 5s linear infinite;
+    animation: spin 3s linear infinite;
     path {
       stroke-width: 8px;
+      stroke: #CA3353;
     }
   }
 }
 
+.deploy-circle {
+  transform-origin: 50%;
+  animation: pulse 4s ease-in-out infinite;
+}
 .deploy-line {
+  stroke-dashoffset: 30px;
+  stroke-dasharray: 30px;
+  animation: move-line 4s ease-in-out infinite;
+}
 
+@keyframes pulse {
+  0% {
+    fill: #CA3353;
+    stroke: #CA3353;
+  } 50% {
+    fill: #9DB2ED;
+    stroke: #9DB2ED;
+    transform: scale(2);
+    transform-origin: 50%;
+  } 100% {
+    fill: #CA3353;
+    stroke: #CA3353;
+  }
+}
+
+
+@keyframes move-line {
+  0% {
+    stroke-dashoffset: 400px;
+    stroke: #CA3353;
+  } 50% {
+    stroke-dashoffset: 0px;
+    stroke: #9DB2ED;
+  } 100% {
+    stroke-dashoffset: 400px;
+    stroke: #CA3353;
+  }
 }

@@ -207,6 +207,11 @@
   border-color: #E52C58;
 }
 
+.bd-c-magenta-gradient {
+  border-color: #7FA4F7;
+  border-image: linear-gradient(to right, #CE3E67, #401042) 100% 0;
+}
+
 .ol-white {
   outline-color: white;
 }
@@ -249,19 +254,28 @@ button.bg-white-20:hover {
 }
 .magenta-gradient {
   color: #D81668;
-  background-image: -webkit-linear-gradient(0deg, #7FA4F7, #CE3E67);    -webkit-background-clip: text;
+  background-image: -webkit-linear-gradient(0deg, #CE3E67, #7FA4F7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.dark-gradient {
+  color: #330A3A;
+  background-image: -webkit-linear-gradient(0deg, #CE3E67, #401042);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
 .bluewhite-gradient {
   color: #fff;
-  background-image: -webkit-linear-gradient(0deg, #DF4C8A, #fff);    -webkit-background-clip: text;
+  background-image: -webkit-linear-gradient(0deg, #DF4C8A, #fff);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
 .bg-pattern {
-  background-image: url(../../images/pattern.png);
-  background-size: 300px;
+  background-image: url(../../images/patternbg.png);
+  background-size: 50px;
 }
 .bg-dashes {
   background-image: url(../../images/bg-dashes.png);

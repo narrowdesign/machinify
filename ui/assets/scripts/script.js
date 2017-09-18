@@ -325,9 +325,10 @@ $(function() {
     function lineJump(num) {
       $('.graphic4-lines line').eq(num).css({
         transform: 'scaleY(' + (num*(Math.random() + 2)) + ')',
-        transitionDelay: num/40 + 's',
+        transitionDelay: num/80 + 's',
         transformOrigin: '0 120%',
-        stroke: '#CB375B'
+        stroke: '#9DB2ED',
+        opacity: '1'
       }).addClass('is-on')
     }
     setInterval(function(){
@@ -340,42 +341,55 @@ $(function() {
           lineJump(i)
         }
       },300)
-    },6000)
+    },4000)
 
-    linesInterval = setInterval(doLines,20);
+    var linesInterval;
     setInterval(setDials,3000);
-    var dialOffset = 260;
+    var dialOffset = 80;
     setDials();
     function setDials() {
-      if (dialOffset == 260) {
+      if (dialOffset == 80) {
         dialOffset = 0;
-        $('.graphic1-spiral1 path').css({
-          strokeDashoffset: 0,
-          strokeWidth: 2
-        })
         setTimeout(function(){
-          linesInterval = setInterval(doLines,20);
+          $('.graphic1-spiral1 path').css({
+            strokeDashoffset: 0,
+          })
+          $('.graphic1-spiral1 circle').css({
+            transform: 'scale(1)',
+            strokeWidth: '3px'
+          })
+        },1000)
+        setTimeout(function(){
+          linesInterval = setInterval(doLines,15);
           for (var i=0;i<$('.graphic-lines line').length;i++) {
             linesStatus[i] = 'nope';
           }
-        },500)
+        },1000)
       } else {
-        dialOffset = 260;
-        $('.graphic1-spiral1 path').css({
-          strokeDashoffset: 260,
-          strokeWidth: 1
-        })
+        dialOffset = 80;
+        setTimeout(function(){
+          $('.graphic1-spiral1 path').css({
+            strokeDashoffset: -200,
+          })
+          $('.graphic1-spiral1 circle').css({
+            transform: 'scale(.03)',
+            strokeWidth: '8px'
+          })
+        },1000)
         clearInterval(linesInterval)
       }
       $('.dial-ring').css({
         strokeDashoffset: dialOffset,
       })
 
-      $('.graphic-lines line').css({
-        transform: 'scaleX(1)',
-        opacity: '.8',
-        stroke: '#ccc'
-      })
+      setTimeout(function(){
+        $('.graphic-lines line').css({
+          transform: 'scaleX(1)',
+          opacity: '.6',
+          stroke: '#ccc',
+          transitionDuration: '1.2s',
+        })
+      },10)
     }
 
     function doLines() {
@@ -390,24 +404,23 @@ $(function() {
       var opacity = Math.random() - .2;
       var scale = Math.random() * 3;
       if (linesStatus[i] != "done") {
-        if (opacity > .75 || scale > 5) {
+        if (opacity > .6 || scale > 5) {
           linesStatus[i] = "done";
           line.css({
             transform: 'scaleX(30)',
             transformOrigin: '50%',
             opacity: 1,
-            stroke: '#CB375B'
+            stroke: '#CB375B',
+            transitionDuration: '.3s',
           });
         } else {
           line.css({
-            opacity: opacity,
             transform: 'scaleX(' + scale + ')',
             transformOrigin: '50%'
           })
         }
       }
     }
-
   })()
   // setInview($('.js-watch-next'));
   /*setInview($('blockquote'));*/
@@ -429,25 +442,40 @@ $(function() {
       }
     },300)
   }
-  var growthGroup = $('.growth g').length;
-  $('.growth path').each(function(i){
-    $('.growth path').eq(i).css({
-      transitionDelay: Math.random() + 's'
-    })
-  })
-  setInterval(function(){
-    var group = $('.growth g').eq(growthGroup);
-    var offset = 0;
-    if (Math.random() > .8) {
-      offset = '-120px'
-    }
-    var pathNum = Math.floor(Math.random() * $('path',group).length);
-    $('path',group).css({
-      strokeDashoffset: offset,
-    })
-    growthGroup--;
-    if (growthGroup <= 0) {
-      growthGroup = $('.growth g').length
-    }
-  },100)
+
+  growth()
+  function growth() {
+    var growthGroup = $('.growth g').length;
+    var growthInterval = setInterval(function(){
+      var group = $('.growth g').eq(growthGroup);
+      growthGroup--;
+      $('path',group).css({
+        strokeDashoffset: 0,
+        stroke: '#CA3353',
+        transition: '4s stroke-dashoffset, 2s stroke ease-in'
+      })
+      if (growthGroup < 0) {
+        clearInterval(growthInterval);
+        setTimeout(function(){
+          reverseGrowth()
+        },3000)
+      }
+    },50)
+  }
+  function reverseGrowth() {
+    var growthGroup = $('.growth g').length;
+    var growthInterval = setInterval(function(){
+      var group = $('.growth g').eq(growthGroup);
+      growthGroup--;
+      $('path',group).css({
+        strokeDashoffset: '-390px',
+        stroke: '#9DB2ED',
+        transition: '4s stroke-dashoffset, 1s stroke'
+      })
+      if (growthGroup < 0) {
+        clearInterval(growthInterval);
+        growth()
+      }
+    },50)
+  }
 })

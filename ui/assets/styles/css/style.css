@@ -195,7 +195,7 @@ nav {
 }
 .js-nav--main .menu-item {
   position: relative;
-  padding: 10px 0 10px 0;
+  padding: 8px 0 8px 0;
 }
 .js-nav--main .menu-item:before {
   width: 0;
@@ -258,7 +258,7 @@ h1 {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 200;
-  font-size: 64px;
+  font-size: calc(2.1rem + (3.5 - 2.1) * (100vw - 20rem) / (105 - 20));
   line-height: 1 !important;
   margin: 0 0 20px;
 }
@@ -504,16 +504,22 @@ canvas {
   animation: spin-centered 2s linear 1000;
 }
 .graphic1-spiral1 path {
-  stroke-dashoffset: 260px;
-  stroke-dasharray: 260px;
-  transition: 3s ease-in-out;
-  transition-delay: 1s;
+  stroke-dashoffset: -200px;
+  stroke-dasharray: 200px;
+  transition: 1.4s all ease-in-out 1.1s;
+}
+.graphic1-spiral1 circle {
+  transform-origin: 50% 50%;
+  transform: scale(0.03);
+  stroke-width: 8px;
+  transition: 1.4s all ease-in-out 1.1s;
 }
 .graphic-lines {
   transition: 1s;
 }
 .graphic-lines line {
-  transition: 0.2s ease-in-out;
+  transition: 0.3s ease-in-out;
+  opacity: .5;
 }
 svg .dial-ring {
   stroke-dashoffset: 80px;
@@ -529,12 +535,12 @@ svg:nth-of-type(3) .dial-ring {
   transition-delay: 1s;
 }
 .growth path {
-  stroke-dashoffset: 120px;
-  stroke-dasharray: 120px;
-  transition: 5s;
+  stroke-dashoffset: -390px;
+  stroke-dasharray: 390px;
+  transition: 4s stroke-dashoffset, 1s stroke;
 }
 .graphic4-spiral {
-  animation: spin 2.5s ease-in-out infinite;
+  animation: spin 4s ease-in-out infinite;
 }
 .graphic4-lines line {
   transition: 0.3s ease-out;
@@ -556,10 +562,13 @@ svg:nth-of-type(3) .dial-ring {
   }
 }
 .graphic3-spiral {
-  animation: spin-loop 5s ease-in-out infinite;
+  animation: spin-loop 2s linear infinite;
 }
-.graphic3-spiral path {
-  /*animation: shift-color 5s ease-in-out infinite;*/
+.bounce1 {
+  animation: bounce1 5s ease-in-out infinite;
+}
+.bounce2 {
+  animation: bounce2 5s ease-in-out infinite;
 }
 @keyframes shift-color {
   0% {
@@ -575,15 +584,45 @@ svg:nth-of-type(3) .dial-ring {
     fill: rgba(206, 61, 100, 0.1);
   }
 }
+@keyframes bounce1 {
+  0% {
+    transform: translate3d(49%, 0, 0) scaleX(-1);
+  }
+  50% {
+    transform: translate3d(0, 0, 0) scaleX(-1);
+  }
+  100% {
+    transform: translate3d(49%, 0, 0) scaleX(-1);
+  }
+}
+@keyframes bounce2 {
+  0% {
+    transform: translate3d(-49%, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-49%, 0, 0);
+  }
+}
 @keyframes spin-loop {
   0% {
     transform: rotate(0);
   }
-  50% {
+  100% {
     transform: rotate(360deg);
   }
+}
+@keyframes spin-loop3 {
+  0% {
+    transform: rotate(0) translate3d(-58%, 50%, 0) scale(0.8);
+  }
+  50% {
+    transform: rotate(180deg) translate3d(0, 0, 0) scale(1.5);
+  }
   100% {
-    transform: rotate(0deg);
+    transform: rotate(360deg) translate3d(-58%, 50%, 0) scale(0.8);
   }
 }
 .slider {
@@ -615,6 +654,23 @@ svg:nth-of-type(3) .dial-ring {
 .cloud g:nth-of-type(4) {
   animation: spin 2s linear infinite;
 }
+.cloud g path {
+  animation: pulse-line 4s ease-in-out infinite;
+}
+.cloud circle {
+  animation: pulse-line 4s ease-in-out infinite;
+}
+@keyframes pulse-line {
+  0% {
+    stroke: #CA3353;
+  }
+  50% {
+    stroke: #9DB2ED;
+  }
+  100% {
+    stroke: #CA3353;
+  }
+}
 .control-line {
   stroke-dashoffset: 1500px;
   stroke-dasharray: 1500px;
@@ -624,11 +680,54 @@ svg:nth-of-type(3) .dial-ring {
   position: absolute;
   transform-origin: 50% 50%;
 }
+.deploy g path {
+  stroke-width: 1.1;
+}
 .deploy g:nth-of-type(2) {
-  animation: spin 5s linear infinite;
+  animation: spin 3s linear infinite;
 }
 .deploy g:nth-of-type(2) path {
   stroke-width: 8px;
+  stroke: #CA3353;
+}
+.deploy-circle {
+  transform-origin: 50%;
+  animation: pulse 4s ease-in-out infinite;
+}
+.deploy-line {
+  stroke-dashoffset: 30px;
+  stroke-dasharray: 30px;
+  animation: move-line 4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0% {
+    fill: #CA3353;
+    stroke: #CA3353;
+  }
+  50% {
+    fill: #9DB2ED;
+    stroke: #9DB2ED;
+    transform: scale(2);
+    transform-origin: 50%;
+  }
+  100% {
+    fill: #CA3353;
+    stroke: #CA3353;
+  }
+}
+@keyframes move-line {
+  0% {
+    stroke-dashoffset: 400px;
+    stroke: #CA3353;
+  }
+  50% {
+    stroke-dashoffset: 0px;
+    stroke: #9DB2ED;
+  }
+  100% {
+    stroke-dashoffset: 400px;
+    stroke: #CA3353;
+  }
 }
 .test {
   width: 100%;
@@ -1926,6 +2025,9 @@ svg:nth-of-type(3) .dial-ring {
 }
 .p-t-vid {
   padding-top: 56.25%;
+}
+.p-t-25p {
+  padding-top: 25%;
 }
 .p-r-0 {
   padding-right: 0rem;
@@ -4124,6 +4226,7 @@ svg:nth-of-type(3) .dial-ring {
 }
 .t-t-u {
   text-transform: uppercase;
+  letter-spacing: .03rem;
 }
 @media (max-width: 960px) {
   .ss-t-a-l {
@@ -7599,7 +7702,7 @@ svg:nth-of-type(3) .dial-ring {
     transform: translate3d(-50%, -50%, 0) rotate(0deg);
   }
   100% {
-    transform: translate3d(-50%, -50%, 0) rotate(-360deg);
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
   }
 }
 @keyframes grow {
@@ -7817,6 +7920,10 @@ svg:nth-of-type(3) .dial-ring {
 .bd-c-magenta {
   border-color: #E52C58;
 }
+.bd-c-magenta-gradient {
+  border-color: #7FA4F7;
+  border-image: linear-gradient(to right, #CE3E67, #401042) 100% 0;
+}
 .ol-white {
   outline-color: white;
 }
@@ -7856,7 +7963,14 @@ button.bg-white-20:hover {
 }
 .magenta-gradient {
   color: #D81668;
-  background-image: -webkit-linear-gradient(0deg, #7FA4F7, #CE3E67);
+  background-image: -webkit-linear-gradient(0deg, #CE3E67, #7FA4F7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.dark-gradient {
+  color: #330A3A;
+  background-image: -webkit-linear-gradient(0deg, #CE3E67, #401042);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -7869,8 +7983,8 @@ button.bg-white-20:hover {
   display: inline-block;
 }
 .bg-pattern {
-  background-image: url(../../images/pattern.png);
-  background-size: 300px;
+  background-image: url(../../images/patternbg.png);
+  background-size: 50px;
 }
 .bg-dashes {
   background-image: url(../../images/bg-dashes.png);
