@@ -3,6 +3,10 @@ nav {
   transform: translate3d(0,0,0);
 }
 
+.menu-icon div {
+  margin-top: 5px;
+}
+
 .js-nav--main .menu-item {
   position: relative;
   padding: 8px 0 8px 0;
@@ -64,4 +68,20 @@ nav {
     transition: 0s ease-out;
     transition-delay: .3s;
   }
+}
+
+@media (max-width: 960px) {
+  .is-menu-open {
+    .menu {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #1E0538;
+      padding: 3rem;
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+
 }

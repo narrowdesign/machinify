@@ -82,6 +82,12 @@ $(function() {
     });
   }
 
+  $('.menu-icon').on('click',expandMenu);
+
+  function expandMenu() {
+    $('body').toggleClass('is-menu-open')
+  }
+
   // FUNCTIONS
   ////////////
   (function init() {
