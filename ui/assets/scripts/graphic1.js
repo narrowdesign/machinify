@@ -1,4 +1,3 @@
-var paused = false;
 (function() {
   var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                               window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -67,11 +66,6 @@ var paused = false;
     spiralOriginY = winW * aspect * axis
     canvas.width = winW;
     canvas.height = winH;
-
-    if (winW < winH) {
-      canvas.width = winW;
-      canvas.height = winH;
-    }
   }
 
   var spiralRed = new Image;
