@@ -1,5 +1,3 @@
-var _winW = window.innerWidth; // width of the window
-var _winH = window.innerHeight;
 var onLine, scrollX, scrollY, gyroscopeGamma, gyroscopeBeta, oldScrollX=0, oldScrollY=0, scrollXTotal=0, scrollYTotal=0, scrollXVelocity=0, scrollYVelocity=0, scrollXPercent, scrollYPercent, touchEnabled, oldTouchX, oldTouchY, touchX, touchY, touchMoveTotal=0, mouseX=0, mouseY=0, oldMouseX=0, oldMouseY=0, mouseXVelocity=0, mouseYVelocity=0, mouseXTotal=0, mouseYTotal=0, mouseXPercent, mouseYPercent, mouseXSpeed, mouseYSpeed, cookies, language, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, scrollX, keyTotal=0, keyCache='', keyCurrent, mouseEnterTotal, mouseLeaveTotal, mouseDragTime, mouseUpEvents=0, mouseDownEvents=0, mouseDownTime, clicks=0, currentDate, startDate, currentTime, startTime, totalTime, activeTime, inactiveTime, plugins, device, OS, OSVersion, browser, browserVersion;
 
 var isTouchDevice;
@@ -30,6 +28,8 @@ if( ios ) {
 
 
 $(function() {
+  var _winW = window.innerWidth; // width of the window
+  var _winH = window.innerHeight;
 
   var WIN = $(window);
   var DOC = $(document);

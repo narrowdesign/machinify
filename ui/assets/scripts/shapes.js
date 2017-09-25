@@ -10,7 +10,7 @@ var paused = false;
   var smallScreen = false;
   var spirals;
 
-  var canvas = document.getElementById('canvas');
+  var canvas = document.querySelector('#canvas');
   var ctx = canvas.getContext('2d');
   var aspect = .5;
   var axis = .5;

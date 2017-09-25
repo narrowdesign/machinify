@@ -449,7 +449,7 @@ body.is-in .js-name span > span:hover {
   opacity: .4;
   pointer-events: none;
 }
-canvas {
+#canvas {
   position: fixed;
   top: 0;
   left: 0;
