@@ -3,61 +3,56 @@
                               window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
   window.requestAnimationFrame = requestAnimationFrame;
 
-  var spirals;
+  var canvas;
+  var ctx;
+  var canvasWidth = 300;
+  var canvasHeight = 150;
 
-  var canvas = document.querySelector('#graphic1');
-
-  var winW = canvas.width;
-  var winH = canvas.height;
-
-  var ctx = canvas.getContext('2d');
-  var rotation = 0;
-  var pauseTimeout;
-  var scrollTop = 0;
-
-  sizeCanvas();
-
-  setInterval(function(){
-    drawMbp()
-    drawMbp()
-    drawMbp()
-  },60)
-  window.addEventListener('touchmove',drawMbp);
-  window.addEventListener('keydown',function() {
-    if (rotation > 90 || rotation < -1300)
-    keydown = true;
-    drawMbp()
-    drawMbp()
-    drawMbp()
-  });
-  window.addEventListener('keyup',function() {
-    keydown = false;
-  });
-
-  window.addEventListener('resize',function(){
-    sizeCanvas()
-  })
-
-  function sizeCanvas() {
-    winW = canvas.width;
-    winH = canvas.width;
-    canvas.width = canvas.width;
-    canvas.height = canvas.height;
-  }
-
-  var spiralRed = new Image;
-  spiralRed.src = 'ui/assets/images/straight-line.svg';
+  var circleR = 20;
+  var timeout = 0;
+  var often = 15;
   var count = 0;
-  var clearingCount = 0;
-  // every 10 seconds clear it dramatically
-  function drawMbp() {
-    count++;
-    clearingCount++;
-    requestAnimationFrame(function(){
-      ctx.globalAlpha = 1;
-      ctx.rotate(.025)
-      ctx.drawImage(spiralRed, 0,0,350,2);
-    })
-    // }
+
+  function init(){
+    // often = 5;
+    canvas = document.getElementById("graphic1");
+    ctx = canvas.getContext("2d");
+    drawLines();
   }
+
+  function drawLines() {
+    ctx.translate(canvasWidth/2,canvasHeight/2);
+    drawTimeout();
+    drawTimeout();
+  }
+  function drawTimeout(){
+    requestAnimationFrame(function(){
+      count++;
+      ctx.beginPath();
+      ctx.moveTo(0,Math.floor(Math.random()*12)*circleR);
+      var radians = Math.PI/180*(Math.random()*90);
+      var x = 200;
+      ctx.lineTo(-200,0);
+
+      ctx.strokeStyle="#E52C58";
+      ctx.lineWidth=0.05;
+
+      ctx.stroke();
+      ctx.rotate(radians);
+
+      ctx.beginPath();
+      ctx.moveTo(0,Math.floor(Math.random()*12)*circleR);
+      var radians = Math.PI/180*(Math.random()*90);
+      var x = 200;
+      ctx.lineTo(-200,0);
+      ctx.strokeStyle="#9DB2ED";
+      ctx.lineWidth=0.05;
+
+      ctx.stroke();
+      ctx.rotate(radians);
+      drawTimeout();
+    })
+  }
+  init()
+
 })();
