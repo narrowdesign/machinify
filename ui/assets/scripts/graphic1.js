@@ -13,8 +13,10 @@
   var often = 15;
   var count = 0;
 
+  var inited = false;
+
   function init(){
-    // often = 5;
+    inited = true;
     canvas = document.getElementById("graphic1");
     ctx = canvas.getContext("2d");
     drawLines();
@@ -53,6 +55,11 @@
       drawTimeout();
     })
   }
-  init()
+
+  window.addEventListener('scroll',function(e){
+    if (scrollY > document.getElementById("graphic1").getBoundingClientRect().top - window.innerHeight && !inited) {
+      init();
+    }
+  })
 
 })();
