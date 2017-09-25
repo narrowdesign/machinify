@@ -58,8 +58,6 @@ function ParticleObject(pIndex, pX, pY)
     this.y = pY;
     this.size = 1;
     this.color = "#ffffff";
-    this.arcX = randomRange(-1, 1);
-    this.arcY = randomRange(-1, 1);
     this.distance = 0;
 
     this.range = 6;
@@ -72,7 +70,6 @@ function ParticleObject(pIndex, pX, pY)
         context.fillStyle = this.color;
 
         context.beginPath();
-        context.arc(this.x, this.y, this.size, 0, Math.PI * 2, true);
         context.closePath();
         context.fill();
 
