@@ -1,8 +1,10 @@
 var canvas = document.getElementById("graphic2"),
     context = canvas.getContext("2d");
 
-var width = 300,
-    height = 150;
+var colors = new Array('49,97,118','186,64,109')
+
+var width = window.innerWidth,
+    height = window.innerHeight;
 
 canvas.width = width;
 canvas.height = height;
@@ -10,7 +12,7 @@ canvas.height = height;
 var particle;
 var particleList = [];
 
-for(var i = 0; i < 60; ++i)
+for(var i = 0; i < 40; ++i)
 {
     particle = new ParticleObject(i, width * .5, height * .5);
     particle.draw();
@@ -22,25 +24,7 @@ setInterval(intervalHandler, 1000 / 30);
 
 function intervalHandler()
 {
-//    context.fillStyle = "#ffffff";
-
-//    context.beginPath();
-//    context.fillRect(width * .5, height * .5, 1, 1);
-//    context.closePath();
-//    context.fill();
-
-//*
     context.clearRect(0, 0, width, height);
-
-/*/
-    context.globalCompositeOperation = "source-atop";
-
-    context.fillStyle = "rgba(0, 0, 0, 0.3)";
-    context.fillRect(0, 0, width, height);
-    context.fill();
-//*/
-
-//    context.globalCompositeOperation = "lighter";
 
     for(var i = 0; i < particleList.length; ++i)
     {
@@ -58,31 +42,35 @@ function ParticleObject(pIndex, pX, pY)
     this.y = pY;
     this.size = 1;
     this.color = "#ffffff";
+    this.arcX = randomRange(-1, 1);
+    this.arcY = randomRange(-1, 1);
     this.distance = 0;
 
-    this.range = 6;
-    this.speed = .002;
+    this.range = 3;
+    this.speed = .001;
 
     this.draw = function()
     {
         context.moveTo(this.x, this.y);
-        //context.fillStyle = this.radgrad;
         context.fillStyle = this.color;
 
         context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2, true);
         context.closePath();
         context.fill();
 
         this.ticker += this.speed;
+
         this.ticker = this.ticker == 1 ? 0 : this.ticker;
 
         this.x += Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range;
-        this.y += Math.cos(Math.cos(this.index * .4) + (this.ticker * this.index * .62)) * this.range;
+        this.y += Math.cos(Math.cos(this.index * .4) + (this.ticker * this.index * 1)) * this.range;
 
-//        this.radgrad = context.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-//        this.radgrad.addColorStop(0, '#EEFF00');
-//        this.radgrad.addColorStop(.8, '#FF0000');
-//        this.radgrad.addColorStop(1, '#000000');
+        // if (this.index < 1) {
+        //   console.log(Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range)
+        //   this.size = 200;
+        // }
+
     }
 
     this.connect = function()
@@ -93,21 +81,18 @@ function ParticleObject(pIndex, pX, pY)
 
             this.distance = Math.sqrt( Math.pow(particle.x - this.x, 2) + Math.pow(particle.y - this.y, 2) );
 
-            if(this.distance > 50 && this.distance < 100)
+            if(this.distance > 50 && this.distance < 300)
             {
                 this.isConnected++;
+                // this.size = Math.ceil(this.distance/20);
+                this.color = 'rgba(' + colors[i%2] + ',.4)';
 
-                context.strokeStyle = "rgba(255,255,255," +  (this.distance * 0.003).toString() + ")";
+                context.strokeStyle = "rgba(" + colors[i%2] + "," +  Math.random() + ")";
                 context.beginPath();
                 context.moveTo(this.x, this.y);
                 context.lineTo(particle.x, particle.y);
                 context.stroke();
             }
-
-            /*
-
-            */
-            //particle.draw();
         }
     }
 }

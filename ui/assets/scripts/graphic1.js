@@ -5,10 +5,10 @@
 
   var canvas;
   var ctx;
-  var canvasWidth = 300;
-  var canvasHeight = 150;
+  var canvasWidth = window.innerWidth;
+  var canvasHeight = window.innerHeight;
 
-  var circleR = 20;
+  var circleR = 30;
   var timeout = 0;
   var often = 15;
   var count = 0;
@@ -19,6 +19,9 @@
     inited = true;
     canvas = document.getElementById("graphic1");
     ctx = canvas.getContext("2d");
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
     drawLines();
   }
 
@@ -32,23 +35,23 @@
       count++;
       ctx.beginPath();
       ctx.moveTo(0,Math.floor(Math.random()*12)*circleR);
-      var radians = Math.PI/180*(Math.random()*90);
-      var x = 200;
-      ctx.lineTo(-200,0);
+      var radians = Math.PI/180*((Math.floor(Math.random()*4)/4)*90);
+      var x = 300;
+      ctx.lineTo(-300,0);
 
       ctx.strokeStyle="#E52C58";
-      ctx.lineWidth=0.05;
+      ctx.lineWidth=0.2;
 
       ctx.stroke();
       ctx.rotate(radians);
 
       ctx.beginPath();
       ctx.moveTo(0,Math.floor(Math.random()*12)*circleR);
-      var radians = Math.PI/180*(Math.random()*90);
-      var x = 200;
-      ctx.lineTo(-200,0);
+      var radians = Math.PI/180*((Math.floor(Math.random()*4)/4)*90);
+      var x = 300;
+      ctx.lineTo(-300,0);
       ctx.strokeStyle="#9DB2ED";
-      ctx.lineWidth=0.05;
+      ctx.lineWidth=0.2;
 
       ctx.stroke();
       ctx.rotate(radians);

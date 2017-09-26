@@ -220,6 +220,9 @@ nav {
   .js-nav--main .menu-item.active:before {
     width: calc(1px + 100%);
   }
+  .js-nav--main .menu-item.active:before {
+    background-color: #fff;
+  }
 }
 .js-nav__wrapper {
   background-size: cover;
@@ -330,7 +333,7 @@ blockquote {
   padding-bottom: 1rem;
   font-size: 1.25rem;
   line-height: 1.7;
-  max-width: 560px;
+  max-width: 720px;
 }
 .f-s-body {
   font-size: 1.125rem;
