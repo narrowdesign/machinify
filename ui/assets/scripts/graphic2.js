@@ -12,7 +12,7 @@ canvas.height = height;
 var particle;
 var particleList = [];
 
-for(var i = 0; i < 40; ++i)
+for(var i = 0; i < 60; ++i)
 {
     particle = new ParticleObject(i, width * .5, height * .5);
     particle.draw();
@@ -46,7 +46,7 @@ function ParticleObject(pIndex, pX, pY)
     this.arcY = randomRange(-1, 1);
     this.distance = 0;
 
-    this.range = 3;
+    this.range = 4;
     this.speed = .001;
 
     this.draw = function()
@@ -64,7 +64,7 @@ function ParticleObject(pIndex, pX, pY)
         this.ticker = this.ticker == 1 ? 0 : this.ticker;
 
         this.x += Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range;
-        this.y += Math.cos(Math.cos(this.index * .4) + (this.ticker * this.index * 1)) * this.range;
+        this.y += Math.cos(Math.cos(this.index * .4) + (this.ticker * this.index * .75)) * this.range;
 
         // if (this.index < 1) {
         //   console.log(Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range)
@@ -81,13 +81,13 @@ function ParticleObject(pIndex, pX, pY)
 
             this.distance = Math.sqrt( Math.pow(particle.x - this.x, 2) + Math.pow(particle.y - this.y, 2) );
 
-            if(this.distance > 50 && this.distance < 300)
+            if(this.distance > 50 && this.distance < 250)
             {
                 this.isConnected++;
-                // this.size = Math.ceil(this.distance/20);
-                this.color = 'rgba(' + colors[i%2] + ',.4)';
+                this.size = Math.ceil(this.distance/20);
+                this.color = 'rgba(' + colors[i%2] + ',.3)';
 
-                context.strokeStyle = "rgba(" + colors[i%2] + "," +  Math.random() + ")";
+                context.strokeStyle = "rgba(" + colors[i%2] + ",.5)";
                 context.beginPath();
                 context.moveTo(this.x, this.y);
                 context.lineTo(particle.x, particle.y);

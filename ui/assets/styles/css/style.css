@@ -2052,6 +2052,9 @@ svg:nth-of-type(3) .dial-ring {
 .p-t-50p {
   padding-top: 50%;
 }
+.p-t-66p {
+  padding-top: 66.666%;
+}
 .p-t-vid {
   padding-top: 56.25%;
 }
