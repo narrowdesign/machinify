@@ -39,12 +39,12 @@
     // move the origin to the center
     ctx.translate(centerX,centerY);
     // set the number of rings
-    rings = Math.round(Math.random() * 20) + 2;
+    rings = Math.round(Math.random() * 5) + 2;
     // clear the number of sections
     ringSections = [];
     // set the number of sections per ring between 6-20
     for (var i=0;i<rings;i++) {
-      ringSections[i] = Math.round(Math.random() * 100) + 3;
+      ringSections[i] = Math.round(Math.random() * 80) + 5;
       drawCircle(i)
     }
     currentRing = 0;
