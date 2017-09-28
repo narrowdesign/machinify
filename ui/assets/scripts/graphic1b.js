@@ -9,13 +9,19 @@
   var ctx;
   var canvasWidth = 1000;
   var canvasHeight = 666;
+  var centerX = canvasWidth / 2;
+  var centerY = canvasHeight / 2;
 
-  var circleR = 40;
+  var radius = canvasHeight / 2.05;
   var timeout = 0;
-  var count = 0;
   var totalRadians = 0;
   var rings = 0;
   var ringSections = new Array();
+  var currentRing = 0;
+  var currentSection = 0;
+  var frame = 0;
+
+  var resetting = false;
 
   var inited = false;
 
@@ -30,38 +36,80 @@
   }
 
   function drawLines() {
-    ctx.translate(canvasWidth/2,canvasHeight/2);
-    rings = Math.round(Math.random() * 6) + 2;
+    // move the origin to the center
+    ctx.translate(centerX,centerY);
+    // set the number of rings
+    rings = Math.round(Math.random() * 20) + 2;
+    // clear the number of sections
     ringSections = [];
+    // set the number of sections per ring between 6-20
     for (var i=0;i<rings;i++) {
-      ringSections[i] = Math.round(Math.random() * 16) + 4;
+      ringSections[i] = Math.round(Math.random() * 100) + 3;
+      drawCircle(i)
     }
+    currentRing = 0;
+    currentSection = 0;
+    resetting = false;
     cancelAnimationFrame(raf);
     drawTimeout();
   }
   function drawTimeout(){
+    // draw a section line
     raf = requestAnimationFrame(function(){
-      count++;
-      ctx.beginPath();
-      var myRing = Math.round(Math.random()*rings);
-      var start = 333/(myRing+1);
-      ctx.moveTo(start,0);
-      var radians = Math.PI/180*(360/ringSections[myRing]);
-      ctx.lineTo(166,0);
-      count%2 ? ctx.strokeStyle="#9DB2ED" : ctx.strokeStyle="#E52C58";;
+      frame++;
+      canvas.style.transform = 'rotate(' + -frame + 'deg)'
 
-      ctx.stroke();
-      ctx.rotate(radians);
-      drawTimeout();
+      if (currentRing < rings) {
+        ctx.beginPath();
+        // move the originX point of the line to currentRing * (radius/rings)
+        var originX = currentRing * radius/rings;
+        ctx.moveTo(originX,0);
+        // draw a line the width of the ring
+        var segmentW = radius/rings;
+        ctx.lineTo(originX + segmentW,0);
+        // rotate the line 360/ringSections[currentRing] * currentSection
+        var segmentR = 360/ringSections[currentRing];
+        var rotation = segmentR*currentSection*Math.PI/180;
 
-      if (count > 500) {
-        resetLines()
+        console.log('ring:',currentRing,'section:',currentSection,'rotation:',rotation)
+
+        setStrokeColor(currentRing);
+        ctx.lineWidth = .8;
+        ctx.resetTransform();
+        ctx.translate(centerX,centerY);
+        ctx.stroke();
+        ctx.rotate(rotation);
+        currentSection++;
+        drawCircle()
+      } else if (!resetting) {
+        resetting = true;
+        setTimeout(function(){
+          resetLines();
+        },2000)
       }
+
+      if (currentSection > ringSections[currentRing]) {
+        currentRing++;
+        currentSection = 0;
+      }
+
+      drawTimeout();
     })
   }
 
+  function drawCircle(num) {
+    ctx.beginPath();
+    ctx.arc(0, 0, (radius/rings) * (num+1), 0, 2 * Math.PI, false);
+    setStrokeColor(num);
+    ctx.lineWidth = .4;
+    ctx.stroke();
+  }
+
+  function setStrokeColor(num) {
+    num%2 ? ctx.strokeStyle="#9DB2ED" : ctx.strokeStyle="#E52C58";
+  }
+
   function resetLines() {
-    count = 0;
     ctx.resetTransform();
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     drawLines();
