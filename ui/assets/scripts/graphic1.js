@@ -32,9 +32,9 @@
   function drawLines() {
     ctx.translate(canvasWidth/2,canvasHeight/2);
     drawTimeout();
-    teeth = Math.ceil(Math.random()*8) + 1
+    teeth = Math.ceil(Math.random()*6) + 1
     arms = Math.ceil(Math.random()*2) + 3
-    circleR = Math.floor(Math.random()*40) + 80;
+    circleR = Math.floor(Math.random()*40) + 20;
     toY = Math.random()*150
     console.log(teeth,arms,circleR,toY)
   }
