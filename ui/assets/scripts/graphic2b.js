@@ -49,7 +49,7 @@
     // draw branches
     raf = requestAnimationFrame(function(){
       frame++;
-
+      canvas.style.transform = 'rotate(' + -frame/2 + 'deg)'
       if (frame < 500) {
         for (var i=0;i<branches;i++) {
           ctx.beginPath();
