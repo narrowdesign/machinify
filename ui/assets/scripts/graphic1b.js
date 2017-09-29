@@ -27,6 +27,10 @@
   function init(){
     inited = true;
     canvas = document.getElementById("graphic1");
+    canvas.addEventListener('click',function(){
+      resetting = true;
+      resetLines();
+    })
     ctx = canvas.getContext("2d");
 
     canvas.width = canvasWidth;
@@ -46,12 +50,12 @@
       ringSections[i] = Math.round(Math.random() * 80) + 5;
       drawCircle(i)
     }
-    shuffleSections();
     currentRing = 0;
     currentSection = 0;
     resetting = false;
     cancelAnimationFrame(raf);
     drawTimeout();
+    shuffleSections();
   }
   function drawTimeout(){
     // draw a section line
@@ -73,7 +77,7 @@
 
 
         setStrokeColor(currentRing);
-        ctx.lineWidth = .9;
+        ctx.lineWidth = .7 + (1600/window.innerWidth)/5;
         ctx.resetTransform();
         ctx.translate(centerX,centerY);
         ctx.stroke();
