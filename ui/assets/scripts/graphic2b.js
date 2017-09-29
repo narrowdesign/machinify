@@ -49,30 +49,34 @@
     cancelAnimationFrame(raf);
     drawTimeout();
   }
+  var delayTimeout;
   function drawTimeout(){
     // draw branches
+    clearTimeout(delayTimeout)
     raf = requestAnimationFrame(function(){
       frame++;
       canvas.style.transform = 'rotate(' + -frame/2 + 'deg)'
-      if (frame < 300) {
+      if (frame < 200) {
         for (var i=0;i<branches;i++) {
           ctx.beginPath();
           // move the originX point of the line to currentRing * (radius/rings)
           ctx.moveTo(branchesPos[i][0],branchesPos[i][1]);
-          var shiftX = Math.random()*6 - i%2 - i%3;
-          var shiftY = (Math.random()*6 - i%2 - i%3);
+          var shiftX = Math.random()*20 - i%2 - i%3;
+          var shiftY = (Math.random()*20 - i%2 - i%3);
           var rotation = (i/branches)*Math.PI*2;
-          branchesPos[i] = [Math.min(branchesPos[i][0],233) + shiftX,Math.min(branchesPos[i][1] + shiftY,233)]
+          branchesPos[i] = [branchesPos[i][0] + shiftX, branchesPos[i][1] + shiftY]
           ctx.lineTo(branchesPos[i][0],branchesPos[i][1]);
           ctx.rotate(rotation)
 
           setStrokeColor(i);
           ctx.lineWidth = .5;
-          ctx.stroke();
+          if (branchesPos[i][0] < 233 && branchesPos[i][1] < 233) {
+            ctx.stroke();
+          }
 
-          if (frame > 100) {
+          if (frame > 20) {
             ctx.beginPath();
-            ctx.arc(Math.min(313,Math.floor(((frame-100)/300)*53)*20), 0, 2, 0, Math.PI*2, false);
+            ctx.arc(Math.min(330,Math.floor(((frame-20)/300)*53)*20), 0, 2, 0, Math.PI*2, false);
             setStrokeColor(i);
             ctx.lineWidth = .06;
             ctx.stroke();
@@ -85,12 +89,12 @@
         },2000)
       }
 
-      if (frame%40 == 0) {
-        branches += 50
+      if (frame%20 == 0) {
+        branches += 20
         branches = Math.min(500,branches);
       }
 
-      drawTimeout();
+      delayTimeout = setTimeout(drawTimeout,20)
     })
   }
 
