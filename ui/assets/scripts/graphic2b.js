@@ -55,7 +55,7 @@
     clearTimeout(delayTimeout)
     raf = requestAnimationFrame(function(){
       frame++;
-      canvas.style.transform = 'rotate(' + -frame/2 + 'deg)'
+      canvas.style.transform = 'rotate(' + -frame/1.5 + 'deg)'
       if (frame < 200) {
         for (var i=0;i<branches;i++) {
           ctx.beginPath();
