@@ -13,13 +13,12 @@
   var centerY = canvasHeight / 2;
 
   var radius = canvasHeight / 2.05;
-  var timeout = 0;
-  var totalRadians = 0;
   var rings = 0;
   var ringSections = new Array();
   var currentRing = 0;
   var currentSection = 0;
   var frame = 0;
+  var sections = new Array();
 
   var resetting = false;
 
@@ -47,6 +46,7 @@
       ringSections[i] = Math.round(Math.random() * 80) + 5;
       drawCircle(i)
     }
+    shuffleSections();
     currentRing = 0;
     currentSection = 0;
     resetting = false;
@@ -62,19 +62,18 @@
       if (currentRing < rings) {
         ctx.beginPath();
         // move the originX point of the line to currentRing * (radius/rings)
-        var originX = currentRing * radius/rings;
+        var originX = currentRing * radius / rings;
         ctx.moveTo(originX,0);
         // draw a line the width of the ring
-        var segmentW = radius/rings;
+        var segmentW = radius / rings;
         ctx.lineTo(originX + segmentW,0);
         // rotate the line 360/ringSections[currentRing] * currentSection
-        var segmentR = 360/ringSections[currentRing];
-        var rotation = segmentR*currentSection*Math.PI/180;
+        var segmentR = 360 / ringSections[currentRing];
+        var rotation = segmentR * sections[currentSection] * Math.PI / 180;
 
-        console.log('ring:',currentRing,'section:',currentSection,'rotation:',rotation)
 
         setStrokeColor(currentRing);
-        ctx.lineWidth = .8;
+        ctx.lineWidth = .9;
         ctx.resetTransform();
         ctx.translate(centerX,centerY);
         ctx.stroke();
@@ -91,15 +90,28 @@
       if (currentSection > ringSections[currentRing]) {
         currentRing++;
         currentSection = 0;
+        shuffleSections();
       }
 
       drawTimeout();
     })
   }
 
+  function shuffleSections() {
+    sections = [];
+    for (var i=0; i < ringSections[currentRing]; i++) {
+      sections[i] = i;
+    }
+    for(var j, x, i = sections.length; i; j = parseInt(Math.random() * i), x = sections[--i], sections[i] = sections[j], sections[j] = x);
+  };
+
+  function randomSection(section) {
+    return sectionOrder[section]
+  }
+
   function drawCircle(num) {
     ctx.beginPath();
-    ctx.arc(0, 0, (radius/rings) * (num+1), 0, 2 * Math.PI, false);
+    ctx.arc(0, 0, (radius / rings) * (num + 1), 0, 2 * Math.PI, false);
     setStrokeColor(num);
     ctx.lineWidth = .4;
     ctx.stroke();
