@@ -72,7 +72,7 @@
 
           if (frame > 100) {
             ctx.beginPath();
-            ctx.arc(Math.min(333,Math.floor(((frame-100)/300)*53)*20), 0, 2, 0, Math.PI*2, false);
+            ctx.arc(Math.min(313,Math.floor(((frame-100)/300)*53)*20), 0, 2, 0, Math.PI*2, false);
             setStrokeColor(i);
             ctx.lineWidth = .06;
             ctx.stroke();
