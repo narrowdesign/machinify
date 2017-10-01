@@ -242,8 +242,27 @@ nav {
     transition: 0.1s ease-out;
   }
 }
-.is-scrolled .js-nav--main {
+.js-nav--main {
+  transition: 1s;
+}
+.js-nav--main:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(to right, #050035 0%, #340a3a 100%);
+  transform: translateY(-20%);
+  opacity: 0;
+  transition: .5s;
+}
+.is-scrolled .js-nav--main {
+  transition: 1s;
+}
+.is-scrolled .js-nav--main:before {
+  opacity: 1;
+  transform: translateY(0%);
 }
 @media (max-width: 960px) {
   .is-scrolled .js-nav--main {
@@ -461,7 +480,6 @@ body.is-in .js-name span > span:hover {
 }
 .outputs {
   align-items: flex-start;
-  opacity: 1;
   transition: .3s;
   width: 100%;
 }
@@ -490,9 +508,6 @@ body.is-in .js-name span > span:hover {
   background: #D81668;
   width: 1px;
   height: 100%;
-}
-.is-scrolled .outputs {
-  opacity: .1;
 }
 @media (min-width: 800px) {
   .mood {
