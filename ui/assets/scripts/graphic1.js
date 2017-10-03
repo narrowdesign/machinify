@@ -21,7 +21,7 @@
 
   function init(){
     inited = true;
-    canvas = document.getElementById("graphic1");
+    canvas = document.getElementById("graphic3");
     ctx = canvas.getContext("2d");
 
     canvas.width = canvasWidth;

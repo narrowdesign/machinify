@@ -50,7 +50,7 @@ function ParticleObject(pIndex, pX, pY)
     {
         context.moveTo(this.x, this.y);
         context.fillStyle = this.color;
-
+        context.globalAlpha = .4;
         context.beginPath();
         context.arc(this.x, this.y, this.size, 0, Math.PI * 2, true);
         context.closePath();
@@ -82,9 +82,9 @@ function ParticleObject(pIndex, pX, pY)
             {
                 this.isConnected++;
                 this.size = Math.ceil(this.distance/20);
-                this.color = 'rgba(' + colors[i%2] + ',.3)';
+                this.color = i%2 == 0 ? '#060130' : '#E2305B';
 
-                context.strokeStyle = "rgba(" + colors[i%2] + ",.5)";
+                context.strokeStyle = i%2 == 0 ? "#E2305B" : "#060130";
                 context.beginPath();
                 context.moveTo(this.x, this.y);
                 context.lineTo(particle.x, particle.y);
