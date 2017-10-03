@@ -1,8 +1,8 @@
 // One of my first <canvas> experiments, woop! :D
 
 (function(){
-  var SCREEN_WIDTH = 1000;
-  var SCREEN_HEIGHT = 666;
+  var WIN_W = 1000;
+  var WIN_H = 666;
 
   var RADIUS = 320;
 
@@ -16,8 +16,8 @@
   var context;
   var particles;
 
-  var mouseX = SCREEN_WIDTH * 0.5;
-  var mouseY = SCREEN_HEIGHT * 0.5;
+  var mouseX = WIN_W * 0.5;
+  var mouseY = WIN_H * 0.5;
   var mouseIsDown = false;
 
   function init() {
@@ -26,8 +26,8 @@
     canvas2 = document.getElementById( 'canvas-scratch');
 
     if (canvas && canvas.getContext) {
-      context = canvas.getContext('2d');
-      context2 = canvas2.getContext('2d');
+      ctx = canvas.getContext('2d');
+      ctx2 = canvas2.getContext('2d');
 
       // Register event listeners
       window.addEventListener('mousemove', documentMouseMoveHandler, false);
@@ -65,8 +65,8 @@
   }
 
   function documentMouseMoveHandler(event) {
-    mouseX = event.clientX - (1000 - SCREEN_WIDTH) * .5;
-    mouseY = event.clientY - (1000 - SCREEN_HEIGHT) * .5;
+    mouseX = event.clientX - (1000 - WIN_W) * .5;
+    mouseY = event.clientY - (1000 - WIN_H) * .5;
   }
 
   function documentMouseDownHandler(event) {
@@ -81,8 +81,8 @@
     if(event.touches.length == 1) {
       event.preventDefault();
 
-      mouseX = event.touches[0].pageX - (1000 - SCREEN_WIDTH) * .5;;
-      mouseY = event.touches[0].pageY - (1000 - SCREEN_HEIGHT) * .5;
+      mouseX = event.touches[0].pageX - (1000 - WIN_W) * .5;;
+      mouseY = event.touches[0].pageY - (1000 - WIN_H) * .5;
     }
   }
 
@@ -90,14 +90,14 @@
     if(event.touches.length == 1) {
       event.preventDefault();
 
-      mouseX = event.touches[0].pageX - (1000 - SCREEN_WIDTH) * .5;;
-      mouseY = event.touches[0].pageY - (1000 - SCREEN_HEIGHT) * .5;
+      mouseX = event.touches[0].pageX - (1000 - WIN_W) * .5;;
+      mouseY = event.touches[0].pageY - (1000 - WIN_H) * .5;
     }
   }
 
   function windowResizeHandler() {
-    SCREEN_WIDTH = 1000;
-    SCREEN_HEIGHT = 666;
+    WIN_W = 1000;
+    WIN_H = 666;
 
     canvas.width = 1000;
     canvas.height = 666;
@@ -116,22 +116,22 @@
 
     RADIUS_SCALE = Math.min( RADIUS_SCALE, RADIUS_SCALE_MAX );
 
-    context2.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
-    context2.drawImage(canvas,0,0);
+    ctx2.clearRect(0,0,WIN_W,WIN_H);
+    ctx2.drawImage(canvas,0,0);
 
-    context.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
-    context.globalAlpha = .98;
-    context.drawImage(canvas2,0,0);
+    ctx.clearRect(0,0,WIN_W,WIN_H);
+    ctx.globalAlpha = .98;
+    ctx.drawImage(canvas2,0,0);
 
-    context.globalAlpha = 1;
+    ctx.globalAlpha = 1;
     for (i = 0, len = particles.length; i < len; i++) {
       var particle = particles[i];
 
       var lp = { x: particle.position.x, y: particle.position.y };
 
       // Rotation
-      particle.offset.x += ((mouseX/SCREEN_WIDTH)-.5)*2 * particle.speed;
-      particle.offset.y += ((mouseX/SCREEN_WIDTH)-.5)*2 * particle.speed;
+      particle.offset.x += ((mouseX/WIN_W + mouseY/WIN_H)/2-.5)*2 * particle.speed + .01;
+      particle.offset.y += ((mouseX/WIN_W + mouseY/WIN_H)/2-.5)*2 * particle.speed + .01;
 
       // Follow mouse with some lag
       particle.shift.x += 0;
@@ -142,8 +142,8 @@
       particle.position.y = particle.shift.y + Math.sin(i + particle.offset.y) * (particle.orbit*RADIUS_SCALE);
 
       // Limit to screen bounds
-      particle.position.x = Math.max( Math.min( particle.position.x, SCREEN_WIDTH ), 0 );
-      particle.position.y = Math.max( Math.min( particle.position.y, SCREEN_HEIGHT ), 0 );
+      particle.position.x = Math.max( Math.min( particle.position.x, WIN_W ), 0 );
+      particle.position.y = Math.max( Math.min( particle.position.y, WIN_H ), 0 );
 
       particle.size += ( particle.targetSize - particle.size ) * 0.05;
 
@@ -151,18 +151,18 @@
         particle.targetSize = 1 + Math.random() * 3;
       }
 
-      context.beginPath();
-      context.fillStyle = setFillColor(i);
-      context.lineWidth = particle.size;
-      context.moveTo(lp.x, lp.y);
-      context.lineTo(particle.position.x, particle.position.y);
-      context.arc(particle.position.x, particle.position.y, particle.size/2, 0, Math.PI*2, true);
-      context.fill();
+      ctx.beginPath();
+      ctx.fillStyle = setFillColor(i);
+      ctx.lineWidth = particle.size;
+      ctx.moveTo(lp.x, lp.y);
+      ctx.lineTo(particle.position.x, particle.position.y);
+      ctx.arc(particle.position.x, particle.position.y, particle.size/2, 0, Math.PI*2, true);
+      ctx.fill();
     }
   }
 
   function setFillColor(num) {
-    num%3 ? context.fillStyle="#9DB2ED" : context.fillStyle="#E52C58";
+    num%3 ? ctx.fillStyle="#9DB2ED" : ctx.fillStyle="#E52C58";
   }
 
   window.onload = init;
