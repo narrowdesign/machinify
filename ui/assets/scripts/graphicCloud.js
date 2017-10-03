@@ -1,138 +1,100 @@
-(function() {
-  var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-  window.requestAnimationFrame = requestAnimationFrame;
+var canvas = document.getElementById("graphic-cloud"),
+    context = canvas.getContext("2d");
 
-  var raf;
+var colors = new Array('49,97,118','186,64,109')
 
-  var canvas;
-  var ctx;
-  var canvasWidth = 1000;
-  var canvasHeight = 666;
-  var centerX = canvasWidth / 2;
-  var centerY = canvasHeight / 2;
+canvas.width = 1000;
+canvas.height = 1000;
 
-  var radius = canvasHeight / 2.05;
-  var branches = 0;
-  var branchesPos = new Array();
-  var frame = 0;
-  var mR = 0;
-  var mX = 0;
-  var mY = 0;
+var particle;
+var particleList = [];
 
-  var resetting = false;
+for(var i = 0; i < 100; ++i)
+{
+    particle = new ParticleObject(i, canvas.width * .5, canvas.height * .5);
+    particle.draw();
+    particleList.push(particle);
+}
 
-  var inited = false;
 
-  function init(){
-    inited = true;
-    canvas = document.getElementById("graphic-cloud");
-    canvas.addEventListener('click',function(){
-      resetting = true;
-      resetLines();
-    })
-    ctx = new CanvasWrapper(canvas.getContext("2d"));
+setInterval(intervalHandler, 1000 / 30);
 
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-    drawLines();
-  }
+function intervalHandler()
+{
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
-  function drawLines() {
-    // move the origin to the center
-    ctx.translate(centerX,centerY);
-    // set the number of branches
-    branches = 21;
-    branchesPos = [];
-    for (var i=0;i<branches+500;i++) {
-      branchesPos[i] = [0,0]
+    for(var i = 0; i < particleList.length; ++i)
+    {
+        particle = particleList[i];
+        particle.draw();
+        particle.connect();
+    }
+}
+
+function ParticleObject(pIndex, pX, pY)
+{
+    this.index = pIndex + Math.random();
+    this.ticker = (Math.PI / 2);
+    this.x = pX;
+    this.y = pY;
+    this.size = 5;
+    this.color = "#ffffff";
+    this.arcX = randomRange(-1, 1);
+    this.arcY = randomRange(-1, 1);
+    this.distance = 0;
+
+    this.range = 8;
+    this.speed = .0011;
+
+    this.draw = function()
+    {
+        context.moveTo(this.x, this.y);
+        context.fillStyle = this.color;
+
+        context.beginPath();
+        context.arc(this.x, this.y, this.size, 0, Math.PI * 2, true);
+        context.closePath();
+        context.fill();
+
+        this.ticker += this.speed;
+
+        this.ticker = this.ticker == 1 ? 0 : this.ticker;
+
+        this.x += Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range;
+        this.y += Math.cos(Math.cos(this.index * .4) + (this.ticker * this.index * .75)) * this.range;
+
+        // if (this.index < 1) {
+        //   console.log(Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range)
+        //   this.size = 200;
+        // }
+
     }
 
-    resetting = false;
-    frame = 0;
-    cancelAnimationFrame(raf);
-    drawTimeout();
-  }
-  var delayTimeout;
-  function drawTimeout(){
-    // draw branches
-    raf = requestAnimationFrame(function(){
-      frame++;
-      if (frame < 200) {
-        for (var i=0;i<branches;i++) {
-          ctx.beginPath();
-          // move the originX point of the line to the end of the previous line
-          var oldX = branchesPos[i][0];
-          var oldY = branchesPos[i][1];
-          ctx.moveTo(oldX,oldY);
-          var shiftX = Math.random()*20 - i%2 - i%3;
-          var shiftY = (Math.random()*20 - i%2 - i%3);
-          rotation = (i/branches)*Math.PI*2;
-          mR += rotation;
-          branchesPos[i] = [oldX + shiftX, oldY + shiftY]
-          ctx.lineTo(branchesPos[i][0],branchesPos[i][1]);
-          ctx.rotate(rotation)
+    this.connect = function()
+    {
+        for(var i = 0; i < particleList.length; ++i)
+        {
+            particle = particleList[i];
 
-          setStrokeColor(i);
-          ctx.lineWidth = .5;
-          if (branchesPos[i][0] < 233 && branchesPos[i][1] < 233) {
-            ctx.stroke();
+            this.distance = Math.sqrt( Math.pow(particle.x - this.x, 2) + Math.pow(particle.y - this.y, 2) );
 
-            ctx.beginPath();
-            ctx.rotate(-mR);
-            ctx.translate(-300,0);
-            ctx.moveTo(oldX,oldY);
-            ctx.lineTo(branchesPos[i][0],branchesPos[i][1]);
-            ctx.rotate(mR);
-            ctx.strokeStyle = "black";
-            ctx.stroke();
-            ctx.rotate(-mR);
-            ctx.translate(300,0);
-            ctx.rotate(mR);
-          }
+            if(this.distance > 50 && this.distance < 250)
+            {
+                this.isConnected++;
+                this.size = Math.ceil(this.distance/20);
+                this.color = 'rgba(' + colors[i%2] + ',.3)';
 
-          if (frame > 20) {
-            ctx.beginPath();
-            ctx.arc(Math.min(330,Math.floor(((frame-20)/300)*53)*20), 0, 2, 0, Math.PI*2, false);
-            setStrokeColor(i);
-            ctx.lineWidth = .06;
-            ctx.stroke();
-          }
+                context.strokeStyle = "rgba(" + colors[i%2] + ",.5)";
+                context.beginPath();
+                context.moveTo(this.x, this.y);
+                context.lineTo(particle.x, particle.y);
+                context.stroke();
+            }
         }
-      } else if (!resetting) {
-        resetting = true;
-        setTimeout(function(){
-          resetLines();
-        },2000)
-      }
-
-      if (frame%20 == 0) {
-        branches += 20
-        branches = Math.min(500,branches);
-      }
-
-      drawTimeout()
-    })
-  }
-
-  function setStrokeColor(num) {
-    num%2 ? ctx.strokeStyle="#9DB2ED" : ctx.strokeStyle="#E52C58";
-  }
-
-  function setFillColor(num) {
-    num%3 ? ctx.fillStyle="#9DB2ED" : ctx.fillStyle="#E52C58";
-  }
-
-  function resetLines() {
-    ctx.canvas.resetTransform();
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    drawLines();
-  }
-
-  window.addEventListener('scroll',function(e){
-    if (scrollY > document.getElementById("graphic1").getBoundingClientRect().top - window.innerHeight && !inited) {
-      init();
     }
-  })
+}
 
-})();
+function randomRange(pFrom, pTo)
+{
+    return pFrom + (Math.random()*(pTo-pFrom));
+}
