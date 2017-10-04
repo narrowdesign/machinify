@@ -65,7 +65,7 @@
       canvas.style.transform = 'rotate(' + frame + 'deg)'
       if (currentSection < sections.length) {
         var section = sections[currentSection];
-        var ring = sections[currentSection][0]
+        var ring = sections[currentSection][0];
         ctx.beginPath();
         // move the originX point of the line to currentRing * (radius/rings)
         var originX = ring * radius / numRings;
