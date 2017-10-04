@@ -13,8 +13,9 @@
   var centerY = canvasHeight / 2;
 
   var radius = canvasHeight / 2.05;
-  var rings = 0;
-  var ringSections = new Array();
+  var numRings = 0;
+  var rings = new Array();
+  var numRingSections = new Array();
   var currentRing = 0;
   var currentSection = 0;
   var frame = 0;
@@ -42,12 +43,12 @@
     // move the origin to the center
     ctx.translate(centerX,centerY);
     // set the number of rings
-    rings = Math.round(Math.random() * 5) + 2;
+    numRings = Math.round(Math.random() * 5) + 2;
     // clear the number of sections
-    ringSections = [];
+    numRingSections = [];
     // set the number of sections per ring between 6-20
-    for (var i=0;i<rings;i++) {
-      ringSections[i] = Math.round(Math.random() * 80) + 5;
+    for (var i=0;i<numRings;i++) {
+      numRingSections[i] = Math.round(Math.random() * 80) + 5;
       drawCircle(i)
     }
     currentRing = 0;
@@ -61,22 +62,23 @@
     // draw a section line
     raf = requestAnimationFrame(function(){
       frame++;
-      canvas.style.transform = 'rotate(' + -frame + 'deg)'
-
-      if (currentRing < rings) {
+      canvas.style.transform = 'rotate(' + frame + 'deg)'
+      if (currentSection < sections.length) {
+        var section = sections[currentSection];
+        var ring = sections[currentSection][0]
         ctx.beginPath();
         // move the originX point of the line to currentRing * (radius/rings)
-        var originX = currentRing * radius / rings;
+        var originX = ring * radius / numRings;
         ctx.moveTo(originX,0);
         // draw a line the width of the ring
-        var segmentW = radius / rings;
+        var segmentW = radius / numRings;
         ctx.lineTo(originX + segmentW,0);
-        // rotate the line 360/ringSections[currentRing] * currentSection
-        var segmentR = 360 / ringSections[currentRing];
-        var rotation = segmentR * sections[currentSection] * Math.PI / 180;
+        // rotate the line 360/numRingSections[currentRing] * currentSection
+        var segmentR = 360 / numRingSections[ring];
+        var rotation = segmentR * section[1] * Math.PI / 180;
 
 
-        setStrokeColor(currentRing);
+        setStrokeColor(ring);
         ctx.lineWidth = .7 + (1600/window.innerWidth)/5;
         ctx.resetTransform();
         ctx.translate(centerX,centerY);
@@ -91,11 +93,11 @@
         },2000)
       }
 
-      if (currentSection > ringSections[currentRing]) {
-        currentRing++;
-        currentSection = 0;
-        shuffleSections();
-      }
+      // if (currentSection > numRingSections[currentRing]) {
+      //   currentRing++;
+      //   currentSection = 0;
+      //   shuffleSections();
+      // }
 
       drawTimeout();
     })
@@ -103,10 +105,13 @@
 
   function shuffleSections() {
     sections = [];
-    for (var i=0; i < ringSections[currentRing]; i++) {
-      sections[i] = i;
+    for (var i=0;i <= numRingSections.length; i++) {
+      for (var k=0;k <= numRingSections[i]; k++) {
+        sections.push([i,k])
+      }
     }
-    for(var j, x, i = sections.length; i; j = parseInt(Math.random() * i), x = sections[--i], sections[i] = sections[j], sections[j] = x);
+    // for(var j, x, i = sections.length; i; j = parseInt(Math.random() * i), x = sections[--i], sections[i] = sections[j], sections[j] = x);
+    console.log(sections)
   };
 
   function randomSection(section) {
@@ -115,7 +120,7 @@
 
   function drawCircle(num) {
     ctx.beginPath();
-    ctx.arc(0, 0, (radius / rings) * (num + 1), 0, 2 * Math.PI, false);
+    ctx.arc(0, 0, (radius / numRings) * (num + 1), 0, 2 * Math.PI, false);
     setStrokeColor(num);
     ctx.lineWidth = .4;
     ctx.stroke();
@@ -131,10 +136,6 @@
     drawLines();
   }
 
-  window.addEventListener('scroll',function(e){
-    if (scrollY > document.getElementById("graphic1").getBoundingClientRect().top - window.innerHeight && !inited) {
-      init();
-    }
-  })
+  init();
 
 })();

@@ -55,7 +55,7 @@
     clearTimeout(delayTimeout)
     raf = requestAnimationFrame(function(){
       frame++;
-      canvas.style.transform = 'rotate(' + -frame/1.5 + 'deg)'
+      canvas.style.transform = 'rotate(' + frame/1.5 + 'deg)'
       if (frame < 200) {
         for (var i=0;i<branches;i++) {
           ctx.beginPath();
@@ -112,10 +112,6 @@
     drawLines();
   }
 
-  window.addEventListener('scroll',function(e){
-    if (scrollY > document.getElementById("graphic1").getBoundingClientRect().top - window.innerHeight && !inited) {
-      init();
-    }
-  })
+  init();
 
 })();
