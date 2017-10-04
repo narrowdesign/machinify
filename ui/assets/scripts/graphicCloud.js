@@ -62,12 +62,6 @@ function ParticleObject(pIndex, pX, pY)
 
         this.x += Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range;
         this.y += Math.cos(Math.cos(this.index * .4) + (this.ticker * this.index * .75)) * this.range;
-
-        // if (this.index < 1) {
-        //   console.log(Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range)
-        //   this.size = 200;
-        // }
-
     }
 
     this.connect = function()

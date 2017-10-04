@@ -4,7 +4,7 @@
   var WIN_W = 1000;
   var WIN_H = 666;
 
-  var RADIUS = 320;
+  var RADIUS = 328;
 
   var RADIUS_SCALE = 1;
   var RADIUS_SCALE_MIN = 1;
@@ -120,7 +120,7 @@
     ctx2.drawImage(canvas,0,0);
 
     ctx.clearRect(0,0,WIN_W,WIN_H);
-    ctx.globalAlpha = .98;
+    ctx.globalAlpha = .97;
     ctx.drawImage(canvas2,0,0);
 
     ctx.globalAlpha = 1;
