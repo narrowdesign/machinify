@@ -43,7 +43,7 @@ function ParticleObject(pIndex, pX, pY)
     this.arcY = randomRange(-1, 1);
     this.distance = 0;
 
-    this.range = 5;
+    this.range = 3;
     this.speed = .0005;
 
     this.draw = function()

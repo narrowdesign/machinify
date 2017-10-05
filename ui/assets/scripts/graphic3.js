@@ -29,8 +29,6 @@
       window.addEventListener('mousemove', documentMouseMoveHandler, false);
       window.addEventListener('mousedown', documentMouseDownHandler, false);
       window.addEventListener('mouseup', documentMouseUpHandler, false);
-      document.addEventListener('touchstart', documentTouchStartHandler, false);
-      document.addEventListener('touchmove', documentTouchMoveHandler, false);
       window.addEventListener('resize', windowResizeHandler, false);
 
       createdots();
