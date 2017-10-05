@@ -49,56 +49,55 @@
     // set the number of sections per ring between 6-20
     for (var i=0;i<numRings;i++) {
       numRingSections[i] = Math.round(Math.random() * 80) + 5;
-      drawCircle(i)
     }
     currentRing = 0;
     currentSection = 0;
     resetting = false;
     cancelAnimationFrame(raf);
-    drawTimeout();
     shuffleSections();
+    drawTimeout();
   }
   function drawTimeout(){
     // draw a section line
     raf = requestAnimationFrame(function(){
       frame++;
-      canvas.style.transform = 'rotate(' + frame + 'deg)'
-      if (currentSection < sections.length) {
-        var section = sections[currentSection];
-        var ring = sections[currentSection][0];
-        ctx.beginPath();
-        // move the originX point of the line to currentRing * (radius/rings)
-        var originX = ring * radius / numRings;
-        ctx.moveTo(originX,0);
-        // draw a line the width of the ring
-        var segmentW = radius / numRings;
-        ctx.lineTo(originX + segmentW,0);
-        // rotate the line 360/numRingSections[currentRing] * currentSection
-        var segmentR = 360 / numRingSections[ring];
-        var rotation = segmentR * section[1] * Math.PI / 180;
+      canvas.style.transform = 'rotate(' + frame/2 + 'deg)'
+      resetLines();
+      ctx.globalAlpha = 0;
+      for (var i=Math.max(0,sections.length-Math.floor(frame*4));i<sections.length;i++) {
+        var currentSection = i;
+        // if (currentSection < sections.length) {
+          var section = sections[currentSection];
+          var ring = sections[currentSection][0];
+          var myRandom = sections[currentSection][2];
+          ctx.beginPath();
+          // move the originX point of the line to currentRing * (radius/rings)
+          var originX = Math.min(1,(frame/200)) * ring * radius / numRings;
+          ctx.moveTo(originX * Math.min(frame/200,1) ,0);
+          // draw a line the width of the ring
+          var segmentW = (radius / numRings);
+          ctx.lineTo(myRandom * -1 * Math.min(0,(-200 + frame)) + originX + segmentW,0);
+          // rotate the line 360/numRingSections[currentRing] * currentSection
+          var segmentR = 360 / numRingSections[ring] + myRandom * Math.min(0,(-200 + frame))/200;
+          var rotation = segmentR * section[1] * Math.PI / 180;
 
-
-        setStrokeColor(ring);
-        ctx.lineWidth = .7 + (1600/window.innerWidth)/5;
-        ctx.resetTransform();
-        ctx.translate(centerX,centerY);
-        ctx.stroke();
-        ctx.rotate(rotation);
-        currentSection++;
-        drawCircle()
-      } else if (!resetting) {
-        resetting = true;
-        setTimeout(function(){
-          resetLines();
-        },2000)
+          setStrokeColor(ring);
+          ctx.lineWidth = .7 + (1600/window.innerWidth)/5;
+          ctx.resetTransform();
+          ctx.translate(centerX,centerY);
+          ctx.stroke();
+          ctx.rotate(rotation);
+          ctx.globalAlpha = Math.min(1,.1 + frame/80);
+      }
+      if (frame > 500) {
+        frame = 0;
+        resetLines()
+        drawLines()
       }
 
-      // if (currentSection > numRingSections[currentRing]) {
-      //   currentRing++;
-      //   currentSection = 0;
-      //   shuffleSections();
-      // }
-
+      for (var i=0;i<numRings;i++) {
+        drawCircle(i)
+      }
       drawTimeout();
     })
   }
@@ -107,11 +106,12 @@
     sections = [];
     for (var i=0;i <= numRingSections.length; i++) {
       for (var k=0;k <= numRingSections[i]; k++) {
-        sections.push([i,k])
+        sections.push([i,k,Math.random()])
       }
     }
+    sectionsMess = new Array(sections);
+    // sectionsMess[3] = [2,0];
     // for(var j, x, i = sections.length; i; j = parseInt(Math.random() * i), x = sections[--i], sections[i] = sections[j], sections[j] = x);
-    console.log(sections)
   };
 
   function randomSection(section) {
@@ -120,7 +120,7 @@
 
   function drawCircle(num) {
     ctx.beginPath();
-    ctx.arc(0, 0, (radius / numRings) * (num + 1), 0, 2 * Math.PI, false);
+    ctx.arc(0, 0, (radius*Math.min(1,(frame/200)) / numRings) * (num + 1), 0, 2 * Math.PI, false);
     setStrokeColor(num);
     ctx.lineWidth = .4;
     ctx.stroke();
@@ -133,7 +133,6 @@
   function resetLines() {
     ctx.resetTransform();
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    drawLines();
   }
 
   init();

@@ -50,7 +50,7 @@ function ParticleObject(pIndex, pX, pY)
     {
         context.moveTo(this.x, this.y);
         context.fillStyle = this.color;
-        context.globalAlpha = .4;
+        context.globalAlpha = .6;
         context.beginPath();
         context.arc(this.x, this.y, this.size, 0, Math.PI * 2, true);
         context.closePath();
@@ -62,6 +62,10 @@ function ParticleObject(pIndex, pX, pY)
 
         this.x += Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range;
         this.y += Math.cos(Math.cos(this.index * .4) + (this.ticker * this.index * .75)) * this.range;
+
+        this.x = Math.max(Math.min(1000,this.x),0);
+        this.y = Math.max(Math.min(1000,this.y),0);
+
     }
 
     this.connect = function()
@@ -81,6 +85,8 @@ function ParticleObject(pIndex, pX, pY)
                 context.strokeStyle = i%2 == 0 ? "#E2305B" : "#060130";
                 context.beginPath();
                 context.moveTo(this.x, this.y);
+
+                context.lineWidth = 1.5;
                 context.lineTo(particle.x, particle.y);
                 context.stroke();
             }

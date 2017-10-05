@@ -6,10 +6,10 @@
 
   var R = 328;
 
-  var QUANTITY = 155;
+  var QUANTITY = 6;
 
   var canvas;
-  var context;
+  var ctx;
   var dots;
 
   var mouseX = WIN_W * 0.5;
@@ -17,21 +17,10 @@
   var mouseIsDown = false;
 
   function init() {
-
-    canvas = document.getElementById( 'graphic3' );
-    canvas2 = document.getElementById( 'canvas-scratch');
+    canvas = document.getElementById( 'graphic4' );
 
     if (canvas && canvas.getContext) {
       ctx = canvas.getContext('2d');
-      ctx2 = canvas2.getContext('2d');
-
-      // Register event listeners
-      window.addEventListener('mousemove', documentMouseMoveHandler, false);
-      window.addEventListener('mousedown', documentMouseDownHandler, false);
-      window.addEventListener('mouseup', documentMouseUpHandler, false);
-      document.addEventListener('touchstart', documentTouchStartHandler, false);
-      document.addEventListener('touchmove', documentTouchMoveHandler, false);
-      window.addEventListener('resize', windowResizeHandler, false);
 
       createdots();
 
@@ -51,9 +40,9 @@
         offset: { x: 0, y: 0 },
         shift: { x: mouseX, y: mouseY },
         speed: 0.01+Math.random()*0.04,
-        targetSize: 1,
+        targetSize: 14,
         fillColor: '#' + (Math.random() * 0x404040 + 0xaaaaaa | 0).toString(16),
-        orbit: R*.5 + (R * .5 * Math.random())
+        orbit: R*.5 + (R * .5 * i/10)
       };
 
       dots.push( dot );
@@ -97,18 +86,11 @@
 
     canvas.width = 1000;
     canvas.height = 666;
-    canvas2.width = 1000;
-    canvas2.height = 666;
   }
 
   function loop() {
 
-    ctx2.clearRect(0,0,WIN_W,WIN_H);
-    ctx2.drawImage(canvas,0,0);
-
-    ctx.clearRect(0,0,WIN_W,WIN_H);
     ctx.globalAlpha = .97;
-    ctx.drawImage(canvas2,0,0);
 
     ctx.globalAlpha = 1;
     for (i = 0, len = dots.length; i < len; i++) {
@@ -126,7 +108,7 @@
       dot.position.x = Math.max( Math.min( dot.position.x, WIN_W ), 0 );
       dot.position.y = Math.max( Math.min( dot.position.y, WIN_H ), 0 );
 
-      dot.size += ( dot.targetSize - dot.size ) * 0.05;
+      dot.size = 3;
 
       if( Math.round( dot.size ) == Math.round( dot.targetSize ) ) {
         dot.targetSize = 1 + Math.random() * 3;
@@ -146,6 +128,6 @@
     num%3 ? ctx.fillStyle="#9DB2ED" : ctx.fillStyle="#E52C58";
   }
 
-  window.onload = init;
+  init();
 
 }())
