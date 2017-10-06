@@ -9,7 +9,7 @@ canvas.height = 1000;
 var particle;
 var particleList = [];
 
-for(var i = 0; i < 100; ++i)
+for(var i = 0; i < 60; ++i)
 {
     particle = new ParticleObject(i, canvas.width * .5, canvas.height * .5);
     particle.draw();
@@ -60,8 +60,8 @@ function ParticleObject(pIndex, pX, pY)
 
         this.ticker = this.ticker == 1 ? 0 : this.ticker;
 
-        this.x += Math.sin(Math.cos(this.index * .1) + (this.ticker * this.index * .5)) * this.range;
-        this.y += Math.cos(Math.cos(this.index * .4) + (this.ticker * this.index * .75)) * this.range;
+        this.x += Math.sin(Math.cos(this.index * .5) + (this.ticker * this.index * .5)) * this.range;
+        this.y += Math.cos(Math.cos(this.index * .9) + (this.ticker * this.index * .75)) * this.range;
 
         this.x = Math.max(Math.min(1000,this.x),0);
         this.y = Math.max(Math.min(1000,this.y),0);

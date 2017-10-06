@@ -12,9 +12,12 @@
   var context;
   var dots;
 
+  var centerX = WIN_W * 0.5;
   var mouseX = WIN_W * 0.5;
-  var mouseY = WIN_H * 0.5;
-  var mouseIsDown = false;
+  var centerY = WIN_H * 0.5;
+  var mouseY = WIN_W * 0.5;
+
+  var frame = 0;
 
   function init() {
 
@@ -27,8 +30,6 @@
 
       // Register event listeners
       window.addEventListener('mousemove', documentMouseMoveHandler, false);
-      window.addEventListener('mousedown', documentMouseDownHandler, false);
-      window.addEventListener('mouseup', documentMouseUpHandler, false);
       window.addEventListener('resize', windowResizeHandler, false);
 
       createdots();
@@ -45,9 +46,9 @@
     for (var i = 0; i < QUANTITY; i++) {
       var dot = {
         size: 1,
-        position: { x: mouseX, y: mouseY },
+        position: { x: centerX, y: centerY },
         offset: { x: 0, y: 0 },
-        shift: { x: mouseX, y: mouseY },
+        shift: { x: centerX, y: centerY },
         speed: 0.01+Math.random()*0.04,
         targetSize: 1,
         fillColor: '#' + (Math.random() * 0x404040 + 0xaaaaaa | 0).toString(16),
@@ -59,35 +60,10 @@
   }
 
   function documentMouseMoveHandler(event) {
-    mouseX = event.clientX - (1000 - WIN_W) * .5;
-    mouseY = event.clientY - (1000 - WIN_H) * .5;
+    mouseX = event.clientX-500 - (1000 - WIN_W) * .5;
+    mouseY = event.clientY-500 - (1000 - WIN_H) * .5;
   }
 
-  function documentMouseDownHandler(event) {
-    mouseIsDown = true;
-  }
-
-  function documentMouseUpHandler(event) {
-    mouseIsDown = false;
-  }
-
-  function documentTouchStartHandler(event) {
-    if(event.touches.length == 1) {
-      event.preventDefault();
-
-      mouseX = event.touches[0].pageX - (1000 - WIN_W) * .5;;
-      mouseY = event.touches[0].pageY - (1000 - WIN_H) * .5;
-    }
-  }
-
-  function documentTouchMoveHandler(event) {
-    if(event.touches.length == 1) {
-      event.preventDefault();
-
-      mouseX = event.touches[0].pageX - (1000 - WIN_W) * .5;;
-      mouseY = event.touches[0].pageY - (1000 - WIN_H) * .5;
-    }
-  }
 
   function windowResizeHandler() {
     WIN_W = 1000;
@@ -100,6 +76,8 @@
   }
 
   function loop() {
+
+    frame++
 
     ctx2.clearRect(0,0,WIN_W,WIN_H);
     ctx2.drawImage(canvas,0,0);
@@ -116,10 +94,8 @@
 
       dot.offset.x += ((mouseX/WIN_W + mouseY/WIN_H)/2-.5)*2 * dot.speed + .01;
       dot.offset.y += ((mouseX/WIN_W + mouseY/WIN_H)/2-.5)*2 * dot.speed + .01;
-      dot.shift.x += 0;
-      dot.shift.y += 0;
-      dot.position.x = dot.shift.x + Math.cos(i + dot.offset.x) * (dot.orbit);
-      dot.position.y = dot.shift.y + Math.sin(i + dot.offset.y) * (dot.orbit);
+      dot.position.x = centerX + Math.cos(i + dot.offset.x) * (dot.orbit);
+      dot.position.y = centerY + Math.sin(i + dot.offset.y) * (dot.orbit);
 
       dot.position.x = Math.max( Math.min( dot.position.x, WIN_W ), 0 );
       dot.position.y = Math.max( Math.min( dot.position.y, WIN_H ), 0 );
@@ -136,12 +112,14 @@
       ctx.moveTo(linePos.x, linePos.y);
       ctx.lineTo(dot.position.x, dot.position.y);
       ctx.arc(dot.position.x, dot.position.y, dot.size/2, 0, Math.PI*2, true);
-      ctx.fill();
+      if (frame > 1) {
+        ctx.fill();
+      }
     }
   }
 
   function setFillColor(num) {
-    num%3 ? ctx.fillStyle="#9DB2ED" : ctx.fillStyle="#E52C58";
+    num%2 ? ctx.fillStyle="#9DB2ED" : ctx.fillStyle="#E52C58";
   }
 
   window.onload = init;

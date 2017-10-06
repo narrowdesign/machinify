@@ -2,7 +2,7 @@
 
 (function(){
   var WIN_W = 1000;
-  var WIN_H = 666;
+  var WIN_H = 1000;
 
   var R = 330;
 
@@ -20,7 +20,7 @@
 
 
   function init() {
-    canvas = document.getElementById( 'graphic4' );
+    canvas = document.getElementById( 'graphic-studio' );
     canvas2 = document.getElementById( 'canvas-scratch' );
 
     if (canvas && canvas.getContext) {
@@ -47,12 +47,12 @@
 
   function windowResizeHandler() {
     WIN_W = 1000;
-    WIN_H = 666;
+    WIN_H = 1000;
 
     canvas.width = 1000;
-    canvas.height = 666;
+    canvas.height = 1000;
     canvas2.width = 1000;
-    canvas2.height = 666;
+    canvas2.height = 1000;
   }
 
   function loop() {
