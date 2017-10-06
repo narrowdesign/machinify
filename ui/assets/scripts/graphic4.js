@@ -49,37 +49,6 @@
     }
   }
 
-  function documentMouseMoveHandler(event) {
-    mouseX = event.clientX - (1000 - WIN_W) * .5;
-    mouseY = event.clientY - (1000 - WIN_H) * .5;
-  }
-
-  function documentMouseDownHandler(event) {
-    mouseIsDown = true;
-  }
-
-  function documentMouseUpHandler(event) {
-    mouseIsDown = false;
-  }
-
-  function documentTouchStartHandler(event) {
-    if(event.touches.length == 1) {
-      event.preventDefault();
-
-      mouseX = event.touches[0].pageX - (1000 - WIN_W) * .5;;
-      mouseY = event.touches[0].pageY - (1000 - WIN_H) * .5;
-    }
-  }
-
-  function documentTouchMoveHandler(event) {
-    if(event.touches.length == 1) {
-      event.preventDefault();
-
-      mouseX = event.touches[0].pageX - (1000 - WIN_W) * .5;;
-      mouseY = event.touches[0].pageY - (1000 - WIN_H) * .5;
-    }
-  }
-
   function windowResizeHandler() {
     WIN_W = 1000;
     WIN_H = 666;
