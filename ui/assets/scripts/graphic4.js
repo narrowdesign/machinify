@@ -66,7 +66,7 @@
       ctx.globalAlpha = .85;
       ctx.drawImage(canvas2,0,0);
       ctx.globalAlpha = 1;
-      canvas.style.transform = 'rotate(' + frame/1.5 + 'deg)'
+      canvas.style.transform = 'rotate(' + frame/8 + 'deg)'
       for (i = 0, len = dots.length; i < len; i++) {
         ctx.beginPath();
         ctx.strokeStyle = setStrokeColor(i);

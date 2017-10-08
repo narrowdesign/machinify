@@ -61,7 +61,7 @@
     // draw a section line
     raf = requestAnimationFrame(function(){
       frame++;
-      canvas.style.transform = 'rotate(' + frame/2 + 'deg)'
+      canvas.style.transform = 'rotate(' + frame/8 + 'deg)'
       resetLines();
       ctx.globalAlpha = 0;
       for (var i=Math.max(0,sections.length-Math.floor(frame*4));i<sections.length;i++) {
