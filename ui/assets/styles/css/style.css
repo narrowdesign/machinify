@@ -5831,6 +5831,9 @@ svg:nth-of-type(3) .dial-ring {
 .w-8rem {
   width: 8rem;
 }
+.w-10rem {
+  width: 10rem;
+}
 .w-13rem {
   width: 13rem;
 }
@@ -6105,6 +6108,9 @@ svg:nth-of-type(3) .dial-ring {
   }
   .ms-w-8rem {
     width: 8rem;
+  }
+  .ms-w-10rem {
+    width: 10rem;
   }
   .ms-w-13rem {
     width: 13rem;
