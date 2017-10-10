@@ -171,12 +171,12 @@ $(function() {
     scrollY = WIN.scrollTop();
 
     var moved = scrollY - oldScrollY;
-    if (scrollY > 200 && !BODY.hasClass('is-scrolled')) {
+    if (scrollY > 250 && !BODY.hasClass('is-scrolled')) {
       BODY.addClass('is-scrolled')
-    } else if (scrollY < 200 && BODY.hasClass('is-scrolled')) {
+    } else if (scrollY < 250 && BODY.hasClass('is-scrolled')) {
       BODY.removeClass('is-scrolled');
     }
-    if (scrollY > 200 && (moved < -20 && !BODY.hasClass('is-scrolling-up') && scrollY < DOC.height() - _winH - 40)) {
+    if (scrollY > 250 && (moved < -20 && !BODY.hasClass('is-scrolling-up') && scrollY < DOC.height() - _winH - 40)) {
       BODY.addClass('is-scrolling-up')
     } else if (moved > 0 && BODY.hasClass('is-scrolling-up')) {
       BODY.removeClass('is-scrolling-up')
