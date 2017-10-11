@@ -6,7 +6,7 @@
 
   var R = 330;
 
-  var QUANTITY = 20;
+  var QUANTITY = 40;
 
   var canvas;
   var ctx;
@@ -16,6 +16,7 @@
   var centerX = WIN_W * 0.5;
   var centerY = WIN_H * 0.5;
   var frame = 0;
+  var cycle = 0;
 
 
 
@@ -63,36 +64,30 @@
       ctx2.drawImage(canvas,0,0);
 
       ctx.clearRect(0,0,WIN_W,WIN_H);
-      ctx.globalAlpha = .85;
+      ctx.globalAlpha = .97;
       ctx.drawImage(canvas2,0,0);
       ctx.globalAlpha = 1;
-      canvas.style.transform = 'rotate(' + frame/8 + 'deg)'
       for (i = 0, len = dots.length; i < len; i++) {
         ctx.beginPath();
-        ctx.strokeStyle = setStrokeColor(i);
-        ctx.lineWidth = 1;
-        var startAngle = (Math.PI*1.5) + i;
-        var endAngle = Math.PI*1.5 + ((Math.PI*2) + i/2) * (frame/200);
-        if (frame > 300 - i*5) {
-          ctx.strokeStyle = setStrokeColor(i+Math.floor(frame/15));
-        }
-        ctx.arc(centerX, centerY, R - (QUANTITY - i)*15, startAngle, endAngle, false);
+        ctx.moveTo(1+i*39,WIN_H-(WIN_H*((frame-56)/100)));
+        ctx.strokeStyle = setStrokeColor(cycle);
+        ctx.lineWidth = 3;
+        ctx.lineTo(1+i*39,WIN_H - frame*4 - (i*100) * (frame/(400-i*8)));
         ctx.stroke();
-        if (frame > 400) {
-          frame = 0;
-        }
+      }
+      if (frame > 134) {
+        frame = 0;
+        cycle++;
       }
       loop();
     })
   }
 
   function setStrokeColor(num) {
-    if (num%3 == 0) {
+    if (cycle%2 == 0) {
       ctx.strokeStyle="#9DB2ED"
-    } else if (num%3 == 1) {
-      ctx.strokeStyle="#E52C58"
     } else {
-      ctx.strokeStyle= '#b38ac1'
+      ctx.strokeStyle="#E52C58"
     }
 
   }
