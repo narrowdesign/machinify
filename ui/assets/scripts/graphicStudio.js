@@ -6,7 +6,7 @@
 
   var R = 330;
 
-  var QUANTITY = 60;
+  var QUANTITY = 5;
 
   var canvas;
   var ctx;
@@ -57,34 +57,47 @@
   }
 
   function loop() {
-
     requestAnimationFrame(function(){
       frame++;
       ctx2.clearRect(0,0,WIN_W,WIN_H);
       ctx2.drawImage(canvas,0,0);
 
       ctx.clearRect(0,0,WIN_W,WIN_H);
-      ctx.globalAlpha = .95;
+      ctx.globalAlpha = .98;
       ctx.drawImage(canvas2,0,0);
-      ctx.globalAlpha = 1;
-      for (i = 0, len = dots.length; i < len; i++) {
-        ctx.beginPath();
-        ctx.moveTo(WIN_W,WIN_H - 1+i*20);
-        ctx.strokeStyle = setStrokeColor(i);
-        ctx.lineCap = 'round'
-        ctx.lineWidth = 2;
-        ctx.lineTo(WIN_W - frame * 3 + (i-Math.abs(dots.length/2)),i*20);
-        ctx.stroke();
+      if (frame%19 === 0) {
+       ctx.globalAlpha = .2;
+      } else {
+        ctx.globalAlpha = 1;
       }
-      if (frame > 534) {
+      ctx.beginPath();
+      ctx.lineWidth = 1;
+      sides = Math.max(4,20 - Math.floor(frame/10));
+      for (var i=0;i<sides*2;i++) {
+        // start at 0°
+        ctx.lineTo(
+            333 + Math.cos(Math.PI * i / (sides/2)) * (300 - frame*.75),
+            333 + Math.sin(Math.PI * i / (sides/2)) * (300 - frame*.75)
+        );
+        // and back
+      }
+      ctx.lineTo(
+        333 + Math.cos(0) * (300 - frame*.75),
+        333 + Math.sin(0) * (300 - frame*.75));
+
+      ctx.strokeStyle = setStrokeColor(frame);
+      ctx.stroke();
+
+      if (frame > 300) {
+        sides = 20;
         frame = 0;
-        cycle++;
       }
       loop();
     })
   }
 
   function setStrokeColor(num) {
+    console.log(num)
     if (num%2 == 0) {
       ctx.strokeStyle="#060130"
     } else {
