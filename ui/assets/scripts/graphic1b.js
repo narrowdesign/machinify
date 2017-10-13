@@ -61,10 +61,10 @@
     // draw a section line
     raf = requestAnimationFrame(function(){
       frame++;
-      canvas.style.transform = 'rotate(' + frame/8 + 'deg)'
+      canvas.style.transform = 'rotate(' + frame/16 + 'deg)'
       resetLines();
       ctx.globalAlpha = 0;
-      for (var i=Math.max(0,sections.length-Math.floor(frame*4));i<sections.length;i++) {
+      for (var i=0;i<sections.length;i++) {
         var currentSection = i;
         // if (currentSection < sections.length) {
           var section = sections[currentSection];
@@ -73,12 +73,12 @@
           ctx.beginPath();
           // move the originX point of the line to currentRing * (radius/rings)
           var originX = Math.min(1,(frame/200)) * ring * radius / numRings;
-          ctx.moveTo(originX * Math.min(frame/200,1) ,0);
+          ctx.moveTo(originX * Math.min(frame/1400,1) ,0);
           // draw a line the width of the ring
           var segmentW = (radius / numRings);
-          ctx.lineTo(myRandom * -1 * Math.min(0,(-200 + frame)) + originX + segmentW,0);
+          ctx.lineTo(myRandom * -1 * Math.min(0,(-300 + frame)) + originX + segmentW,0);
           // rotate the line 360/numRingSections[currentRing] * currentSection
-          var segmentR = 360 / numRingSections[ring] + myRandom * Math.min(0,(-200 + frame))/200;
+          var segmentR = 360 / numRingSections[ring] + myRandom * Math.min(0,(-300 + frame))/1400;
           var rotation = segmentR * section[1] * Math.PI / 180;
 
           setStrokeColor(ring);
@@ -89,7 +89,7 @@
           ctx.rotate(rotation);
           ctx.globalAlpha = Math.min(1,.1 + frame/80);
       }
-      if (frame > 500) {
+      if (frame > 1400) {
         frame = 0;
         resetLines()
         drawLines()
@@ -120,7 +120,7 @@
 
   function drawCircle(num) {
     ctx.beginPath();
-    ctx.arc(0, 0, (radius*Math.min(1,(frame/200)) / numRings) * (num + 1), 0, 2 * Math.PI, false);
+    ctx.arc(0, 0, (radius*Math.min(1,(frame/1400)) / numRings) * (num + 1), 0, 2 * Math.PI, false);
     setStrokeColor(num);
     ctx.lineWidth = .4;
     ctx.stroke();

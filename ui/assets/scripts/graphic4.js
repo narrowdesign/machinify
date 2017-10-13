@@ -69,13 +69,13 @@
       ctx.globalAlpha = 1;
       for (i = 0, len = dots.length; i < len; i++) {
         ctx.beginPath();
-        ctx.moveTo(1+i*39,WIN_H-(WIN_H*((frame-56)/350)));
+        ctx.moveTo(i*39,WIN_H-(WIN_H*((frame-256)/350)));
         ctx.strokeStyle = setStrokeColor(cycle);
-        ctx.lineWidth = 3;
-        ctx.lineTo(1+i*39,WIN_H - frame*2 - (i*30) * (frame/(400-i*8)));
+        ctx.lineWidth = 1.5;
+        ctx.lineTo(i*39,WIN_H - frame - (i*15) * (frame/(500-i*12)));
         ctx.stroke();
       }
-      if (frame > 244) {
+      if (frame > 504) {
         frame = 0;
         cycle++;
       }

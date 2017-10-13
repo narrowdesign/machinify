@@ -33,6 +33,7 @@
       windowResizeHandler();
 
       loop();
+      loop()
     }
   }
 
@@ -59,12 +60,6 @@
   function loop() {
     requestAnimationFrame(function(){
       frame++;
-      ctx2.clearRect(0,0,WIN_W,WIN_H);
-      ctx2.drawImage(canvas,0,0);
-
-      ctx.clearRect(0,0,WIN_W,WIN_H);
-      ctx.globalAlpha = .98;
-      ctx.drawImage(canvas2,0,0);
       if (frame%19 === 0) {
        ctx.globalAlpha = .2;
       } else {
@@ -72,19 +67,24 @@
       }
       ctx.beginPath();
       ctx.lineWidth = 1;
-      sides = Math.max(4,20 - Math.floor(frame/10));
-      for (var i=0;i<sides*2;i++) {
-        // start at 0°
-        ctx.lineTo(
-            333 + Math.cos(Math.PI * i / (sides/2)) * (300 - frame*.75),
-            333 + Math.sin(Math.PI * i / (sides/2)) * (300 - frame*.75)
-        );
-        // and back
+      shapes = 25;
+      sides = 25;
+      for (var s=0;s<shapes;s++) {
+        sides--;
+        if (sides > 2) {
+          for (var i=0;i<sides;i++) {
+            // start at 0°
+            ctx.lineTo(
+                333 + Math.cos(Math.PI * i / (sides/2)) * (300 - s*13),
+                333 + Math.sin(Math.PI * i / (sides/2)) * (300 - s*13)
+            );
+          }
+          ctx.lineTo(
+            333 + Math.cos(0) * (300 - s*13),
+            333 + Math.sin(0) * (300 - s*13));
+          // and back
+        }
       }
-      ctx.lineTo(
-        333 + Math.cos(0) * (300 - frame*.75),
-        333 + Math.sin(0) * (300 - frame*.75));
-
       ctx.strokeStyle = setStrokeColor(frame);
       ctx.stroke();
 
@@ -92,12 +92,11 @@
         sides = 20;
         frame = 0;
       }
-      loop();
+      // loop();
     })
   }
 
   function setStrokeColor(num) {
-    console.log(num)
     if (num%2 == 0) {
       ctx.strokeStyle="#060130"
     } else {

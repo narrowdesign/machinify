@@ -171,6 +171,9 @@ $(function() {
     scrollY = WIN.scrollTop();
 
     var moved = scrollY - oldScrollY;
+    $('.page-title').css({
+      opacity: 1-scrollY/160
+    })
     if (scrollY > 250 && !BODY.hasClass('is-scrolled')) {
       BODY.addClass('is-scrolled')
     } else if (scrollY < 250 && BODY.hasClass('is-scrolled')) {

@@ -29,7 +29,7 @@
       ctx2 = canvas2.getContext('2d');
 
       // Register event listeners
-      window.addEventListener('mousemove', documentMouseMoveHandler, false);
+      // window.addEventListener('mousemove', documentMouseMoveHandler, false);
       window.addEventListener('resize', windowResizeHandler, false);
 
       createdots();
@@ -49,7 +49,7 @@
         position: { x: centerX, y: centerY },
         offset: { x: 0, y: 0 },
         shift: { x: centerX, y: centerY },
-        speed: 0.01+Math.random()*0.04,
+        speed: 0.01+Math.random()*0.01,
         targetSize: 1,
         fillColor: '#' + (Math.random() * 0x404040 + 0xaaaaaa | 0).toString(16),
         orbit: R*.5 + (R * .5 * Math.random())
@@ -59,10 +59,10 @@
     }
   }
 
-  function documentMouseMoveHandler(event) {
-    mouseX = event.clientX-500 - (1000 - WIN_W) * .5;
-    mouseY = event.clientY-500 - (1000 - WIN_H) * .5;
-  }
+  // function documentMouseMoveHandler(event) {
+  //   mouseX = event.clientX-500 - (1000 - WIN_W) * .5;
+  //   mouseY = event.clientY-500 - (1000 - WIN_H) * .5;
+  // }
 
 
   function windowResizeHandler() {
@@ -92,8 +92,8 @@
 
       var linePos = { x: dot.position.x, y: dot.position.y };
 
-      dot.offset.x += ((mouseX/WIN_W + mouseY/WIN_H)/2-.5)*2 * dot.speed + .01;
-      dot.offset.y += ((mouseX/WIN_W + mouseY/WIN_H)/2-.5)*2 * dot.speed + .01;
+      dot.offset.x += ((mouseX/WIN_W + mouseY/WIN_H)/2-.5)*2 * dot.speed + .002;
+      dot.offset.y += ((mouseX/WIN_W + mouseY/WIN_H)/2-.5)*2 * dot.speed + .002;
       dot.position.x = centerX + Math.cos(i + dot.offset.x) * (dot.orbit);
       dot.position.y = centerY + Math.sin(i + dot.offset.y) * (dot.orbit);
 
