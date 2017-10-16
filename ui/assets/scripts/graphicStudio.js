@@ -11,12 +11,16 @@
   var canvas;
   var ctx;
   var ctx2;
-  var dots;
 
   var centerX = WIN_W * 0.5;
   var centerY = WIN_H * 0.5;
   var frame = 0;
   var cycle = 0;
+
+  var sides = 3;
+  var shapes = 15;
+
+  var direction = 'down';
 
 
 
@@ -28,22 +32,9 @@
       ctx = canvas.getContext('2d');
       ctx2 = canvas2.getContext('2d');
 
-      createdots();
-
       windowResizeHandler();
 
       loop();
-      loop()
-    }
-  }
-
-  function createdots() {
-    dots = [];
-
-    for (var i = 0; i < QUANTITY; i++) {
-      var dot;
-
-      dots.push( dot );
     }
   }
 
@@ -60,39 +51,39 @@
   function loop() {
     requestAnimationFrame(function(){
       frame++;
-      if (frame%19 === 0) {
-       ctx.globalAlpha = .2;
-      } else {
-        ctx.globalAlpha = 1;
-      }
+      ctx2.clearRect(0,0,WIN_W,WIN_H);
+      ctx2.drawImage(canvas,0,0);
+
+      ctx.clearRect(0,0,WIN_W,WIN_H);
+      ctx.globalAlpha = .93;
+      ctx.drawImage(canvas2,0,0);
+      ctx.globalAlpha = .7;
       ctx.beginPath();
-      ctx.lineWidth = 1;
-      shapes = 25;
-      sides = 25;
+      shapes = 15;
+      if (direction == 'down') {
+        sides -= sides/1000;
+        if (sides < 3) {
+          direction = 'up';
+          frame = 0;
+        }
+      } else {
+        sides += sides/1000;
+        if (sides > 8) {
+          direction = 'down';
+          frame = 0;
+        }
+      }
       for (var s=0;s<shapes;s++) {
-        sides--;
-        if (sides > 2) {
-          for (var i=0;i<sides;i++) {
-            // start at 0°
-            ctx.lineTo(
-                333 + Math.cos(Math.PI * i / (sides/2)) * (300 - s*13),
-                333 + Math.sin(Math.PI * i / (sides/2)) * (300 - s*13)
-            );
-          }
+        for (var i=0;i<=sides;i++) {
           ctx.lineTo(
-            333 + Math.cos(0) * (300 - s*13),
-            333 + Math.sin(0) * (300 - s*13));
-          // and back
+            333 + (Math.cos((Math.PI * i + Math.PI/4) / (sides/2))) * (333-s*23-Math.random()),
+            333 + (Math.sin((Math.PI * i + Math.PI/4) / (sides/2))) * (333-s*23-Math.random())
+          );
         }
       }
       ctx.strokeStyle = setStrokeColor(frame);
       ctx.stroke();
-
-      if (frame > 300) {
-        sides = 20;
-        frame = 0;
-      }
-      // loop();
+      loop();
     })
   }
 

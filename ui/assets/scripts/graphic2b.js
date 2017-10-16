@@ -1,4 +1,5 @@
-(function() {
+(function(){
+
   var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
                               window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
   window.requestAnimationFrame = requestAnimationFrame;
@@ -32,7 +33,6 @@
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
-    drawLines();
   }
 
   function drawLines() {
@@ -52,52 +52,54 @@
   var delayTimeout;
   function drawTimeout(){
     // draw branches
-    clearTimeout(delayTimeout)
-    raf = requestAnimationFrame(function(){
-      frame++;
-      canvas.style.transform = 'rotate(' + frame/12 + 'deg)'
-      if (frame < 280) {
-        for (var i=0;i<branches;i++) {
-          ctx.beginPath();
-          // move the originX point of the line to currentRing * (radius/rings)
-          ctx.moveTo(branchesPos[i][0],branchesPos[i][1]);
-          var shiftX = Math.random()*4 - i%2 - i%3;
-          var shiftY = (Math.random()*4 - i%2 - i%3);
-          var rotation = (i/branches)*Math.PI*2;
-          branchesPos[i] = [branchesPos[i][0] + shiftX, branchesPos[i][1] + shiftY]
-          ctx.lineTo(branchesPos[i][0],branchesPos[i][1]);
-          ctx.rotate(rotation)
-
-          setStrokeColor(i);
-          ctx.lineWidth = .5;
-          if (branchesPos[i][0] < 233 && branchesPos[i][1] < 233) {
-            ctx.stroke();
-          }
-
-          if (frame > 40) {
+    if (visible) {
+      clearTimeout(delayTimeout)
+      raf = requestAnimationFrame(function(){
+        frame++;
+        canvas.style.transform = 'rotate(' + frame/12 + 'deg)'
+        if (frame < 280) {
+          for (var i=0;i<branches;i++) {
             ctx.beginPath();
-            ctx.arc(Math.min(330,Math.floor(((frame-20)/300)*23)*30), 0, 2, 0, Math.PI*2, false);
-            setFillColor(i);
-            ctx.lineWidth = .06;
-            ctx.globalAlpha = .1;
-            ctx.fill();
-            ctx.globalAlpha = 1;
+            // move the originX point of the line to currentRing * (radius/rings)
+            ctx.moveTo(branchesPos[i][0],branchesPos[i][1]);
+            var shiftX = Math.random()*4 - i%2 - i%3;
+            var shiftY = (Math.random()*4 - i%2 - i%3);
+            var rotation = (i/branches)*Math.PI*2;
+            branchesPos[i] = [branchesPos[i][0] + shiftX, branchesPos[i][1] + shiftY]
+            ctx.lineTo(branchesPos[i][0],branchesPos[i][1]);
+            ctx.rotate(rotation)
+
+            setStrokeColor(i);
+            ctx.lineWidth = .5;
+            if (branchesPos[i][0] < 233 && branchesPos[i][1] < 233) {
+              ctx.stroke();
+            }
+
+            if (frame > 40) {
+              ctx.beginPath();
+              ctx.arc(Math.min(330,Math.floor(((frame-20)/300)*23)*30), 0, 2, 0, Math.PI*2, false);
+              setFillColor(i);
+              ctx.lineWidth = .06;
+              ctx.globalAlpha = .1;
+              ctx.fill();
+              ctx.globalAlpha = 1;
+            }
+          }
+          if (frame%50 == 0) {
+            branches += 50
+            branches = Math.min(500,branches);
           }
         }
-      } else if (!resetting) {
-        resetting = true;
-        setTimeout(function(){
-          resetLines();
-        },2000)
-      }
+        // } else if (!resetting) {
+        //   resetting = true;
+        //   setTimeout(function(){
+        //     resetLines();
+        //   },2000)
+        // }
 
-      if (frame%50 == 0) {
-        branches += 50
-        branches = Math.min(500,branches);
-      }
-
-      delayTimeout = setTimeout(drawTimeout,20)
-    })
+        delayTimeout = setTimeout(drawTimeout,20)
+      })
+    }
   }
 
   function setStrokeColor(num) {
@@ -111,9 +113,25 @@
   function resetLines() {
     ctx.resetTransform();
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    drawLines();
   }
 
   init();
+
+  var visible = false;
+  var inview2 = new Waypoint.Inview({
+    element: document.querySelector('.graphic2-container'),
+    entered: function(direction) {
+      if (!visible) {
+        visible = true;
+        frame = 0;
+        drawLines();
+      }
+    },
+    exited: function(direction) {
+      frame = 0;
+      resetLines();
+      visible = false;
+    }
+  })
 
 })();

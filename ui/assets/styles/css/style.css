@@ -541,6 +541,9 @@ body.is-in .js-name span > span:hover {
     transform: rotate(360deg);
   }
 }
+#graphic4 {
+  border-radius: 50% 0 50% 50%;
+}
 .graphic1-spiral1 {
   transition: 3s ease-in-out;
   transform: translate3d(-50%, -50%, 0) rotate(0deg);
