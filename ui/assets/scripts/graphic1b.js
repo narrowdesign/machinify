@@ -26,6 +26,8 @@
 
   var inited = false;
 
+  var visible = false;
+
 
   function init(){
     inited = true;
@@ -39,6 +41,21 @@
 
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
+    var inview = new Waypoint.Inview({
+      element: document.querySelector('.graphic1-container'),
+      entered: function(direction) {
+        if (!visible) {
+          visible = true;
+          frame = 0;
+          drawLines();
+        }
+      },
+      exited: function(direction) {
+        visible = false;
+        frame = 0;
+        resetLines();
+      }
+    })
   }
 
   function drawLines() {
@@ -139,22 +156,5 @@
   }
 
   init();
-
-  var visible = false;
-  var inview = new Waypoint.Inview({
-    element: document.querySelector('.graphic1-container'),
-    entered: function(direction) {
-      if (!visible) {
-        visible = true;
-        frame = 0;
-        drawLines();
-      }
-    },
-    exited: function(direction) {
-      visible = false;
-      frame = 0;
-      resetLines();
-    }
-  })
 
 })()
