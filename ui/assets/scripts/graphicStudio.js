@@ -1,4 +1,3 @@
-// One of my first <canvas> experiments, woop! :D
 
 (function(){
   var WIN_W = 666;

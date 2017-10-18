@@ -24,7 +24,7 @@
 
   var visible = false;
 
-  var characters = new Array('<','>','{','}','[',']','/','.',',','”')
+  var characters = new Array('0','1','0','1')
 
 
 
@@ -77,25 +77,24 @@
       requestAnimationFrame(function(){
         frame++;
         ctx2.clearRect(0,0,WIN_W,WIN_H);
-        ctx2.drawImage(canvas,1,0);
+        ctx2.globalAlpha = .99;
+        ctx2.drawImage(canvas,0,1);
 
         ctx.clearRect(0,0,WIN_W,WIN_H);
-        ctx.globalAlpha = .999;
+        ctx.globalAlpha = 1;
         ctx.drawImage(canvas2,0,0);
         ctx.globalAlpha = 1;
-        if (frame % 4 == 0) {
-          setFillColor(frame)
-          ctx.font = Math.random()*400 + 'px sans-serif';
-          var character = characters[Math.floor(Math.random()*characters.length)]
-          ctx.strokeText(character,Math.random()*666,Math.random()*666);
-        }
+        setFillColor(frame)
+        ctx.font = Math.random()*100 + 'px monospace';
+        var character = characters[Math.floor(Math.random()*characters.length)]
+        ctx.strokeText(character,Math.random()*666,Math.random()*666);
         loop();
       })
     }
   }
 
   function setFillColor(num) {
-    if (num/4%2 == 0) {
+    if (num%2 == 0) {
       ctx.strokeStyle="#060130"
     } else {
       ctx.strokeStyle="#E52C58"
