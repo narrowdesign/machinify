@@ -85,9 +85,9 @@
         ctx.drawImage(canvas2,0,0);
         ctx.globalAlpha = 1;
         setFillColor(frame)
-        ctx.font = Math.random()*100 + 'px monospace';
+        ctx.font = '30px monospace';
         var character = characters[Math.floor(Math.random()*characters.length)]
-        ctx.strokeText(character,Math.random()*666,Math.random()*666);
+        ctx.fillText(character,Math.random()*666,Math.random()*666);
         loop();
       })
     }
@@ -95,9 +95,9 @@
 
   function setFillColor(num) {
     if (num%2 == 0) {
-      ctx.strokeStyle="#060130"
+      ctx.fillStyle="#060130"
     } else {
-      ctx.strokeStyle="#E52C58"
+      ctx.fillStyle="#E52C58"
     }
 
   }
