@@ -22,8 +22,6 @@
   var frame = 0;
   var sections = new Array();
 
-  var resetting = false;
-
   var inited = false;
 
   var visible = false;
@@ -33,7 +31,6 @@
     inited = true;
     canvas = document.getElementById("graphic1");
     canvas.addEventListener('click',function(){
-      resetting = true;
       resetLines();
       drawLines()
     })
@@ -53,7 +50,7 @@
       exited: function(direction) {
         visible = false;
         frame = 0;
-        resetLines();
+        setTimeout(resetLines,20);
       }
     })
   }
@@ -62,16 +59,15 @@
     // move the origin to the center
     ctx.translate(centerX,centerY);
     // set the number of rings
-    numRings = Math.round(Math.random() * 5) + 2;
+    numRings = Math.round(Math.random() * 5) + 5;
     // clear the number of sections
     numRingSections = [];
     // set the number of sections per ring between 6-20
     for (var i=0;i<numRings;i++) {
-      numRingSections[i] = Math.round(Math.random() * 80) + 5;
+      numRingSections[i] = Math.round(Math.random() * 60) + 20;
     }
     currentRing = 0;
     currentSection = 0;
-    resetting = false;
     cancelAnimationFrame(raf);
     shuffleSections();
     drawTimeout();
@@ -92,17 +88,18 @@
             var myRandom = sections[currentSection][2];
             ctx.beginPath();
             // move the originX point of the line to currentRing * (radius/rings)
-            var originX = Math.min(1,(frame/200)) * ring * radius / numRings;
-            ctx.moveTo(originX * Math.min(frame/1400,1) ,0);
+            var originX = Math.min(1,(frame/200)) * ring * radius / numRings - Math.max(0,myRandom * (100-frame));
+            var originY = Math.max(0,myRandom * (200-frame));
+            ctx.moveTo(originX * Math.min(frame/200,1) ,originY);
             // draw a line the width of the ring
             var segmentW = (radius / numRings);
-            ctx.lineTo(myRandom * -1 * Math.min(0,(-300 + frame)) + originX + segmentW,0);
+            ctx.lineTo(myRandom * -1 * Math.min(0,(-200 + frame)) + originX + segmentW,0);
             // rotate the line 360/numRingSections[currentRing] * currentSection
-            var segmentR = 360 / numRingSections[ring] + myRandom * Math.min(0,(-300 + frame))/1400;
-            var rotation = segmentR * section[1] * Math.PI / 180;
+            var segmentR = 360 / numRingSections[ring] + myRandom * Math.min(0,(-200 + frame))/200;
+            var rotation = segmentR * section[1] * Math.PI / 180 - sections.length/10;
 
             setStrokeColor(ring);
-            ctx.lineWidth = .7 + (1600/window.innerWidth)/5;
+            ctx.lineWidth = .7 + (300/window.innerWidth)/5;
             ctx.resetTransform();
             ctx.translate(centerX,centerY);
             ctx.stroke();
@@ -140,7 +137,7 @@
 
   function drawCircle(num) {
     ctx.beginPath();
-    ctx.arc(0, 0, (radius*Math.min(1,(frame/1400)) / numRings) * (num + 1), 0, 2 * Math.PI, false);
+    ctx.arc(0, 0, (radius*Math.min(1,(frame/200)) / numRings) * (num + 1), 0, 2 * Math.PI, false);
     setStrokeColor(num);
     ctx.lineWidth = .4;
     ctx.stroke();

@@ -57,13 +57,13 @@
       raf = requestAnimationFrame(function(){
         frame++;
         canvas.style.transform = 'rotate(' + frame/12 + 'deg)'
-        if (frame < 280) {
+        if (frame < 200) {
           for (var i=0;i<branches;i++) {
             ctx.beginPath();
             // move the originX point of the line to currentRing * (radius/rings)
             ctx.moveTo(branchesPos[i][0],branchesPos[i][1]);
-            var shiftX = Math.random()*4 - i%2 - i%3;
-            var shiftY = (Math.random()*4 - i%2 - i%3);
+            var shiftX = Math.random()*14 - i%2 - i%3;
+            var shiftY = (Math.random()*14 - i%2 - i%3);
             var rotation = (i/branches)*Math.PI*2;
             branchesPos[i] = [branchesPos[i][0] + shiftX, branchesPos[i][1] + shiftY]
             ctx.lineTo(branchesPos[i][0],branchesPos[i][1]);
@@ -75,7 +75,7 @@
               ctx.stroke();
             }
 
-            if (frame > 40) {
+            if (frame > 20) {
               ctx.beginPath();
               ctx.arc(Math.min(330,Math.floor(((frame-20)/300)*23)*30), 0, 2, 0, Math.PI*2, false);
               setFillColor(i);
@@ -85,8 +85,8 @@
               ctx.globalAlpha = 1;
             }
           }
-          if (frame%50 == 0) {
-            branches += 50
+          if (frame%20 == 0) {
+            branches += 30
             branches = Math.min(500,branches);
           }
         }
