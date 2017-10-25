@@ -78,16 +78,17 @@
         frame++;
         ctx2.clearRect(0,0,WIN_W,WIN_H);
         ctx2.globalAlpha = .99;
-        ctx2.drawImage(canvas,0,1);
+        ctx2.drawImage(canvas,0,0);
 
         ctx.clearRect(0,0,WIN_W,WIN_H);
         ctx.globalAlpha = 1;
         ctx.drawImage(canvas2,0,0);
         ctx.globalAlpha = 1;
-        setFillColor(frame)
-        ctx.font = '30px monospace';
-        var character = characters[Math.floor(Math.random()*characters.length)]
-        ctx.fillText(character,Math.random()*666,Math.random()*666);
+        ctx.font = '60px monospace';
+        var textTop = '< >';
+        var textBottom = '< / >';
+        ctx.fillText(textTop,333,55);
+        ctx.fillText(textBottom,333,555);
         loop();
       })
     }
