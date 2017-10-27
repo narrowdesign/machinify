@@ -295,9 +295,6 @@ body.is-in {
   }
 }
 
-#graphic4 {
-  border-radius: 50% 0 50% 50%;
-}
 
 .graphic1-spiral1 {
   transition: 3s ease-in-out;
@@ -516,6 +513,22 @@ svg {
   stroke-dashoffset: 30px;
   stroke-dasharray: 30px;
   animation: move-line 4s ease-in-out infinite;
+}
+
+.request-demo-modal {
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(20px,0,0);
+  transition: .1s ease-in;
+  border-left: 1px solid #e9e9e9;
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0,0,0);
+    transition: .2s ease-out;
+  }
 }
 
 @keyframes pulse {

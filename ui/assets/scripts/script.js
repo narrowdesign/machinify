@@ -47,6 +47,13 @@ $(function() {
     }
   },1000)
 
+  $('.request-demo').on('click',function(){
+    $('.request-demo-modal').addClass('open');
+  })
+  $('.request-demo-close').on('click',function(){
+    $('.request-demo-modal').removeClass('open');
+  })
+
 // EVENTS
 /////////
 
