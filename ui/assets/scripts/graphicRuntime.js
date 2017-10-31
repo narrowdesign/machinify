@@ -11,10 +11,12 @@
   var centerY = WIN_H * 0.5;
   var frame = 0;
 
+  var gap = 10;
+
   var words = [];
   var rows = 15;
   var cols = 5;
-  var numWords = 120;
+  var numWords = 20;
 
   for (var i=0; i<numWords; i++) {
     var lastX = words[i-1] ? words[i-1].x : 0;
@@ -27,7 +29,8 @@
       x: lastX + lastW + 20,
       y: row * 50 + 180,
       w: Math.round(Math.random() * 8) * 30,
-      row: row
+      row: row,
+      lineDash: [Math.random()*100 + 20,gap,Math.random()*200 + 20,gap,Math.random()*100 + 20,gap,Math.random()*200 + 20,gap,Math.random()*50 + 20,gap]
     }
   }
 
@@ -77,25 +80,24 @@
         frame++;
         if (frame % 2 === 0) {
           ctx.clearRect(0,0,WIN_W,WIN_H);
-          ctx.lineWidth = 5;
+          ctx.lineWidth = 2;
           ctx.lineCap = 'round';
           for (var i = 0; i < words.length; i++) {
-            var xFrom = words[i].x;
-            var xTo = xFrom + words[i].w;
-            var yFrom = words[i].y + ((words[i].row - 3) * words[i].x) / 18;
-            var yTo = words[i].y + ((words[i].row - 3) * words[i].x) / 5;
-            words[i].x -= 5;
             ctx.beginPath();
+            ctx.setLineDash(words[i].lineDash);
+            ctx.lineDashOffset = frame;
             setStrokeColor(i);
-            ctx.moveTo(xFrom, yFrom);
-            ctx.bezierCurveTo(xTo, yTo, xTo, yTo, xTo, yTo);
+            ctx.moveTo(0, 333);
+            ctx.quadraticCurveTo(400, 333, 666, 333 + (i - numWords/2) * 100);
             ctx.stroke();
           }
-          ctx.font = '80px monospace';
+          ctx.font = '60px monospace';
           var textTop = '< >';
           var textBottom = '< / >';
-          ctx.fillText(textTop,257,84);
-          ctx.fillText(textBottom,220,600);
+          ctx.fillStyle="#060130"
+          ctx.fillText(textTop,0,60);
+          ctx.fillStyle="#E52C58"
+          ctx.fillText(textBottom,0,653);
         }
         loop();
       })

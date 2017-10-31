@@ -564,6 +564,9 @@ body.is-in .js-name span > span:hover {
   transition: 0.3s ease-in-out;
   opacity: .5;
 }
+#graphic-runtime {
+  border-radius: 0 50% 50% 0;
+}
 svg .dial-ring {
   stroke-dashoffset: 80px;
   stroke-dasharray: 80px;
