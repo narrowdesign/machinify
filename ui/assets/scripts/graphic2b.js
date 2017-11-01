@@ -57,7 +57,7 @@
       raf = requestAnimationFrame(function(){
         frame++;
         canvas.style.transform = 'rotate(' + frame/12 + 'deg)'
-        if (frame < 200) {
+        if (frame < 170) {
           for (var i=0;i<branches;i++) {
             ctx.beginPath();
             // move the originX point of the line to currentRing * (radius/rings)
@@ -97,7 +97,7 @@
         //   },2000)
         // }
 
-        delayTimeout = setTimeout(drawTimeout,20)
+        delayTimeout = setTimeout(drawTimeout,10)
       })
     }
   }
