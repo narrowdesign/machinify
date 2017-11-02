@@ -30,7 +30,7 @@
       y: row * 50 + 180,
       w: Math.round(Math.random() * 8) * 30,
       row: row,
-      lineDash: [Math.random()*100 + 20,gap,Math.random()*200 + 20,gap,Math.random()*100 + 20,gap,Math.random()*200 + 20,gap,Math.random()*50 + 20,gap]
+      lineDash: [Math.random()*100 + 20,gap,Math.random()*200 + 20,gap,Math.random()*100 + 20,gap,Math.random()*200 + 20,gap,Math.random()*50 + 20,0]
     }
   }
 
@@ -85,19 +85,12 @@
           for (var i = 0; i < words.length; i++) {
             ctx.beginPath();
             ctx.setLineDash(words[i].lineDash);
-            ctx.lineDashOffset = frame;
+            ctx.lineDashOffset = -frame;
             setStrokeColor(i);
             ctx.moveTo(0, 333);
             ctx.quadraticCurveTo(400, 333, 666, 333 + (i - numWords/2) * 100);
             ctx.stroke();
           }
-          ctx.font = '60px monospace';
-          var textTop = '< >';
-          var textBottom = '< / >';
-          ctx.fillStyle="#060130"
-          ctx.fillText(textTop,0,60);
-          ctx.fillStyle="#E52C58"
-          ctx.fillText(textBottom,0,653);
         }
         loop();
       })
