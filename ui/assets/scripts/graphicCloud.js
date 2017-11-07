@@ -119,7 +119,7 @@
                     ctx.beginPath();
                     ctx.moveTo(this.x, this.y);
 
-                    ctx.lineWidth = 1.5;
+                    ctx.lineWidth = 12.5;
                     ctx.lineTo(particle.x, particle.y);
                     ctx.stroke();
                 }
