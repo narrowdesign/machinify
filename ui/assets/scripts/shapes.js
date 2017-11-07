@@ -14,12 +14,14 @@ var paused = false;
   var ctx = canvas.getContext('2d');
   var aspect = .5;
   var axis = .5;
+  var axisY = .45;
   var spiralOriginX = winW * axis
-  var spiralOriginY = winW * axis * aspect
-  var keydown;
+  var spiralOriginY = winH * axisY
   var rotation = 0;
   var pauseTimeout;
   var scrollTop = 0;
+  var isTouchEnabled = false;
+  var isTouching;
 
   sizeCanvas();
 
@@ -31,7 +33,13 @@ var paused = false;
       drawMbp()
     }
   },60)
-  window.addEventListener('touchmove',drawMbp);
+  window.addEventListener('touchstart', function(){
+    isTouchEnabled = true;
+    isTouching = true;
+  });
+  window.addEventListener('touchend', function(){
+    isTouching = false;
+  });
   window.addEventListener('scroll',function(){
     paused = true;
     if (scrollY > 700) {
@@ -43,34 +51,22 @@ var paused = false;
       },100)
     }
   })
-  window.addEventListener('keydown',function() {
-    if (rotation > 90 || rotation < -1300)
-    keydown = true;
-    drawMbp()
-    drawMbp()
-    drawMbp()
-  });
-  window.addEventListener('keyup',function() {
-    keydown = false;
-  });
 
   window.addEventListener('resize',function(){
-    sizeCanvas()
+    sizeCanvas();
   })
 
   function sizeCanvas() {
-    winW = window.innerWidth;
-    winH = window.innerHeight;
-    smallScreen = false;
-    // spirals = ['','ui/assets/images/spiral-line-black.svg','ui/assets/images/spiral-line-magenta.svg','ui/assets/images/spiral-line-cyan.svg',]
-    spiralOriginX = winW * axis
-    spiralOriginY = winW * aspect * axis
-    canvas.width = winW;
-    canvas.height = winH;
-
-    if (winW < winH) {
+    if (!isTouching) {
+      winW = window.innerWidth;
+      winH = window.innerHeight;
+      smallScreen = false;
+      // spirals = ['','ui/assets/images/spiral-line-black.svg','ui/assets/images/spiral-line-magenta.svg','ui/assets/images/spiral-line-cyan.svg',]
+      spiralOriginX = winW * axis
+      spiralOriginY = winH * axisY
       canvas.width = winW;
       canvas.height = winH;
+      count = 0;
     }
   }
 

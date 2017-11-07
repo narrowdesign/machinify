@@ -36,17 +36,6 @@ $(function() {
   var BODY = $("body");
   var initialized = false;
 
-  var RATIO; // scrolling image strip
-  var LAST_RIGHT; // right edge of the last image
-  var NAME_TOP;
-
-  resizeHandler(); // Calculate sizes right away
-  setTimeout(function(){
-    if ($('.js-name').offset()) {
-      NAME_TOP = $('.js-name').offset().top;
-    }
-  },1000)
-
   $('.request-demo').on('click',function(){
     $('.request-demo-modal').addClass('open');
   })
@@ -62,8 +51,6 @@ $(function() {
   WIN.on('wheel',scrollHandler);
   WIN.on('scroll',scrollHandler);
   WIN.on('mousemove',mousemoveHandler);
-  WIN.on('keydown', keydownHandler);
-  WIN.on('keyup', keyupHandler);
   WIN.on('mousedown', function(){
     $('.output-mouseDownEvents .output-bar-fill').css({width:'100%'});
     $('.output-clicks .output-bar-fill').css({width:'100%'});
@@ -158,7 +145,7 @@ $(function() {
     counter++;
     if (scrollY < 600) {
       currentDate = new Date();
-      currentTime = (new Date()).toTimeString()
+      currentTime = (new Date()).toTimeString();
       totalTime = currentDate-startDate;
 
       $('.output-mouseX .output-value').text('mx ' + mouseX)
@@ -216,50 +203,6 @@ $(function() {
 
   }
 
-  function keydownHandler(e) {
-    keyTotal++;
-    keyCurrent = String.fromCharCode(e.which);
-    keyCache = (keyCurrent + keyCache);
-    keyCache = keyCache.substr(0,3)
-    $('.output-keyCurrent .output-bar-fill').css({width:'100%'});
-  }
-  function keyupHandler(e) {
-    if (e.keyCode === 39) {
-      $('.bg-pattern').css({
-        // backgroundImage: 'url("ui/assets/images/pattern3.png")'
-      })
-      $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-c j-c-center')
-
-      $('.js-quotes').removeClass('ms-d-f')
-      $('.js-quotes').addClass('p-b-3 t-a-c')
-      $('.js-quote').removeClass('ms-w-30p p-v-8')
-      $('.js-quote').addClass('ms-w-100p p-v-3 t-a-c')
-    }
-    if (e.keyCode === 38) {
-      $('.bg-pattern').css({
-        // backgroundImage: 'url("ui/assets/images/pattern2.png")'
-      })
-      $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-c j-c-center')
-
-      $('.js-quotes').removeClass('ms-d-f')
-      $('.js-quotes').addClass('p-b-3 t-a-c')
-      $('.js-quote').removeClass('ms-w-30p p-v-8')
-      $('.js-quote').addClass('ms-w-100p p-v-3 t-a-c')
-    }
-    if (e.keyCode === 37) {
-      $('.bg-pattern').css({
-        // backgroundImage: 'url("ui/assets/images/pattern.png")'
-      })
-      $('header div').eq(0).attr('class', 'pos-r w-100p ms-d-f a-i-baseline t-a-l j-c-between')
-
-      $('.js-quotes').addClass('ms-d-f')
-      $('.js-quotes').removeClass('p-b-3 t-a-c')
-      $('.js-quote').addClass('ms-w-30p p-v-8')
-      $('.js-quote').removeClass('ms-w-100p p-v-3 t-a-c')
-    }
-    $('.output-keyCurrent .output-bar-fill').css({width:'0'});
-  }
-
   function mousemoveHandler(e) {
     mouseX = e.pageX;
     mouseY = e.pageY - scrollY;
@@ -278,54 +221,11 @@ $(function() {
     var oldWinW = _winW;
     _winW = window.innerWidth;
     _winH = window.innerHeight;
-    if ($('.js-name').offset()) {
-      NAME_TOP = $('.js-name').offset().top;
-    }
     initialized = true;
   }
 
-  var nameHTML = $('.js-name').text();
-  nameHTML = nameHTML.replace(/./g, "<span>$&</span>").replace('<span> </span>','<br>');
-  nameHTML = nameHTML.replace('<span> </span>','<br>');
-  $('.js-name span').html(nameHTML);
-  $('.js-name span > span').each(function(i){
-    $(this).css({
-      '-webkit-transition-delay': Math.random()*.3 + 's'
-    });
-  });
-
-  var nextNameHTML = $('.js-next-name').text();
-  nextNameHTML = nextNameHTML.replace(/./g, "<span>$&</span>").replace('<span> </span>',' ');
-  $('.js-next-name span').html(nextNameHTML);
-  $('.js-next-name span > span').each(function(i){
-    $(this).css({
-      '-webkit-transition-delay': Math.random()*.3 + 's'
-    });
-  });
-
   // ANIMATION STUFF
   BODY.addClass('is-in');
-
-  // // setInview($('.js-watch-next'));
-  // /*setInview($('blockquote'));*/
-
-  // function setInview (el) {
-  //   setTimeout(function(){
-  //     if (el.offset()) {
-  //       var inview = new Waypoint.Inview({
-  //         element: el,
-  //         enter: function(direction) {
-  //           if (!el.hasClass('is-in')) {
-  //             el.addClass('is-in');
-  //           }
-  //         },
-  //         exited: function(direction) {
-  //           el.removeClass('is-in')
-  //         },
-  //       })
-  //     }
-  //   },300)
-  // }
 
 
 })
