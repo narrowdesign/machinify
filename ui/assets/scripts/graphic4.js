@@ -69,7 +69,7 @@
         for (i = 0, len = dots.length; i < len; i++) {
           ctx.beginPath();
           ctx.moveTo(i*30,WIN_H);
-          ctx.strokeStyle="rgba(157,178,237,.5)"
+          // ctx.strokeStyle="rgba(157,178,237,.5)"
           ctx.lineWidth = .08;
           ctx.lineTo(i*30,Math.max(0,0));
           ctx.stroke();
@@ -78,7 +78,7 @@
           var lineTop = WIN_H - 120*progress - (i*i*i)/56 * progress;
           lineTop = Math.max(0,lineTop);
           ctx.beginPath();
-          setStrokeColor(frame);
+          setStrokeColor(i);
           ctx.moveTo(i*30-5,WIN_H);
           ctx.lineWidth = 3;
           ctx.lineTo(i*30-5,lineTop);
@@ -102,11 +102,11 @@
     var g2 = 44;
     var b2 = 88;
 
-    var r = r1 - (r1-r2) * Math.abs(frame%50-25)/25;
-    var g = g1 - (g1-g2) * Math.abs(frame%50-25)/25;
-    var b = b1 - (b1-b2) * Math.abs(frame%50-25)/25;
+    var r = Math.floor(r1 - (r1-r2) * Math.abs((frame-num)%160-80)/80);
+    var g = Math.floor(g1 - (g1-g2) * Math.abs((frame-num)%160-80)/80);
+    var b = Math.floor(b1 - (b1-b2) * Math.abs((frame-num)%160-80)/80);
 
-    ctx.strokeStyle='rgba(' + r + ',' + g + ',' + b + '1)';
+    ctx.strokeStyle='rgba(' + r + ',' + g + ',' + b + ',1)';
   }
 
   init();
