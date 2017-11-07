@@ -75,9 +75,9 @@
               ctx.stroke();
             }
 
-            if (frame > 20) {
+            if (frame > 10) {
               ctx.beginPath();
-              ctx.arc(Math.min(330,Math.floor(((frame-20)/300)*23)*30), 0, 2, 0, Math.PI*2, false);
+              ctx.arc(Math.min(330,Math.floor(((frame-20)/300)*33)*30), 0, 2, 0, Math.PI*2, false);
               setFillColor(i);
               ctx.lineWidth = .06;
               ctx.globalAlpha = .1;

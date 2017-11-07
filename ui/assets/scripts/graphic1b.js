@@ -85,21 +85,21 @@
           // if (currentSection < sections.length) {
             var section = sections[currentSection];
             var ring = sections[currentSection][0];
-            var myRandom = easeOutQuad(sections[currentSection][2],frame);
+            var myRandom = sections[currentSection][2];
             ctx.beginPath();
             // move the originX point of the line to currentRing * (radius/rings)
-            var originX = Math.min(1,(frame/150)) * ring * radius / numRings - Math.max(0,myRandom * (75-frame));
-            var originY = Math.max(0,myRandom * (150-frame));
-            ctx.moveTo(easeOutQuad(originX * Math.min(frame/150,1),frame) ,easeOutQuad(originY,frame));
+            var originX = Math.min(1,(frame/100)) * ring * radius / numRings - Math.max(0,myRandom * (50-frame));
+            var originY = Math.max(0,myRandom * (100-frame));
+            ctx.moveTo(easeOutQuad(originX * Math.min(frame/100,1),frame) ,easeOutQuad(originY,frame));
             // draw a line the width of the ring
             var segmentW = easeOutQuad((radius / numRings),frame);
-            ctx.lineTo(easeOutQuad(myRandom * -1 * Math.min(0,(-150 + frame)) + originX + segmentW,frame),0);
+            ctx.lineTo(easeOutQuad(myRandom * -1 * Math.min(0,(-100 + frame)) + originX + segmentW,frame),0);
             // rotate the line 360/numRingSections[currentRing] * currentSection
-            var segmentR = 360 / numRingSections[ring] + myRandom * Math.min(0,(-150 + frame))/150;
+            var segmentR = 360 / numRingSections[ring] + myRandom * Math.min(0,(-100 + frame))/100;
             var rotation = segmentR * section[1] * Math.PI / 180 - sections.length/10;
 
             setStrokeColor(ring);
-            ctx.lineWidth = .7 + (150/window.innerWidth)/5;
+            ctx.lineWidth = .7 + (100/window.innerWidth)/5;
             ctx.resetTransform();
             ctx.translate(centerX,centerY);
             ctx.stroke();
@@ -136,12 +136,12 @@
   }
 
   function easeOutQuad (num, frame) {
-    return num * Math.min(1,frame/100) * (2 - Math.min(1,frame/100));
+    return num * Math.min(1,frame/60) * (2 - Math.min(1,frame/60));
   }
 
   function drawCircle(num) {
     ctx.beginPath();
-    ctx.arc(0, 0, easeOutQuad((radius*Math.min(1,(frame/150)) / numRings) * (num + 1),frame), 0, 2 * Math.PI, false);
+    ctx.arc(0, 0, easeOutQuad((radius*Math.min(1,(frame/100)) / numRings) * (num + 1),frame), 0, 2 * Math.PI, false);
     setStrokeColor(num);
     ctx.lineWidth = .4;
     ctx.stroke();
