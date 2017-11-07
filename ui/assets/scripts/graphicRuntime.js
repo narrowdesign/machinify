@@ -82,19 +82,24 @@
           ctx.clearRect(0,0,WIN_W,WIN_H);
           ctx.lineWidth = 2;
           ctx.lineCap = 'round';
+          ctx.globalAlpha = Math.min(1,frame/100) * (2 - Math.min(1,frame/100));
           for (var i = 0; i < words.length; i++) {
             ctx.beginPath();
             ctx.setLineDash(words[i].lineDash);
             ctx.lineDashOffset = -frame;
             setStrokeColor(i);
             ctx.moveTo(0, 333);
-            ctx.quadraticCurveTo(400, 333, 666, 333 + (i - numWords/2) * 100);
+            ctx.quadraticCurveTo(400, 333, easeOutQuad(666,frame), 333 + (i - numWords/2) * 100);
             ctx.stroke();
           }
         }
         loop();
       })
     }
+  }
+
+  function easeOutQuad (num, frame) {
+    return num * Math.min(1,frame/100) * (2 - Math.min(1,frame/100));
   }
 
   function setStrokeColor(num) {

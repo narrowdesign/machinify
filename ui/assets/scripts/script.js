@@ -171,7 +171,6 @@ $(function() {
       $('.output-mouseXVelocity .output-bar-fill').css({width: Math.min(100,Math.abs(mouseXVelocity)) + '%'})
       $('.output-mouseYVelocity .output-value').text('myv ' + mouseYVelocity);
       $('.output-mouseYVelocity .output-bar-fill').css({width: Math.min(100,Math.abs(mouseYVelocity)) + '%'})
-
     }
   }
   function scrollHandler(e) {
@@ -307,191 +306,26 @@ $(function() {
   // ANIMATION STUFF
   BODY.addClass('is-in');
 
-  (function cycleGraphics() {
+  // // setInview($('.js-watch-next'));
+  // /*setInview($('blockquote'));*/
 
-    var linesStatus = new Array();
-    for (var i=0;i<$('.graphic-lines line').length;i++) {
-      linesStatus[i] = 'nope';
-    }
+  // function setInview (el) {
+  //   setTimeout(function(){
+  //     if (el.offset()) {
+  //       var inview = new Waypoint.Inview({
+  //         element: el,
+  //         enter: function(direction) {
+  //           if (!el.hasClass('is-in')) {
+  //             el.addClass('is-in');
+  //           }
+  //         },
+  //         exited: function(direction) {
+  //           el.removeClass('is-in')
+  //         },
+  //       })
+  //     }
+  //   },300)
+  // }
 
-    var dashedControls = false;
-    dashControlLines();
-    setInterval(function(){
-      dashControlLines()
-    },3000)
-    function dashControlLines() {
-      dashedControls = !dashedControls;
-      for (var i=0;i<$('.control-line').length;i++) {
-        dashControlLine(i)
-      }
-    }
-    function dashControlLine(num) {
-      var dashOffset = 0;
-      if (dashedControls) {
-        dashOffset = '1500px'
-      }
-      $('.control-line').css({
-        strokeDashoffset: dashOffset,
-      })
-    }
 
-    for (var i=-1;i<$('.graphic4-lines line').length;i = i+9) {
-      lineJump(i)
-    }
-    function lineJump(num) {
-      $('.graphic4-lines line').eq(num).css({
-        transform: 'scaleY(' + (num*(Math.random() + 2)) + ')',
-        transitionDelay: num/80 + 's',
-        transformOrigin: '0 120%',
-        stroke: '#9DB2ED',
-        opacity: '1'
-      }).addClass('is-on')
-    }
-    setInterval(function(){
-      $('.graphic4-lines line').css({
-        transform: 'scaleY(1)',
-        transitionDelay: '0s',
-      }).removeClass('is-on')
-      setTimeout(function(){
-        for (var i=-1;i<$('.graphic4-lines line').length;i = i+9) {
-          lineJump(i)
-        }
-      },300)
-    },4000)
-
-    var linesInterval;
-    setInterval(setDials,3000);
-    var dialOffset = 80;
-    setDials();
-    function setDials() {
-      if (dialOffset == 80) {
-        dialOffset = 0;
-        setTimeout(function(){
-          $('.graphic1-spiral1 path').css({
-            strokeDashoffset: 0,
-          })
-          $('.graphic1-spiral1 circle').css({
-            transform: 'scale(1)',
-            strokeWidth: '3px'
-          })
-        },1000)
-        setTimeout(function(){
-          linesInterval = setInterval(doLines,15);
-          for (var i=0;i<$('.graphic-lines line').length;i++) {
-            linesStatus[i] = 'nope';
-          }
-        },1000)
-      } else {
-        dialOffset = 80;
-        setTimeout(function(){
-          $('.graphic1-spiral1 path').css({
-            strokeDashoffset: -200,
-          })
-          $('.graphic1-spiral1 circle').css({
-            transform: 'scale(.03)',
-            strokeWidth: '8px'
-          })
-        },1000)
-        clearInterval(linesInterval)
-      }
-      $('.dial-ring').css({
-        strokeDashoffset: dialOffset,
-      })
-
-      setTimeout(function(){
-        $('.graphic-lines line').css({
-          transform: 'scaleX(1)',
-          opacity: '.6',
-          stroke: '#ccc',
-          transitionDuration: '1.2s',
-        })
-      },10)
-    }
-
-    function doLines() {
-      if (linesStatus.indexOf('nope') != '-1') {
-        for (var i=0;i<$('.graphic-lines line').length;i++) {
-          updateLine(i)
-        }
-      }
-    }
-    function updateLine(i) {
-      var line = $('.graphic-lines line').eq(i);
-      var opacity = Math.random() - .2;
-      var scale = Math.random() * 3;
-      if (linesStatus[i] != "done") {
-        if (opacity > .6 || scale > 5) {
-          linesStatus[i] = "done";
-          line.css({
-            transform: 'scaleX(30)',
-            transformOrigin: '50%',
-            opacity: 1,
-            stroke: '#CB375B',
-            transitionDuration: '.3s',
-          });
-        } else {
-          line.css({
-            transform: 'scaleX(' + scale + ')',
-            transformOrigin: '50%'
-          })
-        }
-      }
-    }
-  })()
-  // setInview($('.js-watch-next'));
-  /*setInview($('blockquote'));*/
-
-  function setInview (el) {
-    setTimeout(function(){
-      if (el.offset()) {
-        var inview = new Waypoint.Inview({
-          element: el,
-          enter: function(direction) {
-            if (!el.hasClass('is-in')) {
-              el.addClass('is-in');
-            }
-          },
-          exited: function(direction) {
-            el.removeClass('is-in')
-          },
-        })
-      }
-    },300)
-  }
-
-  growth()
-  function growth() {
-    var growthGroup = $('.growth g').length;
-    var growthInterval = setInterval(function(){
-      var group = $('.growth g').eq(growthGroup);
-      growthGroup--;
-      $('path',group).css({
-        strokeDashoffset: 0,
-        stroke: '#CA3353',
-        transition: '4s stroke-dashoffset, 2s stroke ease-in'
-      })
-      if (growthGroup < 0) {
-        clearInterval(growthInterval);
-        setTimeout(function(){
-          reverseGrowth()
-        },3000)
-      }
-    },50)
-  }
-  function reverseGrowth() {
-    var growthGroup = $('.growth g').length;
-    var growthInterval = setInterval(function(){
-      var group = $('.growth g').eq(growthGroup);
-      growthGroup--;
-      $('path',group).css({
-        strokeDashoffset: '-390px',
-        stroke: '#9DB2ED',
-        transition: '4s stroke-dashoffset, 1s stroke'
-      })
-      if (growthGroup < 0) {
-        clearInterval(growthInterval);
-        growth()
-      }
-    },50)
-  }
 })
